@@ -12,13 +12,14 @@
 class entity
 {
 public:
+	using id = uint64_t;
 	using id_gen = id_generator<base_component>;
+	static constexpr uint64_t VERSION_BITS = 8;
+	static constexpr uint64_t INDEX_BITS = 8*sizeof(id) - VERSION_BITS;
 
-	entity();
-	~entity();
-	uint64_t get_id();
-	uint64_t get_index();
-	uint64_t get_version();
+	id get_id();
+	id get_index();
+	id get_version();
 
 	bool is_enabled();
 	void disable();
@@ -33,12 +34,20 @@ public:
 
 	void handle_message(message * msg);
 
+	~entity() = default;
+
+	entity(const entity &) = delete;
+	entity & operator=(const entity &) = delete;
+
 private:
-	uint64_t m_id;
+	friend class world;
+	friend class std::unordered_map<id,entity>;
+
+	entity(id i);
+
+	id m_id;
 	bool m_enabled;
 	std::vector<base_component *> m_components;
-
-	static std::list<uint64_t> freelist;
 };
 
 #endif // ENTITY_HPP

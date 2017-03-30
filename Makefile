@@ -16,3 +16,6 @@ tests:
 	cd tests && for f in ./*.cpp; do \
 		c++ -std=c++11 -I../include -L../lib -lood $$f -o `basename $$f .cpp`; \
 		done
+clean:
+	rm lib/libood.a
+	find tests -executable -type f -delete

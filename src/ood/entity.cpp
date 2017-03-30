@@ -2,31 +2,16 @@
 
 #include "common/log.hpp"
 
-static constexpr uint64_t VERSION_BITS = 8;
-static constexpr uint64_t INDEX_BITS = 64 - VERSION_BITS;
-std::list<uint64_t> entity::freelist;
-
-entity::entity()
+entity::entity(id i)
+	: m_id(i)
+	, m_enabled(true)
 {
-	static uint64_t counter = 0;
-
-	if(!freelist.empty())
-	{
-		m_id = freelist.front();
-		freelist.pop_front();
-	}
-	else
-	{
-		if(counter > (uint64_t(1) << INDEX_BITS) - 1)
-			fatal("entity index space full");
-		m_id = counter++ << VERSION_BITS;
-	}
+	
 }
 
 entity::~entity()
 {
-	if(get_version() < (1 << VERSION_BITS) - 1)
-		freelist.push_back((get_index() << VERSION_BITS) | (get_version() + 1));
+	
 }
 
 uint64_t entity::get_id()
