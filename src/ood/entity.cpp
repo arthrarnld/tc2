@@ -6,12 +6,7 @@ entity::entity(id i)
 	: m_id(i)
 	, m_enabled(true)
 {
-	
-}
-
-entity::~entity()
-{
-	
+	log("entity %llu born", i);
 }
 
 uint64_t entity::get_id()

@@ -17,7 +17,7 @@ void log(const char * fmt, ...)
 	va_list args;
 	va_start(args, fmt);
 
-	printf("LOG ");
+	printf(C_GREEN("  LOG "));
 	vprintf(fmt, args);
 	printf("\n");
 
@@ -29,7 +29,7 @@ void warn(const char * fmt, ...)
 	va_list args;
 	va_start(args, fmt);
 
-	printf(C_YELLOW("WRN "));
+	printf(C_YELLOW(" WARN "));
 	vprintf(fmt, args);
 	printf("\n");
 
@@ -41,7 +41,7 @@ void error(const char * fmt, ...)
 	va_list args;
 	va_start(args, fmt);
 
-	printf(C_RED("ERR "));
+	printf(C_RED("ERROR "));
 	vprintf(fmt, args);
 	printf("\n");
 

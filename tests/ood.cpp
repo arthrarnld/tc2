@@ -1,10 +1,13 @@
-#include "ood/entity.hpp"
-#include <vector>
+#include "ood/world.hpp"
+#include "common/log.hpp"
+#include "common/time.hpp"
+
+#include <unistd.h>
 
 int main()
 {
-	std::vector<entity> entities;
-	for(int i = 0; i < 10; ++i)
-		entities.emplace_back();
+	auto t1 = now();
+	auto t2 = now();
+	log("time: %lf\n", elapsed(t1, t2));
 	return 0;
 }

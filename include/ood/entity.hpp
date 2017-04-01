@@ -41,7 +41,6 @@ public:
 
 private:
 	friend class world;
-	friend class std::unordered_map<id,entity>;
 
 	entity(id i);
 
