@@ -1,8 +1,18 @@
-#include "ood/world.hpp"
+#include "world.hpp"
 
 #include "common/log.hpp"
+#include "base_system.hpp"
 
-world::pointer_type world::create()
+bool world::update(double dt)
+{
+	auto begin	= m_entities.begin();
+	auto end	= m_entities.end();
+	for(auto & s : m_systems)
+		if(!s->update(begin, end, dt))
+			return false;
+}
+
+world::entity_ptr world::create()
 {
 	entity::id id;
 	if(!m_freelist.empty())
@@ -16,7 +26,7 @@ world::pointer_type world::create()
 			fatal("ran out of indices for entities");
 		id = m_counter++ << entity::VERSION_BITS;
 	}
-	auto e = pointer_type(new entity(id));
+	auto e = entity_ptr(new entity(id));
 	m_entities[id] = e;
 	return e;
 }
@@ -27,11 +37,11 @@ void world::create(int count)
 		create();
 }
 
-world::pointer_type world::get(entity::id id)
+world::entity_ptr world::get(entity::id id)
 {
 	auto it = m_entities.find(id);
 	if(it == m_entities.end())
-		return pointer_type();
+		return entity_ptr();
 	return (*it).second;
 }
 

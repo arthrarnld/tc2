@@ -1,9 +1,9 @@
-#include "ood/position_component.hpp"
+#include "position_component.hpp"
 
 position_component::position_component(float x, float y)
 	: m_position(x,y)
 {
-	
+
 }
 
 void position_component::translate(float x, float y)

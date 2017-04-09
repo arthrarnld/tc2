@@ -1,4 +1,4 @@
-#include "ood/entity.hpp"
+#include "entity.hpp"
 
 #include "common/log.hpp"
 
@@ -41,7 +41,5 @@ void entity::enable()
 
 void entity::handle_message(message * msg)
 {
-	for(auto & c : m_components)
-		if(c->handle_message(msg))
-			break;
+
 }

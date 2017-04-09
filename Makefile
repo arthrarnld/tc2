@@ -1,11 +1,12 @@
-OODSRC = $(wildcard src/ood/*.cpp)
-COMMSRC = $(wildcard src/common/*.cpp)
+SRC02 = $(shell find src/02_ood_ecs/ -name '*.cpp')
+BIN02 = lib02.so
+COMMSRC = $(shell find src/common/ -name '*.cpp')
 
 all: tests
 
-ood: common
-	c++ -std=c++11 -fPIC -I./include -c $(OODSRC)
-	c++ -L./bin -lcommon -shared -o bin/libood.so *.o
+tgt02: common
+	c++ -std=c++11 -fPIC -I./include -I./include/02_ood_ecs -c $(SRC02)
+	c++ -L./bin -lcommon -shared -o bin/$(BIN02) *.o
 	rm *.o
 
 common:
@@ -13,8 +14,8 @@ common:
 	c++ -shared -o bin/libcommon.so *.o
 	rm *.o
 
-tests: ood
-	c++ -std=c++11 -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lood tests/ood.cpp -o bin/ood
+tests: tgt02
+	c++ -std=c++11 -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -l02 tests/ood.cpp -o bin/ood
 
 clean:
 	rm -f bin/*
