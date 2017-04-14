@@ -24,6 +24,18 @@ void log(const char * fmt, ...)
 	va_end(args);
 }
 
+void debug(const char * fmt, ...)
+{
+	va_list args;
+	va_start(args, fmt);
+
+	printf(C_BLUE("DEBUG "));
+	vprintf(fmt, args);
+	printf("\n");
+
+	va_end(args);
+}
+
 void warn(const char * fmt, ...)
 {
 	va_list args;

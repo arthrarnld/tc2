@@ -1,7 +1,14 @@
-#include "position_component.hpp"
+#include "components/position_component.hpp"
 
-position_component::position_component(float x, float y)
-	: m_position(x,y)
+position_component::position_component(uint64_t owner)
+	: base_component(owner)
+{
+
+}
+
+position_component::position_component(uint64_t owner, float x, float y)
+	: base_component(owner)
+	, m_position(x,y)
 {
 
 }

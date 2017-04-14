@@ -4,10 +4,13 @@
 #include <vector>
 #include <list>
 #include <cstdint>
+#include <memory>
 
-#include "base_component.hpp"
+#include "components/base_component.hpp"
 #include "id_generator.hpp"
-#include "message.hpp"
+#include "messages/base_message.hpp"
+
+class world;
 
 class entity
 {
@@ -29,10 +32,29 @@ public:
 	T & get_component()
 	{
 		assert_derived(T, base_component, "type must be a subclass of base_component");
-		return *m_components[id_gen::get<T>()];
+		return *static_cast<T*>(m_components[id_gen::get<T>()].get());
 	}
 
-	void handle_message(message * msg);
+	template <typename T>
+	bool has_component()
+	{
+		assert_derived(T, base_component, "type must be a subclass of base_component");
+		return m_components[id_gen::get<T>()] != nullptr;
+	}
+
+	template<typename T, typename ... Args>
+	T & add_component(Args&& ... args)
+	{
+		assert_derived(T, base_component, "type must be a subclass of base_component");
+		T * comp = new T(m_id, args...);
+		uint64_t pos = id_gen::get<T>();
+		if(pos >= m_components.size())
+			m_components.resize(pos+1);
+		m_components[pos].reset(comp);
+		return *comp;
+	}
+
+	void push_message(base_message * msg);
 
 	~entity() = default;
 
@@ -45,8 +67,12 @@ private:
 	entity(id i);
 
 	id m_id;
+	bool m_alive;
 	bool m_enabled;
-	std::vector<base_component *> m_components;
+	std::vector< std::shared_ptr<base_component> > m_components;
+	std::vector< std::shared_ptr<base_message> > m_messages;
+
+	void flush_messages(world * w);
 };
 
 #endif // ENTITY_HPP

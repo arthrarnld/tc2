@@ -2,6 +2,7 @@
 #define HEALTH_SYSTEM_HPP
 
 #include "base_system.hpp"
+#include "../components/health_component.hpp"
 
 class health_system : public base_system
 {
@@ -12,8 +13,12 @@ public:
 	{
 		for(iterator_type it = begin; it != end; ++it)
 		{
-			entity_ptr e = it->second;
-			e->set_health(std::min(e->get_max_health(), e->get_health()+e->get_regen_rate()*dt));
+			auto e = it->second;
+			if(e->has_component<health_component>())
+			{
+				auto & hc = e->get_component<health_component>();
+				hc.set_health(std::min((double)hc.get_max_health(), hc.get_health()+hc.get_regen_rate()*dt));
+			}
 		}
 		return true;
 	}

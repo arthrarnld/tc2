@@ -1,7 +1,7 @@
 #ifndef BASE_SYSTEM_HPP
 #define BASE_SYSTEM_HPP
 
-#include "world.hpp"
+#include "../world.hpp"
 
 class base_system
 {
