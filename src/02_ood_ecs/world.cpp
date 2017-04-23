@@ -13,6 +13,7 @@ bool world::update(double dt)
 	for(auto & s : m_systems)
 		if(!s->update(*this, dt))
 			return false;
+	return true;
 }
 
 entity & world::create()

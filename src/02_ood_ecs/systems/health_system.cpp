@@ -34,7 +34,7 @@ bool health_system::handle_message(base_message * msg, world & w)
 			return true;
 		auto hc = e->get_component<health_component>();
 		hc->health -= m->value;
-		log("%llu --> %llu: -%f [%f]", from, to, m->value, hc->health);
+		debug("%llu takes %.2f damage [HP = %.2f]", to, m->value, hc->health);
 		return true;
 	}
 	return false;

@@ -1,6 +1,6 @@
-SRC02 = $(shell find src/02_ood_ecs/ -name '*.cpp')
+SRC02 = $(shell find src/02_ood_ecs -name '*.cpp')
 BIN02 = lib02.so
-COMMSRC = $(shell find src/common/ -name '*.cpp')
+COMMSRC = $(shell find src/common -name '*.cpp')
 CFLAGS = -g -std=c++11
 
 all: tests
@@ -12,9 +12,10 @@ tgt02: common
 	@rm *.o
 
 common:
+	@mkdir -p bin
 	c++ $(CFLAGS) -fPIC -I./include -c $(COMMSRC)
 	c++ -shared -o bin/libcommon.so *.o
-	rm *.o
+	@rm *.o
 
 tests: tgt02
 	c++ $(CFLAGS) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -l02 tests/ood.cpp -o bin/ood

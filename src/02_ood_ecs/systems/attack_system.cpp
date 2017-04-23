@@ -67,6 +67,7 @@ bool attack_system::update(world & w, double dt)
 		if(target) {
 			if(distance <= ac->range)
 			{
+				debug("%llu attacking %llu", e->get_id(), target->get_id());
 				ac->state = attack_component::ENGAGED;
 				ac->reload_rem = ac->reload;
 				w.push_message(new health_message(
@@ -74,11 +75,13 @@ bool attack_system::update(world & w, double dt)
 					target->get_id(),	// to
 					ac->damage			// damage
 				));
-
+				if(mc && mc->target != entity::NIL) // cancel movement
+					mc->target = entity::NIL;
 			}
-			else if(mc)
+			else if(mc) {
+				debug("%llu pursuing %llu", e->get_id(), target->get_id());
 				mc->target = target->get_id();
-
+			}
 		} else {
 			ac->state = attack_component::IDLE;
 		}

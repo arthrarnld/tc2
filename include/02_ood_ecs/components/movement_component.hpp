@@ -6,9 +6,15 @@
 class movement_component : public base_component
 {
 public:
-	movement_component(uint64_t owner) : base_component(owner) { }
+	movement_component(uint64_t owner, float speed)
+		: base_component(owner)
+		, speed(speed)
+	{
+		
+	}
 
 	uint64_t target;
+	float speed;
 };
 
 #endif // MOVEMENT_COMPONENT_HPP

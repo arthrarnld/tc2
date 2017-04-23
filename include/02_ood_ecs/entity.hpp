@@ -6,7 +6,10 @@
 #include <cstdint>
 #include <memory>
 
+#include "common/log.hpp"
+
 #include "components/base_component.hpp"
+#include "components/movement_component.hpp"
 #include "id_generator.hpp"
 
 class world;
@@ -35,6 +38,8 @@ public:
 	T * get_component()
 	{
 		assert_derived(T, base_component, "type must be a subclass of base_component");
+		if(id_gen::get<T>() >= m_components.size())
+			return nullptr;
 		return static_cast<T*>(m_components[id_gen::get<T>()].get());
 	}
 
