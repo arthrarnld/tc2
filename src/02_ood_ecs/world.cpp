@@ -1,5 +1,7 @@
 #include "world.hpp"
 
+#include <algorithm>
+
 #include "common/log.hpp"
 #include "systems/base_system.hpp"
 
@@ -7,11 +9,9 @@
 
 bool world::update(double dt)
 {
-	auto begin	= m_entities.begin();
-	auto end	= m_entities.end();
 	flush_messages();
 	for(auto & s : m_systems)
-		if(!s->update(begin, end, dt))
+		if(!s->update(*this, dt))
 			return false;
 }
 
@@ -70,6 +70,22 @@ void world::push_message(base_message * m)
 	m_messages.emplace_back(m);
 }
 
+world::container_type::iterator world::begin()
+{
+	return m_entities.begin();
+}
+
+world::container_type::iterator world::end()
+{
+	return m_entities.end();
+}
+
+void world::for_each(std::function<void(entity&)> && fn)
+{
+	for(auto & pair : m_entities)
+		fn(*(pair.second.get()));
+}
+
 void world::flush_messages()
 {
 	for(auto & m : m_messages)
@@ -77,8 +93,7 @@ void world::flush_messages()
 		if(m->get_id() == death_message::id)
 		{
 			auto dm = std::static_pointer_cast<death_message>(m);
-			uint64_t entity_id = dm->get_sender();
-			entity_ptr e = get(entity_id);
+			entity_ptr e = get(dm->sender);
 			if(!e)
 				warn("Death message from non-existing entity");
 			else
@@ -87,10 +102,11 @@ void world::flush_messages()
 				destroy(*e);
 			}
 		}
+		else
+			for(auto & s : m_systems)
+				if(s->handle_message(m.get(), *this))
+					break;
 	}
 	m_messages.clear();
 
-	for(auto & p : m_entities)
-		if(p.second->is_enabled())
-			p.second->flush_messages(this);
 }

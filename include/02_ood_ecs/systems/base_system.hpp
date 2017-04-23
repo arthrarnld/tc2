@@ -6,8 +6,10 @@
 class base_system
 {
 public:
-	using iterator_type = world::iterator_type;
-	virtual bool update(iterator_type begin, iterator_type end, double dt) = 0;
+	virtual bool handle_message(base_message * m, world & w) { return false; }
+
+	// using iterator_type = world::iterator_type;
+	virtual bool update(world & w, double dt) = 0;
 protected:
 	base_system() = default;
 };

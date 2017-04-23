@@ -15,7 +15,7 @@ public:
 
 	death_message(uint64_t sender)
 		: base_message(sender)
-		{  }
+	{  }
 };
 
 #endif // DEATH_MESSAGE_HPP

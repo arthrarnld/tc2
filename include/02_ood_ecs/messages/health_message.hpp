@@ -13,16 +13,12 @@ public:
 		return id;
 	}
 
-	health_message(uint64_t sender, float value)
-		: base_message(sender)
-		, m_value(value)
+	health_message(uint64_t sender, uint64_t recipient, float value)
+		: base_message(sender, recipient)
+		, value(value)
 		{  }
 
-	float get_value() { return m_value; }
-	void set_value(float v) { m_value = v; }
-
-private:
-	float m_value;
+	float value;
 };
 
 #endif // HEALTH_MESSAGE_HPP

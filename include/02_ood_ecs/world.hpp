@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <memory>
+#include <functional>
 
 #include "entity.hpp"
 #include "messages/base_message.hpp"
@@ -29,6 +30,11 @@ public:
 	void push_system(base_system * s);
 
 	void push_message(base_message * m);
+
+	container_type::iterator begin();
+	container_type::iterator end();
+
+	void for_each(std::function<void(entity&)> && fn);
 
 private:
 	container_type m_entities;

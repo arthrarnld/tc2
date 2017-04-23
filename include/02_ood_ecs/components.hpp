@@ -5,7 +5,9 @@
 #define COMPONENTS_HPP
 
 #include "components/team_component.hpp"
+#include "components/movement_component.hpp"
 #include "components/position_component.hpp"
+#include "components/attack_component.hpp"
 #include "components/health_component.hpp"
 #include "components/base_component.hpp"
 

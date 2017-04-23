@@ -9,6 +9,11 @@ entity::entity(id i)
 	debug("entity %llu born [%llu , %llu]", i, get_index(), get_version());
 }
 
+bool entity::is_valid()
+{
+	return m_id != NIL;
+}
+
 uint64_t entity::get_id()
 {
 	return m_id;
@@ -39,17 +44,17 @@ void entity::enable()
 	m_enabled = true;
 }
 
-void entity::push_message(base_message * msg)
-{
-	m_messages.emplace_back(msg);
-}
+// void entity::push_message(base_message * msg)
+// {
+// 	m_messages.emplace_back(msg);
+// }
 
-void entity::flush_messages(world * w)
-{
-	for(auto m : m_messages)
-		for(auto c : m_components)
-			if(c->handle_message(m.get(), w))
-				break;
-
-	m_messages.clear();
-}
+// void entity::flush_messages(world * w)
+// {
+// 	for(auto m : m_messages)
+// 		for(auto c : m_components)
+// 			if(c->handle_message(m.get(), w))
+// 				break;
+//
+// 	m_messages.clear();
+// }

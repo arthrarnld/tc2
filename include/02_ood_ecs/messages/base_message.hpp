@@ -4,6 +4,7 @@
 #include <cstdint>
 
 #include "../id_generator.hpp"
+#include "../entity.hpp"
 
 class base_message
 {
@@ -14,14 +15,16 @@ public:
 	virtual ~base_message() = default;
 
 	virtual id_type get_id() = 0;
-	uint64_t get_sender() { return m_sender; }
 
 protected:
-	base_message(uint64_t sender)
-		: m_sender(sender)
+	base_message(uint64_t sender, uint64_t recipient = entity::NIL)
+		: sender(sender)
+		, recipient(recipient)
 		{  }
-private:
-	uint64_t m_sender;
+
+public:
+	uint64_t sender;
+	uint64_t recipient;
 };
 
 #endif // MESSAGE_HPP

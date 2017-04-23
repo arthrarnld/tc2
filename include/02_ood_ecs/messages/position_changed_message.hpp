@@ -6,6 +6,8 @@
 class position_changed_message : public base_message
 {
 public:
+	static const id_type id;
+
 	position_changed_message(uint64_t sender)
 		: base_message(sender)
 	{  }
