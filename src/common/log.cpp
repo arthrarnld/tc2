@@ -24,6 +24,7 @@ void log(const char * fmt, ...)
 	va_end(args);
 }
 
+#if DEBUG
 void debug(const char * fmt, ...)
 {
 	va_list args;
@@ -35,6 +36,7 @@ void debug(const char * fmt, ...)
 
 	va_end(args);
 }
+#endif
 
 void warn(const char * fmt, ...)
 {

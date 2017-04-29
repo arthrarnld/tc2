@@ -4,9 +4,9 @@
 #ifndef MESSAGES_HPP
 #define MESSAGES_HPP
 
-#include "messages/health_message.hpp"
-#include "messages/position_changed_message.hpp"
 #include "messages/base_message.hpp"
 #include "messages/death_message.hpp"
+#include "messages/health_message.hpp"
+#include "messages/position_changed_message.hpp"
 
 #endif // MESSAGES_HPP

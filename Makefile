@@ -12,9 +12,10 @@ ecs_oo: common
 	@rm *.o
 
 common:
+	@mkdir -p bin
 	c++ $(CFLAGS) -fPIC -I./include -c $(COMMSRC)
 	c++ -shared -o bin/libcommon.so *.o
-	rm *.o
+	@rm *.o
 
 tests: ecs_oo
 	c++ $(CFLAGS) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lecs_oo tests/ecs_oo.cpp -o bin/ecs_oo

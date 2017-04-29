@@ -5,6 +5,13 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+float ranges[]	= {  20,  10,  10,  10,  10,  10 };
+float damages[]	= {  10,  20,  10,  10,  10,  10 };
+float reloads[]	= {   1,   1, 0.2,   1,   1,   1 };
+float healths[]	= { 100, 100, 100, 200, 100, 100 };
+float regens[]	= {   1,   1,   1,   1,   5,   1 };
+float speeds[]	= {   1,   1,   1,   1,   1,   2 };
+
 int main()
 {
 	srandom(time(NULL));
@@ -14,23 +21,41 @@ int main()
 	w.push_system(new attack_system);
 	w.push_system(new movement_system);
 
-	auto & e1 = w.create();
-	e1.add_component<health_component>(100, 1);
-	e1.add_component<team_component>(1);
-	e1.add_component<attack_component>(10,10,1);
-	e1.add_component<position_component>(0, 0);
-
-	auto & e2 = w.create();
-	e2.add_component<health_component>(100, 1);
-	e2.add_component<team_component>(2);
-	e2.add_component<attack_component>(10,20,1);
-	e2.add_component<position_component>(5, 0);
-
-	while(w.get_entity_count() > 0)
+	for(int i = 0; i < 1000; ++i)
 	{
-		w.update(1);
-		log("%u", w.get_entity_count());
-		usleep(200000);
+		auto & e1 = w.create();
+		int t = i%6;
+		e1.add_component<health_component>(healths[t], regens[t]);
+		e1.add_component<team_component>(t);
+		e1.add_component<attack_component>(ranges[t], damages[t], reloads[t]);
+		e1.add_component<position_component>((i % 100)*100, (i / 100)*100);
+		e1.add_component<movement_component>(speeds[t]);
 	}
+
+	int team;
+	bool multiple_teams = true;
+	time_point tp;
+	double t;
+	while(multiple_teams)
+	{
+		tp = now();
+		if(!w.update(1)) break;
+		t = elapsed(tp, now());
+		log("%llu %f", w.get_entity_count(), t);
+
+		team = -1;
+		multiple_teams = false;
+		w.for_each([&team, &multiple_teams](entity & e) {
+			if(multiple_teams) return;
+			auto tc = e.get_component<team_component>();
+			if(!tc) return;
+			if(team == -1)
+				team = tc->team;
+			else if(team != tc->team)
+				multiple_teams = true;
+		});
+	} ;
+
+	log("team %d wins!", team);
 	return 0;
 }
