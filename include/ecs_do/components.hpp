@@ -4,6 +4,9 @@
 #ifndef COMPONENTS_HPP
 #define COMPONENTS_HPP
 
-#include "components/position_manager.hpp"
+#include "components/attack.hpp"
+#include "components/health.hpp"
+#include "components/movement.hpp"
+#include "components/position.hpp"
 
 #endif // COMPONENTS_HPP

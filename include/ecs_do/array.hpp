@@ -8,6 +8,8 @@ struct array
 {
 public:
 	using value_type = T;
+	using iterator = value_type*;
+	using const_iterator = const value_type*;
 
 	array(size_t cap = 10)
 		: m_data(new value_type[cap])
@@ -61,6 +63,27 @@ public:
 		return m_data[i];
 	}
 
+	value_type & front()
+	{
+		return m_data[0];
+	}
+
+	value_type & back()
+	{
+		return m_data[m_len-1];
+	}
+
+	iterator begin()
+		{ return m_data; }
+	iterator end()
+		{ return m_data + m_len; }
+
+	const_iterator begin() const
+		{ return m_data; }
+	const_iterator end() const
+		{ return m_data + m_len; }
+
+
 private:
 	value_type * m_data;
 	size_t m_cap;
@@ -68,7 +91,7 @@ private:
 
 	void expand()
 	{
-		value_type new_buf = new value_type[m_cap*2];
+		value_type * new_buf = new value_type[m_cap*2];
 		std::copy(m_data, m_data + m_cap, new_buf);
 		delete [] m_data;
 		m_data = new_buf;
