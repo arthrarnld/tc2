@@ -10,13 +10,22 @@
 struct health
 {
 	health(size_t cap = 8)
-		: helper(this, cap, &health_points, &max_regen, &regen_rate)
+		: helper(this, cap, &health_points, &max_health, &regen_rate)
 	{  }
 
 	SOA_COMPONENT_BASE(health)
 
+	inline size_t create(uint64_t e, float max, float regen) {
+		size_t i = create(e);
+		health_points[i] = max;
+		max_health[i] = max;
+		regen_rate[i] = regen;
+		return i;
+	}
+
+
 	float * health_points;
-	float * max_regen;
+	float * max_health;
 	float * regen_rate;
 
 };

@@ -8,5 +8,6 @@
 #include "components/health.hpp"
 #include "components/movement.hpp"
 #include "components/position.hpp"
+#include "components/team.hpp"
 
 #endif // COMPONENTS_HPP

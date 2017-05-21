@@ -1,5 +1,5 @@
-#ifndef POSITION_MANAGER_HPP
-#define POSITION_MANAGER_HPP
+#ifndef POSITION_COMPONENT_HPP
+#define POSITION_COMPONENT_HPP
 
 #include <stdint.h>
 #include <unordered_map>
@@ -15,8 +15,15 @@ struct position
 
 	SOA_COMPONENT_BASE(position)
 
-	glm::vec3 * pos;
+	inline size_t create(uint64_t e, float x, float y) {
+		size_t i = create(e);
+		pos[i] = glm::vec2{x,y};
+		return i;
+	}
+
+
+	glm::vec2 * pos;
 };
 
 
-#endif // POSITION_MANAGER_HPP
+#endif // POSITION_COMPONENT_HPP

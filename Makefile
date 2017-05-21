@@ -29,8 +29,8 @@ common:
 	@rm *.o
 
 tests: ecs_oo ecs_do
-	c++ $(CFLAGS) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lecs_oo tests/ecs_oo.cpp -o bin/oo
-	c++ $(CFLAGS) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lecs_do tests/ecs_do.cpp -o bin/do
+	c++ -g $(CFLAGS) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lecs_oo tests/ecs_oo.cpp -o bin/oo
+	c++ -g $(CFLAGS) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lecs_do tests/ecs_do.cpp -o bin/do
 
 clean:
 	rm -f bin/*

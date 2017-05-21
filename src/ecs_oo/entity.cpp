@@ -5,9 +5,7 @@
 entity::entity(id i)
 	: m_id(i)
 	, m_enabled(true)
-{
-	debug("entity %llu born [%llu , %llu]", i, get_index(), get_version());
-}
+{  }
 
 bool entity::is_valid()
 {

@@ -1,10 +1,16 @@
 #include "world.hpp"
 
-static const uint64_t VERSION_BITS = 8;
-static const uint64_t INDEX_BITS = 64 - VERSION_BITS;
+#include "systems.hpp"
+#include "entity.hpp"
+
+world::world()
+	: m_next_index(0)
+	, m_count(0)
+{  }
 
 uint64_t world::create()
 {
+	++m_count;
 	if(m_freelist.empty())
 		return (m_next_index++ << VERSION_BITS);
 
@@ -13,9 +19,28 @@ uint64_t world::create()
 	return id;
 }
 
-void world::destroy(uint64_t eid)
+void world::kill(uint64_t e)
 {
-	uint64_t version = eid & ((1<<VERSION_BITS) - 1);
-	if(version < ((1<<VERSION_BITS) - 1))
-		m_freelist.push_back(eid+1);
+	m_dead.push_back(e);
+}
+
+void world::update(double dt)
+{
+	update_health(this, dt);
+	update_attack(this, dt);
+	update_movement(this, dt);
+
+	for(uint64_t e : m_dead)
+	{
+		pos.kill(e);
+		hea.kill(e);
+		att.kill(e);
+		mov.kill(e);
+		tea.kill(e);
+
+		--m_count;
+		if(version(e) < ((1<<VERSION_BITS) - 1))
+			m_freelist.push_back(e+1);
+	}
+	m_dead.clear();
 }

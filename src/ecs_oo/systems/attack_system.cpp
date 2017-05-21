@@ -79,7 +79,8 @@ bool attack_system::update(world & w, double dt)
 					mc->target = entity::NIL;
 			}
 			else if(mc) {
-				debug("%llu pursuing %llu", e->get_id(), target->get_id());
+				if(mc->target != target->get_id())
+					debug("%llu pursuing %llu", e->get_id(), target->get_id());
 				mc->target = target->get_id();
 			}
 		} else {

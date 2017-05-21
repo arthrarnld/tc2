@@ -6,6 +6,9 @@
 #include <vector>
 #include <unordered_map>
 
+#include "constants.hpp"
+#include "entity.hpp"
+
 // using handle = uint64_t;
 
 
@@ -13,16 +16,24 @@
 private:											\
 	size_t len, cap;								\
 	soa::helper<D> helper;							\
+	uint64_t owned_cap;								\
 	friend class soa::helper<D>;					\
+	size_t * owned;									\
 public:												\
-	std::unordered_map<uint64_t, size_t> owned;		\
 	uint64_t * owner;								\
 	inline size_t create(uint64_t e)				\
 		{ return helper.create(e); }				\
 	inline void destroy(size_t index)				\
 		{ return helper.destroy(index); }			\
+	inline void kill(uint64_t e) {					\
+		size_t idx = lookup(e);						\
+		if(idx != nil)								\
+			helper.destroy(idx);					\
+	}												\
 	inline size_t size()							\
-		{ return len; }
+		{ return len; }								\
+	inline size_t lookup(uint64_t e)				\
+		{ return helper.lookup(e); }
 
 
 namespace soa
@@ -40,8 +51,12 @@ namespace soa
 			o->cap = cap;
 			arrays_to_entries<0,sizeof...(Ts)>{}.go(*this, arrays...);
 
-			// obj->deref = (size_t*) malloc(sizeof(size_t)*cap);
 			obj->owner = new uint64_t[cap];
+
+			obj->owned = new size_t[cap];
+			for(int i = 0; i < cap; ++i)
+				obj->owned[i] = nil;
+			obj->owned_cap = cap;
 
 			for(entry & e : this->arrays)
 				*e.addr = new char[e.size*obj->cap];
@@ -58,37 +73,49 @@ namespace soa
 
 		size_t create(uint64_t e)
 		{
-			size_t index = obj->len++;
+			size_t i = obj->len++;
 
 			if(obj->len == obj->cap)
 				grow();
 
-			obj->owner[index] = e;
-			obj->owned[e] = index;
+			obj->owner[i] = e;
 
-			return index;
+			uint64_t eidx = index(e);
+			if(eidx >= obj->owned_cap)
+				grow_owned(eidx);
+
+			obj->owned[eidx] = i;
+
+			return i;
 		}
 
-		void destroy(size_t index)
+		void destroy(size_t idx)
 		{
-			if(index == obj->len-1) // last element
+			uint64_t eidx = index(obj->owner[idx]);
+			if(idx == obj->len-1) // last element
 			{
 				--obj->len;
-				obj->owned.erase(obj->owner[index]);
+				obj->owned[eidx] = nil;
 				return;
 			}
 
 			uint64_t last_owner = obj->owner[obj->len-1];
-			obj->owned[last_owner] = index;
-			obj->owner[index] = last_owner;
+			obj->owned[index(last_owner)] = idx;
+			obj->owner[idx] = last_owner;
 			for(entry & e : arrays)
 			{
 				char * start = *e.addr + ((obj->len - 1) * e.size);
 				char * end = start + e.size;
-				char * dst = *e.addr + (index * e.size);
+				char * dst = *e.addr + (idx * e.size);
 				std::copy(start, end, dst);
 			}
 			--obj->len;
+		}
+
+		inline size_t lookup(uint64_t e)
+		{
+			uint64_t idx = index(e);
+			return idx > obj->owned_cap ? nil : obj->owned[idx];
 		}
 
 	private:
@@ -116,6 +143,21 @@ namespace soa
 			}
 
 			obj->cap = newcap;
+		}
+
+		void grow_owned(uint64_t idx)
+		{
+			size_t newcap = idx < 2*obj->owned_cap ? 2*obj->owned_cap : idx+1;
+
+			size_t * newowned = new size_t[newcap];
+			std::copy(obj->owned, obj->owned+obj->owned_cap, newowned);
+			delete [] obj->owned;
+
+			for(int i = obj->owned_cap; i < newcap; ++i)
+				newowned[i] = nil;
+
+			obj->owned = newowned;
+			obj->owned_cap = newcap;
 		}
 
 		template<size_t I, size_t S>
