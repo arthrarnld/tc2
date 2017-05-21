@@ -6,6 +6,7 @@
 
 #include "ecs_do/array.hpp"
 #include "ecs_do/components.hpp"
+#include "ecs_do/soa_utils.hpp"
 #include "ecs_do/world.hpp"
 
 #endif // ECS_DO_HPP
