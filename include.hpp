@@ -7,5 +7,7 @@
 #include "include/common.hpp"
 #include "include/ecs_do.hpp"
 #include "include/ecs_oo.hpp"
+#include "include/part_do.hpp"
+#include "include/part_oo.hpp"
 
 #endif // INCLUDE_HPP

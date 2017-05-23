@@ -4,6 +4,7 @@
 #ifndef COMMON_HPP
 #define COMMON_HPP
 
+#include "common/array.hpp"
 #include "common/log.hpp"
 #include "common/time.hpp"
 

@@ -49,7 +49,7 @@ public:
 	void remove(unsigned i)
 	{
 		if(i < m_len-1) // not last element
-			swap(i, m_len-1);
+			m_data[i] = m_data[m_len-1];
 		--m_len;
 	}
 

@@ -4,7 +4,6 @@
 #ifndef ECS_DO_HPP
 #define ECS_DO_HPP
 
-#include "ecs_do/array.hpp"
 #include "ecs_do/components.hpp"
 #include "ecs_do/constants.hpp"
 #include "ecs_do/entity.hpp"
