@@ -2,11 +2,13 @@
 
 particle_emitter::particle_emitter()
 {
+    m_position = glm::vec2(0.0, 0.0);
     m_emission_rate = 1;
 }
 
-particle_emitter::particle_emitter(float emission_rate)
+particle_emitter::particle_emitter(const glm::vec2 & position, float emission_rate)
 {
+    m_position = position;
     m_emission_rate = emission_rate;
 }
 
@@ -40,7 +42,7 @@ void particle_emitter::emit(const particle & p)
 void particle_emitter::tick(double dt)
 {
     for(int i = 0; i < m_emission_rate*dt; ++i)
-        emit(particle());
+        emit(particle(m_position));
 
     for (auto & particle : m_particles)
         particle.tick(dt);
