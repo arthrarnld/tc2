@@ -26,6 +26,10 @@ struct attack
 		damage[idx] = dmg;
 		reload[idx] = rld;
 		state[idx] = IDLE;
+
+		#ifdef DO_ORDERED_ARRAYS
+			first_reloading = idx + 1;
+		#endif
 		return idx;
 	}
 
@@ -35,6 +39,10 @@ struct attack
 	float * reload;
 	state_type * state;
 	float * reload_rem;
+
+	#ifdef DO_ORDERED_ARRAYS
+		size_t first_reloading;
+	#endif
 };
 
 #endif // ATTACK_COMPONENT_HPP
