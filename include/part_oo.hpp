@@ -4,7 +4,7 @@
 #ifndef PART_OO_HPP
 #define PART_OO_HPP
 
-#include "part_oo/particle.hpp"
 #include "part_oo/particle_emitter.hpp"
+#include "part_oo/particle.hpp"
 
 #endif // PART_OO_HPP
