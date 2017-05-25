@@ -3,8 +3,6 @@
 
 #include "glm/glm.hpp"
 #include "common/array.hpp"
-#include <vector>
-#include <initializer_list>
 
 struct particle_system
 {

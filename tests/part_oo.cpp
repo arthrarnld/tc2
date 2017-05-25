@@ -2,11 +2,11 @@
 #include "common/log.hpp"
 #include "common/time.hpp"
 #include <fstream>
-#include <unordered_map>
+#include <map>
 #include <vector>
 
-std::unordered_map<int, double> times;
-std::unordered_map<int, int> occurrences;
+std::map<int, double> times;
+std::map<int, int> occurrences;
 
 int main(int argc, char ** argv)
 {
