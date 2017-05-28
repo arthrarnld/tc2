@@ -2,11 +2,11 @@
 #include "common/log.hpp"
 #include "common/time.hpp"
 #include <fstream>
-#include <unordered_map>
+#include <map>
 #include <vector>
 
-std::unordered_map<int, double> times;
-std::unordered_map<int, int> occurrences;
+std::map<int, double> times;
+std::map<int, int> occurrences;
 
 int main(int argc, char ** argv)
 {
@@ -48,8 +48,8 @@ int main(int argc, char ** argv)
         printf("\ri: %d\tdt: %-20f", i, taken);
 
         // log("particle count: %d\t time taken: %f", e.get_particle_count(), taken);
-        for(size_t j = 0; j < EMITTER_COUNT; ++j)
-            if(i % INCREASE == 0)
+        if(i % INCREASE == 0)
+            for(size_t j = 0; j < EMITTER_COUNT; ++j)
                 emitters[j].set_emission_rate(emitters[j].get_emission_rate() + 1);
     }
 
