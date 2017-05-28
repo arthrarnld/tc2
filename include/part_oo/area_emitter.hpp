@@ -11,7 +11,7 @@ protected:
     void emit() override;
 
 public:
-    area_emitter(float max_distance = 10);
+    area_emitter(const glm::vec2 & position, float emission_rate, float max_distance = 10);
 
     float get_max_distance();
     void set_max_distance(float max_distance);

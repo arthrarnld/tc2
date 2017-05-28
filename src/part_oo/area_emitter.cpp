@@ -1,7 +1,8 @@
 #include "area_emitter.hpp"
 #include "common/util.hpp"
 
-area_emitter::area_emitter(float max_distance)
+area_emitter::area_emitter(const glm::vec2 & position, float emission_rate, float max_distance)
+    : particle_emitter(position, emission_rate)
 {
     m_max_distance = max_distance;
 }

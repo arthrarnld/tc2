@@ -6,7 +6,7 @@
 
 #include "part_oo/area_emitter.hpp"
 #include "part_oo/cone_emitter.hpp"
-#include "part_oo/particle_emitter.hpp"
 #include "part_oo/particle.hpp"
+#include "part_oo/particle_emitter.hpp"
 
 #endif // PART_OO_HPP

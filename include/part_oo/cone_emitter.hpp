@@ -13,7 +13,7 @@ protected:
     void emit() override;
 
 public:
-    cone_emitter(float angle_rad);
+    cone_emitter(const glm::vec2 & position, float emission_rate, float angle_rad);
 
     float get_angle();
     void set_angle(float angle_rad);

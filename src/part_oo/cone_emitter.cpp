@@ -5,7 +5,8 @@
 
 const glm::vec2 cone_emitter::UP = glm::vec2(0.0, 1.0);
 
-cone_emitter::cone_emitter(float angle_rad)
+cone_emitter::cone_emitter(const glm::vec2 & position, float emission_rate, float angle_rad)
+    : particle_emitter(position, emission_rate)
 {
     m_angle = angle_rad;
 }
