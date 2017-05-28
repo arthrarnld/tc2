@@ -1,18 +1,11 @@
 #include "particle.hpp"
 
-particle::particle(const glm::vec2 & position)
-{
-    m_position = position;
-    m_velocity = glm::vec2(1.0, 1.0);
-    m_lifetime = 10.0;
-    m_alive = true;
-}
-
 particle::particle(const glm::vec2 & p, const glm::vec2 & v, float l)
 {
     m_position = p;
     m_velocity = v;
     m_lifetime = l;
+    m_alive = true;
 }
 
 const glm::vec2 & particle::get_velocity()

@@ -1,34 +1,59 @@
-#import "particle_system.hpp"
+#include "particle_system.hpp"
+#include "common/util.hpp"
+#include "glm/gtx/rotate_vector.hpp"
 
-particle_system::particle_system()
-{
-    m_last_active_emitter = -1;
-}
+const glm::vec2 particle_system::UP = glm::vec2(0.0, 1.0);
 
-void particle_system::create_emitter(const glm::vec2 & position, float emission_rate)
+particle_system::particle_system() { }
+
+void particle_system::new_line_emitter(const glm::vec2 & position, float emission_rate)
 {
     e_positions.push_back(position);
     e_emission_rates.push_back(emission_rate);
-    m_last_active_emitter++;
+    move(e_positions.size()-1, 0, [this](size_t a, size_t b) {
+        this->e_positions.swap(a, b);
+        this->e_emission_rates.swap(a, b);
+    }, partitions);
 }
 
-void particle_system::disable_emitter(int index)
+void particle_system::new_cone_emitter(const glm::vec2 & position, float emission_rate, float angle_rad)
 {
-    if(m_last_active_emitter > 0)
-    {
-        e_positions.swap(index, m_last_active_emitter);
-        e_emission_rates.swap(index, m_last_active_emitter);
-    }
+    e_positions.push_back(position);
+    e_emission_rates.push_back(emission_rate);
+    cone_angles.push_back(angle_rad);
+    move(e_positions.size()-1, 1, [this](size_t a, size_t b) {
+        this->e_positions.swap(a, b);
+        this->e_emission_rates.swap(a, b);
+    }, partitions);
+}
 
-    m_last_active_emitter--;
+void particle_system::new_area_emitter(const glm::vec2 & position, float emission_rate, float max_distance)
+{
+    e_positions.push_back(position);
+    e_emission_rates.push_back(emission_rate);
+    area_max_distances.push_back(max_distance);
 }
 
 int particle_system::tick(double dt)
 {
     // tick emitters
-    for(size_t i = 0; i <= m_last_active_emitter; ++i)
+    for(size_t i = 0; i < partitions[0]; ++i)
     {
-        emit(i, glm::vec2(0.0,0.0), glm::vec2(1.0,1.0), 10, dt);
+        emit(i, e_positions[i], glm::vec2(1.0,1.0), 10, dt);
+    }
+    for(size_t i = partitions[0]; i < partitions[1]; ++i)
+    {
+        float ang = cone_angles[i - partitions[0]];
+        float rotation = norm_rand() * ang - ang;
+
+        emit(i, e_positions[i], glm::rotate(UP, rotation), 10, dt);
+    }
+    for(size_t i = partitions[1]; i < e_positions.size(); ++i)
+    {
+        float dist = area_max_distances[i - partitions[1]];
+        float x = (norm_rand()*2.0f - 1.0f) * dist;
+
+        emit(i, e_positions[i] + glm::vec2(x, 0.0), glm::vec2(1.0,1.0), 10, dt);
     }
 
     // tick particles

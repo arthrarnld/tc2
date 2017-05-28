@@ -1,15 +1,19 @@
 #include "particle_emitter.hpp"
 
-particle_emitter::particle_emitter()
-{
-    m_position = glm::vec2(0.0, 0.0);
-    m_emission_rate = 1;
-}
-
 particle_emitter::particle_emitter(const glm::vec2 & position, float emission_rate)
 {
     m_position = position;
     m_emission_rate = emission_rate;
+}
+
+glm::vec2 particle_emitter::get_position()
+{
+    return m_position;
+}
+
+void particle_emitter::set_position(const glm::vec2 & position)
+{
+    m_position = position;
 }
 
 float particle_emitter::get_emission_rate()
@@ -34,15 +38,15 @@ int particle_emitter::get_particle_count()
     return m_particles.size();
 }
 
-void particle_emitter::emit(const particle & p)
+void particle_emitter::emit()
 {
-    m_particles.push_back(p);
+    m_particles.emplace_back(m_position);
 }
 
 void particle_emitter::tick(double dt)
 {
     for(int i = 0; i < m_emission_rate*dt; ++i)
-        emit(particle(m_position));
+        emit();
 
     for (auto & particle : m_particles)
         particle.tick(dt);

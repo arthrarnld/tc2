@@ -11,8 +11,7 @@ private:
     bool m_alive;
 
 public:
-    particle(const glm::vec2 & position);
-    particle(const glm::vec2 & p, const glm::vec2 & v, float l);
+    particle(const glm::vec2 & p, const glm::vec2 & v = glm::vec2(0.0, 1.0), float l = 10.0);
 
     const glm::vec2 & get_position();
     const glm::vec2 & get_velocity();

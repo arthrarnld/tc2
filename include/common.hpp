@@ -8,5 +8,6 @@
 #include "common/constants.hpp"
 #include "common/log.hpp"
 #include "common/time.hpp"
+#include "common/util.hpp"
 
 #endif // COMMON_HPP

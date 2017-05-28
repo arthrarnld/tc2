@@ -73,4 +73,4 @@ tests: ecs_oo ecs_do part_oo part_do
 
 
 clean:
-	rm -f bin/*
+	rm -rf bin/* *.o

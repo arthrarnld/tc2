@@ -7,13 +7,18 @@
 
 class particle_emitter {
 private:
-    std::vector<particle> m_particles;
     glm::vec2 m_position;
     float m_emission_rate;
 
+protected:
+    std::vector<particle> m_particles;
+    virtual void emit();
+
 public:
-    particle_emitter();
-    particle_emitter(const glm::vec2 & position, float emission_rate);
+    particle_emitter(const glm::vec2 & position = glm::vec2(), float emission_rate = 1);
+
+    glm::vec2 get_position();
+    void set_position(const glm::vec2 & position);
 
     void set_emission_rate(float rate);
     float get_emission_rate();
@@ -21,9 +26,8 @@ public:
     const particle * get_particle_at(int pos);
     int get_particle_count();
 
-    void emit(const particle & p);
-
     void tick(double dt);
+
 };
 
 #endif // PARTICLE_EMITTER_HPP
