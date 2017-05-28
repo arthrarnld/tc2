@@ -5,8 +5,6 @@
 #include "common/log.hpp"
 #include "systems/base_system.hpp"
 
-#include "messages/death_message.hpp"
-
 bool world::update(double dt)
 {
 	flush_messages();
@@ -91,22 +89,9 @@ void world::flush_messages()
 {
 	for(auto & m : m_messages)
 	{
-		if(m->get_id() == death_message::id)
-		{
-			auto dm = std::static_pointer_cast<death_message>(m);
-			entity_ptr e = get(dm->sender);
-			if(!e)
-				warn("Death message from non-existing entity");
-			else
-			{
-				debug("Destroying dead entity");
-				destroy(*e);
-			}
-		}
-		else
-			for(auto & s : m_systems)
-				if(s->handle_message(m.get(), *this))
-					break;
+		for(auto & s : m_systems)
+			if(s->handle_message(m.get(), *this))
+				break;
 	}
 	m_messages.clear();
 

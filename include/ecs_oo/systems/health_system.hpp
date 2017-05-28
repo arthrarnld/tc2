@@ -10,8 +10,6 @@ public:
 	health_system() = default;
 
 	bool update(world & w, double dt) override;
-
-	bool handle_message(base_message * m, world & w) override;
 };
 
 #endif // HEALTH_SYSTEM_HPP

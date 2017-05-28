@@ -5,6 +5,7 @@
 #define COMMON_HPP
 
 #include "common/array.hpp"
+#include "common/constants.hpp"
 #include "common/log.hpp"
 #include "common/time.hpp"
 

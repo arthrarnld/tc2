@@ -27,16 +27,16 @@ void world::kill(uint64_t e)
 void world::update(double dt)
 {
 	update_health(this, dt);
-	update_attack(this, dt);
+	update_reproduction(this, dt);
 	update_movement(this, dt);
 
 	for(uint64_t e : m_dead)
 	{
 		pos.kill(e);
 		hea.kill(e);
-		att.kill(e);
+		rep.kill(e);
 		mov.kill(e);
-		tea.kill(e);
+		spe.kill(e);
 
 		--m_count;
 		if(version(e) < ((1<<VERSION_BITS) - 1))
