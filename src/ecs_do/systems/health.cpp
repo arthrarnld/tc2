@@ -10,12 +10,12 @@ bool update_health(world * w, double dt)
 	movement & m = w->mov;
 	#ifdef DO_PARTITION_ARRAYS
 		// Idle
-		for(size_t i = 0; i < h.first_eating; ++i)
+		for(size_t i = 0; i < h.partitions[0]; ++i)
 		{
 			h.hunger[i] += h.appetite[i] * dt;
 		}
 		// Eating
-		for(size_t i = h.first_eating; i < h.size(); ++i)
+		for(size_t i = h.partitions[0]; i < h.size(); ++i)
 		{
 			--h.hunger[i];
 			if(h.hunger[i] <= 0) // done eating

@@ -6,6 +6,7 @@
 
 
 #include "../soa_utils.hpp"
+#include "common/util.hpp"
 
 struct health
 {
@@ -32,7 +33,7 @@ struct health
 		prey[idx] = pr;
 
 		#ifdef DO_PARTITION_ARRAYS
-			first_eating = idx + 1;
+			idx = move(idx, 0, MEMBER_SWAP_FUNC, partitions);
 		#else
 			state[idx] = IDLE;
 		#endif
@@ -43,11 +44,8 @@ struct health
 	inline size_t start_eating(size_t i)
 	{
 		#ifdef DO_PARTITION_ARRAYS
-			--first_eating;
-			if(first_eating > i) {
-				swap(i, first_eating);
+			if(move(i, 1, MEMBER_SWAP_FUNC, partitions) != i)
 				return i;
-			}
 			return i + 1;
 		#else
 			state[i] = EATING;
@@ -58,9 +56,9 @@ struct health
 	inline size_t stop_eating(size_t i)
 	{
 		#ifdef DO_PARTITION_ARRAYS
-			++first_eating;
-			if(first_eating <= i)
-				swap(i, first_eating-1);
+			if(move(i, 0, MEMBER_SWAP_FUNC, partitions) != i)
+				return i;
+				return i + 1;
 		#else
 			state[i] = IDLE;
 		#endif
@@ -74,7 +72,7 @@ struct health
 	int   * prey;
 
 	#ifdef DO_PARTITION_ARRAYS
-		size_t first_eating;
+		size_t partitions[1] = { 0 };
 	#else
 		enum state_type { IDLE, EATING };
 		state_type * state;

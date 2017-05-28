@@ -11,23 +11,22 @@ float speeds    [] = {  20,  15,  20,  20,  15,  25 };
 
 world w;
 
+using test_func_type = void(*)();
 
-int main(int argc, char ** argv)
+// Function that runs the tests
+test_func_type test_func;
+// Number of entities to reach
+size_t entity_count;
+// Number of iterations between consecutive
+// entity births
+size_t increment_period;
+// Accumulated times by number of entities
+double * times;
+// Variables for measuring time
+time_point tp;
+
+void run_measure_tick()
 {
-	if(argc != 3)
-	{
-		printf("usage: %s entity-count increment-period\n", argv[0]);
-		return -1;
-	}
-
-	size_t entity_count = atoll(argv[1]);
-	size_t increment_period = atoll(argv[2]);
-
-	double times[entity_count+1];
-
-	// size_t printed_size = 0;
-	time_point tp;
-	double time;
 	for(size_t i = 0; i < entity_count * increment_period; ++i)
 	{
 		if(i % increment_period == 0)
@@ -43,18 +42,62 @@ int main(int argc, char ** argv)
 		}
 		tp = now();
 		w.update(1);
-		time = elapsed(tp, now());
-		times[w.count()] += time;
+		times[w.count()] += elapsed(tp, now());
 
-		// if(printed_size != w.count()) {
-		// 	fprintf(stderr, "\r%-10llu %-10f", w.count(), time);
-		// 	printed_size = w.count();
-		// }
+		fprintf(stderr, "\r%3d%%", 100*(i+1)/(entity_count*increment_period));
 	}
-	// fprintf(stderr, "\n");
+	fprintf(stderr, "\n");
+}
+
+void run_measure_insertion()
+{
+	for(size_t i = 0; i < entity_count; ++i)
+	{
+		int s = i%6;
+		tp = now();
+
+		uint64_t e = w.create();
+		w.spe.create(e, s);
+		w.hea.create(e, appetites[s], (s+1)%6);
+		w.mov.create(e, speeds[s]);
+		w.pos.create(e, sin(i)*10, cos(i)*10);
+		w.rep.create(e, libidos[s]);
+
+		times[w.count()] = elapsed(tp, now());
+
+		fprintf(stderr, "\r%3d%%", 100*(i+1)/entity_count);
+	}
+	fprintf(stderr, "\n");
+}
+
+int main(int argc, char ** argv)
+{
+	if(argc < 3)
+	{
+		printf("usage: %s [OPTIONS] entity-count increment-period\n", argv[0]);
+		return -1;
+	}
+
+	test_func = run_measure_tick;
+	int opt = 1;
+	// Parse OPTIONS
+	for( ; opt < argc-2; ++opt)
+	{
+		if(!strcmp(argv[opt], "--insertion"))
+			test_func = run_measure_insertion;
+		else if(strcmp(argv[opt], "--tick"))
+			fatal("unknown option '%s'", argv[opt]);
+	}
+
+	entity_count = atoll(argv[opt++]);
+	increment_period = atoll(argv[opt++]);
+	times = new double[entity_count+1];
+
+	test_func();
 
 	for(int i = 0; i <= entity_count; ++i)
 		std::cout << i << '\t' << times[i] / (double)increment_period << '\n';
 
+	delete [] times;
 	return 0;
 }

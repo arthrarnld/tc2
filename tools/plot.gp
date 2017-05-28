@@ -16,7 +16,7 @@ set key top left
 
 f(x) = 1.0/60.0
 
-plot "oo_20000_10.dat"  using 1:2 title "OO"  w lines lw 1, \
-     "do0_20000_10.dat" using 1:2 title "DO0" w lines lw 1, \
-     "do1_20000_10.dat" using 1:2 title "DO1" w lines lw 1, \
+plot "data/oo_20000_10.dat"  using 1:2 title "OO"  w lines lw 1, \
+     "data/do0_20000_10.dat" using 1:2 title "DO0" w lines lw 1, \
+     "data/do1_20000_10.dat" using 1:2 title "DO1" w lines lw 1, \
      f(x) title "60Hz" w lines lw 1
