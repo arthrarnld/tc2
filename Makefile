@@ -60,17 +60,27 @@ common:
 	c++ -shared -o bin/libcommon.so *.o
 	@rm *.o
 
-tests: ecs_oo ecs_do part_oo part_do
+tests: ecs part
 	@echo -e "\e[1mBuilding tests\e[0m"
+
+ecs: test_ecs_oo test_ecs_do
+
+test_ecs_oo: ecs_oo
 	c++ $(CFLAGS) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lecs_oo tests/ecs_oo.cpp -o bin/oo
+
+test_ecs_do: ecs_do
 	@# Stage 0 -----------------------------------------------------------------
 	c++ $(CFLAGS) $(S0) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lecs_do0 tests/ecs_do.cpp -o bin/do0
 	@# Stage 1 -----------------------------------------------------------------
 	c++ $(CFLAGS) $(S1) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lecs_do1 tests/ecs_do.cpp -o bin/do1
-	@# Particle systems --------------------------------------------------------
-	c++ $(CFLAGS) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lpart_oo tests/part_oo.cpp -o bin/part_oo
-	c++ $(CFLAGS) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lpart_do tests/part_do.cpp -o bin/part_do
 
+part: test_part_oo test_part_do
+
+test_part_oo: part_oo
+	c++ $(CFLAGS) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lpart_oo tests/part_oo.cpp -o bin/part_oo
+
+test_part_do: part_do
+	c++ $(CFLAGS) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lpart_do tests/part_do.cpp -o bin/part_do
 
 clean:
 	rm -rf bin/* *.o
