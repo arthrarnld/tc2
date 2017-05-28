@@ -5,7 +5,6 @@
 #define ECS_DO_HPP
 
 #include "ecs_do/components.hpp"
-#include "ecs_do/constants.hpp"
 #include "ecs_do/entity.hpp"
 #include "ecs_do/soa_utils.hpp"
 #include "ecs_do/systems.hpp"

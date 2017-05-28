@@ -11,11 +11,11 @@ ECS_DO_SRC = $(shell find src/ecs_do/ -name '*.cpp')
 ECS_DO_BIN = libecs_do
 
 COMMSRC = $(shell find src/common/ -name '*.cpp')
-CFLAGS = -g -std=c++11 -Wfatal-errors
+CFLAGS = -g -std=c++11 #-Wfatal-errors
 
 # Data-oriented ECS implementation stages
-S0 = -DDO_LOOKUP_STD_UNORDERED_MAP
-S1 = -DDO_LOOKUP_ENTITY_ARRAY
+S0 =
+S1 = -DDO_PARTITION_ARRAYS
 
 
 all: tests

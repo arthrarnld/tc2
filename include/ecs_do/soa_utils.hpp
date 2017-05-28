@@ -6,28 +6,18 @@
 #include <cstring>
 #include <vector>
 
-#include "constants.hpp"
+#include "common/constants.hpp"
 #include "entity.hpp"
 
-// using handle = uint64_t;
 
-#if defined(DO_LOOKUP_STD_UNORDERED_MAP)
-	#include <unordered_map>
-	#define OWNED_DECL std::unordered_map<uint64_t, size_t> owned;
-#elif defined(DO_LOOKUP_ENTITY_ARRAY)
-	#define OWNED_DECL		\
-		uint64_t owned_cap;	\
-		size_t * owned;
-#else
-	#error "No lookup macro set."
-#endif
 
 #define SOA_COMPONENT_BASE(D)									\
 	private:													\
 		friend class soa::helper<D>;							\
 		size_t len, cap;										\
 		soa::helper<D> helper;									\
-		OWNED_DECL												\
+		uint64_t owned_cap;										\
+		size_t * owned;											\
 	public:														\
 		uint64_t * owner;										\
 		inline size_t create(uint64_t e)						\
@@ -63,12 +53,10 @@ namespace soa
 
 			obj->owner = new uint64_t[cap];
 
-			#ifdef DO_LOOKUP_ENTITY_ARRAY
-				obj->owned = new size_t[cap];
-				for(int i = 0; i < cap; ++i)
-					obj->owned[i] = nil;
-				obj->owned_cap = cap;
-			#endif
+			obj->owned = new size_t[cap];
+			for(int i = 0; i < cap; ++i)
+				obj->owned[i] = nil;
+			obj->owned_cap = cap;
 
 			for(entry & e : this->arrays)
 				*e.addr = new char[e.size*obj->cap];
@@ -77,9 +65,7 @@ namespace soa
 		~helper()
 		{
 			delete [] obj->owner;
-			#ifdef DO_LOOKUP_ENTITY_ARRAY
-				delete [] obj->owned;
-			#endif
+			delete [] obj->owned;
 
 			for(entry & e : arrays)
 				delete [] *e.addr;
@@ -94,15 +80,10 @@ namespace soa
 
 			obj->owner[i] = e;
 
-
-			#if defined(DO_LOOKUP_STD_UNORDERED_MAP)
-				obj->owned[e] = i;
-			#elif defined(DO_LOOKUP_ENTITY_ARRAY)
-				uint64_t eidx = index(e);
-				if(eidx >= obj->owned_cap)
-					grow_owned(eidx);
-				obj->owned[eidx] = i;
-			#endif
+			uint64_t eidx = index(e);
+			if(eidx >= obj->owned_cap)
+				grow_owned(eidx);
+			obj->owned[eidx] = i;
 
 			return i;
 		}
@@ -113,22 +94,14 @@ namespace soa
 			if(idx == obj->len-1) // last element
 			{
 				--obj->len;
-				#if defined(DO_LOOKUP_STD_UNORDERED_MAP)
-					obj->owned[obj->owner[idx]] = nil;
-				#elif defined(DO_LOOKUP_ENTITY_ARRAY)
-					obj->owned[eidx] = nil;
-				#endif
+				obj->owned[eidx] = nil;
 
 				return;
 			}
 
 			uint64_t last_owner = obj->owner[obj->len-1];
 
-			#if defined(DO_LOOKUP_STD_UNORDERED_MAP)
-				obj->owned[last_owner] = idx;
-			#elif defined(DO_LOOKUP_ENTITY_ARRAY)
-				obj->owned[index(last_owner)] = idx;
-			#endif
+			obj->owned[index(last_owner)] = idx;
 
 			obj->owner[idx] = last_owner;
 			size_t ridx = replacement_idx == nil ? obj->len-1 : replacement_idx;
@@ -144,30 +117,15 @@ namespace soa
 
 		size_t lookup(uint64_t e)
 		{
-			#if defined(DO_LOOKUP_STD_UNORDERED_MAP)
-				auto it = obj->owned.find(e);
-				if(it == obj->owned.end())
-					return nil;
-				return it->second;
-			#elif defined(DO_LOOKUP_ENTITY_ARRAY)
-				uint64_t eidx = index(e);
-				if(eidx >= obj->owned_cap)
-					return nil;
-				return obj->owned[eidx];
-			#endif
+			uint64_t eidx = index(e);
+			if(eidx >= obj->owned_cap)
+				return nil;
+			return obj->owned[eidx];
 		}
 
 		void swap(size_t a, size_t b)
 		{
-			#if defined(DO_LOOKUP_STD_UNORDERED_MAP)
-				uint64_t aowner = obj->owner[a];
-				uint64_t bowner = obj->owner[b];
-				obj->owned[aowner] = b;
-				obj->owned[bowner] = a;
-			#elif defined(DO_LOOKUP_ENTITY_ARRAY)
-				std::swap(obj->owned[a], obj->owned[b]);
-			#endif
-
+			std::swap(obj->owned[a], obj->owned[b]);
 			std::swap(obj->owner[a], obj->owner[b]);
 
 			for(entry & e : arrays)
@@ -211,22 +169,20 @@ namespace soa
 			obj->cap = newcap;
 		}
 
-		#ifdef DO_LOOKUP_ENTITY_ARRAY
-			void grow_owned(uint64_t idx)
-			{
-				size_t newcap = idx < 2*obj->owned_cap ? 2*obj->owned_cap : idx+1;
+		void grow_owned(uint64_t idx)
+		{
+			size_t newcap = idx < 2*obj->owned_cap ? 2*obj->owned_cap : idx+1;
 
-				size_t * newowned = new size_t[newcap];
-				std::copy(obj->owned, obj->owned+obj->owned_cap, newowned);
-				delete [] obj->owned;
+			size_t * newowned = new size_t[newcap];
+			std::copy(obj->owned, obj->owned+obj->owned_cap, newowned);
+			delete [] obj->owned;
 
-				for(int i = obj->owned_cap; i < newcap; ++i)
-					newowned[i] = nil;
+			for(int i = obj->owned_cap; i < newcap; ++i)
+				newowned[i] = nil;
 
-				obj->owned = newowned;
-				obj->owned_cap = newcap;
-			}
-		#endif
+			obj->owned = newowned;
+			obj->owned_cap = newcap;
+		}
 
 		template<size_t I, size_t S>
 		struct arrays_to_entries

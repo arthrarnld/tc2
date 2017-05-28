@@ -16,11 +16,11 @@ struct world
 	inline size_t count() const
 		{ return m_count; }
 
-	position	pos;
-	health		hea;
-	attack		att;
-	movement	mov;
-	team		tea;
+	position		pos;
+	health			hea;
+	reproduction	rep;
+	movement		mov;
+	species			spe;
 
 private:
 	std::list<uint64_t> m_freelist;

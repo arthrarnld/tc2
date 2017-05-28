@@ -17,22 +17,22 @@ void log(const char * fmt, ...)
 	va_list args;
 	va_start(args, fmt);
 
-	printf(C_GREEN("  LOG "));
-	vprintf(fmt, args);
-	printf("\n");
+	fprintf(stderr, C_GREEN("  LOG "));
+	vfprintf(stderr, fmt, args);
+	fprintf(stderr, "\n");
 
 	va_end(args);
 }
 
-#if DEBUG
+#ifdef DEBUG
 void debug(const char * fmt, ...)
 {
 	va_list args;
 	va_start(args, fmt);
 
-	printf(C_BLUE("DEBUG "));
-	vprintf(fmt, args);
-	printf("\n");
+	fprintf(stderr, C_BLUE("DEBUG "));
+	vfprintf(stderr, fmt, args);
+	fprintf(stderr, "\n");
 
 	va_end(args);
 }
@@ -43,9 +43,9 @@ void warn(const char * fmt, ...)
 	va_list args;
 	va_start(args, fmt);
 
-	printf(C_YELLOW(" WARN "));
-	vprintf(fmt, args);
-	printf("\n");
+	fprintf(stderr, C_YELLOW(" WARN "));
+	vfprintf(stderr, fmt, args);
+	fprintf(stderr, "\n");
 
 	va_end(args);
 }
@@ -55,9 +55,9 @@ void error(const char * fmt, ...)
 	va_list args;
 	va_start(args, fmt);
 
-	printf(C_RED("ERROR "));
-	vprintf(fmt, args);
-	printf("\n");
+	fprintf(stderr, C_RED("ERROR "));
+	vfprintf(stderr, fmt, args);
+	fprintf(stderr, "\n");
 
 	va_end(args);
 }
@@ -67,9 +67,9 @@ void fatal(const char * fmt, ...)
 	va_list args;
 	va_start(args, fmt);
 
-	printf(C_RED("FATAL "));
-	vprintf(fmt, args);
-	printf("\n");
+	fprintf(stderr, C_RED("FATAL "));
+	vfprintf(stderr, fmt, args);
+	fprintf(stderr, "\n");
 
 	va_end(args);
 	std::exit(-1);

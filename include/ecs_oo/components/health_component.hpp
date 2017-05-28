@@ -9,18 +9,21 @@
 class health_component : public base_component
 {
 public:
-	health_component(uint64_t owner, float max, float regen)
+	enum state_type { IDLE, EATING };
+
+	health_component(uint64_t owner, float appetite, int prey)
 		: base_component(owner)
-		, health(max)
-		, max_health(max)
-		, regen_rate(regen)
+		, hunger(100)
+		, appetite(appetite)
+		, prey(prey)
 	{
 
 	}
 
-	float health;
-	float max_health;
-	float regen_rate;
+	float hunger;
+	float appetite;
+	int prey;
+	state_type state;
 };
 
 #endif // HEALTH_COMPONENT_HPP

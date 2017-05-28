@@ -1,9 +1,12 @@
+#!/usr/bin/gnuplot
+
 set terminal qt persist
 
 set xlabel "Número de entidades"
 set ylabel "Tempo por iteração (s)"
 
 set autoscale
+set decimalsign ","
 
 set title "Tempo de processamento em função do número de entidades"
 
@@ -11,8 +14,9 @@ set grid
 
 set key top left
 
-set style line 1 lc rgb '#1abc9c' lt 1 lw 1 pt 7 ps 1
-set style line 2 lc rgb '#c0392b' lt 1 lw 1 pt 9 ps 1.5
+f(x) = 1.0/60.0
 
-plot oo_filename using 1:2 title "Orientado a Objetos" w linespoints ls 1, \
-     do_filename using 1:2 title "Orientado a Dados" with linespoints ls 2
+plot "oo_20000_10.dat"  using 1:2 title "OO"  w lines lw 1, \
+     "do0_20000_10.dat" using 1:2 title "DO0" w lines lw 1, \
+     "do1_20000_10.dat" using 1:2 title "DO1" w lines lw 1, \
+     f(x) title "60Hz" w lines lw 1

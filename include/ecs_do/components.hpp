@@ -4,10 +4,10 @@
 #ifndef COMPONENTS_HPP
 #define COMPONENTS_HPP
 
-#include "components/attack.hpp"
 #include "components/health.hpp"
 #include "components/movement.hpp"
 #include "components/position.hpp"
-#include "components/team.hpp"
+#include "components/reproduction.hpp"
+#include "components/species.hpp"
 
 #endif // COMPONENTS_HPP

@@ -4,8 +4,8 @@
 #ifndef SYSTEMS_HPP
 #define SYSTEMS_HPP
 
-#include "systems/attack.hpp"
 #include "systems/health.hpp"
 #include "systems/movement.hpp"
+#include "systems/reproduction.hpp"
 
 #endif // SYSTEMS_HPP
