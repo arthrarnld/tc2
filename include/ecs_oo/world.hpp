@@ -24,11 +24,11 @@ public:
 	entity & create();
 	void create(int count);
 	entity_ptr get(entity::id id);
-	void destroy(entity & e);
 	unsigned get_entity_count();
 
-	void push_system(base_system * s);
+	void clear();
 
+	void push_system(base_system * s);
 	void push_message(base_message * m);
 
 	container_type::iterator begin();

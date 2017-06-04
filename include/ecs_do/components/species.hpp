@@ -17,6 +17,11 @@ struct species
 		return idx;
 	}
 
+	inline void print()
+	{
+		fprintf(stderr, "species: { 0 | %zu }\n", size());
+	}
+
 	int * id;
 };
 

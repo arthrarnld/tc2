@@ -17,7 +17,11 @@ struct reproduction
 		)
 	{  }
 
-	SOA_COMPONENT_BASE(reproduction)
+	#ifdef DO_PARTITION_ARRAYS
+		SOA_PARTITIONED_COMPONENT_BASE(reproduction)
+	#else
+		SOA_COMPONENT_BASE(reproduction)
+	#endif
 
 	inline size_t create(uint64_t e, float lib) {
 		size_t idx = create(e);
@@ -56,6 +60,15 @@ struct reproduction
 		#endif
 
 		return i + 1;
+	}
+
+	inline void print()
+	{
+		#ifdef DO_PARTITION_ARRAYS
+			fprintf(stderr, "reproduction: { 0 | %zu | %zu }\n", partitions[0], size());
+		#else
+			fprintf(stderr, "reproduction: { 0 | %zu }\n", size());
+		#endif
 	}
 
 	// Properties:

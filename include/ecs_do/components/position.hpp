@@ -21,6 +21,11 @@ struct position
 		return i;
 	}
 
+	inline void print()
+	{
+		fprintf(stderr, "position: { 0 | %zu }\n", size());
+	}
+
 
 	glm::vec2 * pos;
 };

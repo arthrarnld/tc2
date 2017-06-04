@@ -19,9 +19,17 @@ uint64_t world::create()
 	return id;
 }
 
-void world::kill(uint64_t e)
+void world::clear()
 {
-	m_dead.push_back(e);
+	m_freelist.clear();
+	m_next_index = 0;
+	m_count = 0;
+
+	pos.clear();
+	hea.clear();
+	rep.clear();
+	mov.clear();
+	spe.clear();
 }
 
 void world::update(double dt)
@@ -29,18 +37,4 @@ void world::update(double dt)
 	update_health(this, dt);
 	update_reproduction(this, dt);
 	update_movement(this, dt);
-
-	for(uint64_t e : m_dead)
-	{
-		pos.kill(e);
-		hea.kill(e);
-		rep.kill(e);
-		mov.kill(e);
-		spe.kill(e);
-
-		--m_count;
-		if(version(e) < ((1<<VERSION_BITS) - 1))
-			m_freelist.push_back(e+1);
-	}
-	m_dead.clear();
 }

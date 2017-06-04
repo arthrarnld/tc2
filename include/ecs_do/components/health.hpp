@@ -24,7 +24,11 @@ struct health
 
 	{  }
 
-	SOA_COMPONENT_BASE(health)
+	#ifdef DO_PARTITION_ARRAYS
+		SOA_PARTITIONED_COMPONENT_BASE(health)
+	#else
+		SOA_COMPONENT_BASE(health)
+	#endif
 
 	inline size_t create(uint64_t e, float apt, int pr) {
 		size_t idx = create(e);
@@ -64,6 +68,15 @@ struct health
 		#endif
 
 		return i + 1;
+	}
+
+	inline void print()
+	{
+		#ifdef DO_PARTITION_ARRAYS
+			fprintf(stderr, "health: { 0 | %zu | %zu }\n", partitions[0], size());
+		#else
+			fprintf(stderr, "health: { 0 | %zu }\n", size());
+		#endif
 	}
 
 
