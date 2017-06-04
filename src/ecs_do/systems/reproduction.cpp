@@ -11,10 +11,10 @@ bool update_reproduction(world * w, double dt)
 
 	#ifdef DO_PARTITION_ARRAYS
 		// Idle
-		for(size_t i = 0; i < r.first_mating; ++i)
+		for(size_t i = 0; i < r.partitions[0]; ++i)
 			r.desire[i] += r.libido[i] * dt;
 		// Mating
-		for(size_t i = r.first_mating; i < r.size(); )
+		for(size_t i = r.partitions[0]; i < r.size(); )
 			if(--r.desire[i] <= 0)
 			{
 				r.desire[i] = 0;

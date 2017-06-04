@@ -47,11 +47,10 @@ world::entity_ptr world::get(entity::id id)
 	return (*it).second;
 }
 
-void world::destroy(entity & e)
+void world::clear()
 {
-	if(e.get_version() < (1 << entity::VERSION_BITS) - 1)
-		m_freelist.push_back((e.get_index() << entity::VERSION_BITS) | (e.get_version() + 1));
-	m_entities.erase(e.get_id());
+	m_freelist.clear();
+	m_entities.clear();
 }
 
 unsigned world::get_entity_count()

@@ -21,3 +21,4 @@ function process() {
 }
 
 process include
+rm -f include.hpp

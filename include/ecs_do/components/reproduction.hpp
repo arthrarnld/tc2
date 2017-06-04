@@ -1,8 +1,8 @@
 #ifndef REPRODUCTION_COMPONENT_HPP
 #define REPRODUCTION_COMPONENT_HPP
 
+#include "common/util.hpp"
 #include "../soa_utils.hpp"
-
 
 struct reproduction
 {
@@ -17,7 +17,11 @@ struct reproduction
 		)
 	{  }
 
-	SOA_COMPONENT_BASE(reproduction)
+	#ifdef DO_PARTITION_ARRAYS
+		SOA_PARTITIONED_COMPONENT_BASE(reproduction)
+	#else
+		SOA_COMPONENT_BASE(reproduction)
+	#endif
 
 	inline size_t create(uint64_t e, float lib) {
 		size_t idx = create(e);
@@ -25,7 +29,7 @@ struct reproduction
 		libido[idx] = lib;
 
 		#ifdef DO_PARTITION_ARRAYS
-			first_mating = idx + 1;
+			idx = move(idx, 0, MEMBER_SWAP_FUNC, partitions);
 		#else
 			state[idx] = IDLE;
 		#endif
@@ -36,11 +40,8 @@ struct reproduction
 	inline size_t start_mating(size_t i)
 	{
 		#ifdef DO_PARTITION_ARRAYS
-			--first_mating;
-			if(first_mating > i) {
-				swap(i, first_mating);
+			if(move(i, 1, MEMBER_SWAP_FUNC, partitions) != i)
 				return i;
-			}
 			return i + 1;
 		#else
 			state[i] = MATING;
@@ -51,9 +52,9 @@ struct reproduction
 	inline size_t stop_mating(size_t i)
 	{
 		#ifdef DO_PARTITION_ARRAYS
-			++first_mating;
-			if(first_mating <= i)
-				swap(i, first_mating-1);
+			if(move(i, 0, MEMBER_SWAP_FUNC, partitions) != i)
+				return i;
+			return i + 1;
 		#else
 			state[i] = IDLE;
 		#endif
@@ -61,12 +62,21 @@ struct reproduction
 		return i + 1;
 	}
 
+	inline void print()
+	{
+		#ifdef DO_PARTITION_ARRAYS
+			fprintf(stderr, "reproduction: { 0 | %zu | %zu }\n", partitions[0], size());
+		#else
+			fprintf(stderr, "reproduction: { 0 | %zu }\n", size());
+		#endif
+	}
+
 	// Properties:
 	float * desire;
 	float * libido;
 
 	#ifdef DO_PARTITION_ARRAYS
-		size_t first_mating;
+		size_t partitions[1] = { 0 };
 	#else
 		enum state_type { IDLE, MATING };
 		state_type * state;

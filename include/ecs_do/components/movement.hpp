@@ -16,7 +16,11 @@ struct movement
 		)
 	{  }
 
-	SOA_COMPONENT_BASE(movement)
+	#ifdef DO_PARTITION_ARRAYS
+		SOA_PARTITIONED_COMPONENT_BASE(movement)
+	#else
+		SOA_COMPONENT_BASE(movement)
+	#endif
 
 	inline size_t create(uint64_t e, float s) {
 		size_t i = create(e);
@@ -83,6 +87,16 @@ struct movement
 		#endif
 
 		return i + 1;
+	}
+
+	inline void print()
+	{
+		#ifdef DO_PARTITION_ARRAYS
+			fprintf(stderr, "movement: { 0 | %zu | %zu | %zu }\n", partitions[0], partitions[1], size());
+		#else
+			fprintf(stderr, "movement: { 0 | %zu }\n", size());
+		#endif
+
 	}
 
 	uint64_t * target;

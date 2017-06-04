@@ -10,7 +10,7 @@ struct world
 {
 	world();
 	uint64_t create();
-	void kill(uint64_t eid);
+	void clear();
 	void update(double dt);
 
 	inline size_t count() const
@@ -26,8 +26,6 @@ private:
 	std::list<uint64_t> m_freelist;
 	uint64_t m_next_index;
 	size_t m_count;
-
-	std::vector<uint64_t> m_dead;
 };
 
 #endif // WORLD_HPP

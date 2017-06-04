@@ -1,6 +1,7 @@
 #ifndef SOA_UTILS_HPP
 #define SOA_UTILS_HPP
 
+#include <algorithm>
 #include <cstdint>
 #include <cstdio>
 #include <cstring>
@@ -9,9 +10,20 @@
 #include "common/constants.hpp"
 #include "entity.hpp"
 
+template<size_t N>
+void reset_partitions(size_t (&partitions)[N])
+{
+	for(int i = 0; i < N; ++i)
+		partitions[i] = 0;
+}
 
+#ifdef DO_PARTITION_ARRAYS
+	#define RESET_PARTITIONS reset_partitions(partitions)
+#else
+	#define RESET_PARTITIONS ((void)0)
+#endif
 
-#define SOA_COMPONENT_BASE(D)									\
+#define SOA_COMPONENT_COMMON(D)									\
 	private:													\
 		friend class soa::helper<D>;							\
 		size_t len, cap;										\
@@ -36,6 +48,22 @@
 		inline void swap(size_t a, size_t b)					\
 			{ helper.swap(a, b); }
 
+#define SOA_COMPONENT_BASE(D)									\
+	SOA_COMPONENT_COMMON(D)										\
+	inline void clear() {										\
+		std::fill(owned, owned+owned_cap, nil);					\
+		len = 0;												\
+	}
+
+#define SOA_PARTITIONED_COMPONENT_BASE(D)						\
+	SOA_COMPONENT_COMMON(D)										\
+	inline void clear() {										\
+		std::fill(owned, owned+owned_cap, nil);					\
+		len = 0;												\
+		RESET_PARTITIONS;										\
+	}
+
+
 namespace soa
 {
 	template<typename T>
@@ -54,8 +82,7 @@ namespace soa
 			obj->owner = new uint64_t[cap];
 
 			obj->owned = new size_t[cap];
-			for(int i = 0; i < cap; ++i)
-				obj->owned[i] = nil;
+			std::fill(obj->owned, obj->owned+cap, nil);
 			obj->owned_cap = cap;
 
 			for(entry & e : this->arrays)

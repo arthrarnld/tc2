@@ -22,7 +22,7 @@ all: tests
 
 ecs_oo: common
 	@tools/genheaders.sh
-	@echo -e "\e[1mBuilding Object-Oriented ECS\e[0m"
+	@echo -e "\033[1mBuilding Object-Oriented ECS\033[0m"
 	c++ $(CFLAGS) -fPIC -I./include -I./include/ecs_oo -c $(ECS_OO_SRC)
 	c++ -L./bin -lcommon -shared -o bin/$(ECS_OO_BIN) *.o
 	@rm *.o
@@ -30,26 +30,26 @@ ecs_oo: common
 ecs_do: common
 	@tools/genheaders.sh
 	@# Stage 0
-	@echo -e "\e[1mBuilding Stage 0\e[0m"
+	@echo -e "\033[1mBuilding Stage 0\033[0m"
 	c++ $(CFLAGS) $(S0) -fPIC -I./include -I./include/ecs_do -c $(ECS_DO_SRC)
 	c++ -L./bin -lcommon -shared -o bin/$(ECS_DO_BIN)0.so *.o
 	@rm *.o
 	@# Stage 1
-	@echo -e "\e[1mBuilding Stage 1\e[0m"
+	@echo -e "\033[1mBuilding Stage 1\033[0m"
 	c++ $(CFLAGS) $(S1) -fPIC -I./include -I./include/ecs_do -c $(ECS_DO_SRC)
 	c++ -L./bin -lcommon -shared -o bin/$(ECS_DO_BIN)1.so *.o
 	@rm *.o
 
 part_oo: common
 	@tools/genheaders.sh
-	@echo -e "\e[1mBuilding Object-Oriented Particle System\e[0m"
+	@echo -e "\033[1mBuilding Object-Oriented Particle System\033[0m"
 	c++ $(CFLAGS) -fPIC -I./include -I./include/part_oo -c $(PART_OO_SRC)
 	c++ -L./bin -lcommon -shared -o bin/$(PART_OO_BIN) *.o
 	@rm *.o
 
 part_do: common
 	@tools/genheaders.sh
-	@echo -e "\e[1mBuilding Data-Oriented Particle System\e[0m"
+	@echo -e "\033[1mBuilding Data-Oriented Particle System\033[0m"
 	c++ $(CFLAGS) -fPIC -I./include -I./include/part_do -c $(PART_DO_SRC)
 	c++ -L./bin -lcommon -shared -o bin/$(PART_DO_BIN) *.o
 	@rm *.o
@@ -61,7 +61,7 @@ common:
 	@rm *.o
 
 tests: ecs part
-	@echo -e "\e[1mBuilding tests\e[0m"
+	@echo -e "\033[1mBuilding tests\033[0m"
 
 ecs: test_ecs_oo test_ecs_do
 

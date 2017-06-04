@@ -6,6 +6,7 @@
 
 
 #include "../soa_utils.hpp"
+#include "common/util.hpp"
 
 struct health
 {
@@ -23,7 +24,11 @@ struct health
 
 	{  }
 
-	SOA_COMPONENT_BASE(health)
+	#ifdef DO_PARTITION_ARRAYS
+		SOA_PARTITIONED_COMPONENT_BASE(health)
+	#else
+		SOA_COMPONENT_BASE(health)
+	#endif
 
 	inline size_t create(uint64_t e, float apt, int pr) {
 		size_t idx = create(e);
@@ -32,7 +37,7 @@ struct health
 		prey[idx] = pr;
 
 		#ifdef DO_PARTITION_ARRAYS
-			first_eating = idx + 1;
+			idx = move(idx, 0, MEMBER_SWAP_FUNC, partitions);
 		#else
 			state[idx] = IDLE;
 		#endif
@@ -43,11 +48,8 @@ struct health
 	inline size_t start_eating(size_t i)
 	{
 		#ifdef DO_PARTITION_ARRAYS
-			--first_eating;
-			if(first_eating > i) {
-				swap(i, first_eating);
+			if(move(i, 1, MEMBER_SWAP_FUNC, partitions) != i)
 				return i;
-			}
 			return i + 1;
 		#else
 			state[i] = EATING;
@@ -58,14 +60,23 @@ struct health
 	inline size_t stop_eating(size_t i)
 	{
 		#ifdef DO_PARTITION_ARRAYS
-			++first_eating;
-			if(first_eating <= i)
-				swap(i, first_eating-1);
+			if(move(i, 0, MEMBER_SWAP_FUNC, partitions) != i)
+				return i;
+				return i + 1;
 		#else
 			state[i] = IDLE;
 		#endif
 
 		return i + 1;
+	}
+
+	inline void print()
+	{
+		#ifdef DO_PARTITION_ARRAYS
+			fprintf(stderr, "health: { 0 | %zu | %zu }\n", partitions[0], size());
+		#else
+			fprintf(stderr, "health: { 0 | %zu }\n", size());
+		#endif
 	}
 
 
@@ -74,7 +85,7 @@ struct health
 	int   * prey;
 
 	#ifdef DO_PARTITION_ARRAYS
-		size_t first_eating;
+		size_t partitions[1] = { 0 };
 	#else
 		enum state_type { IDLE, EATING };
 		state_type * state;
