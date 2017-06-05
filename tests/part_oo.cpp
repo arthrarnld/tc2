@@ -113,18 +113,13 @@ void run_measure_insertion()
     }
 }
 
-void run_measure_fps()
-{
-
-}
-
 int main(int argc, char ** argv)
 {
     enum { TICK, INSERTION, FPS } test;
 	test_func = run_measure_tick;
 	test = TICK;
 	int c;
-	while((c = getopt(argc, argv, "tif")) != -1)
+	while((c = getopt(argc, argv, "ti")) != -1)
 		switch(c)
 		{
 			case 't':
@@ -134,10 +129,6 @@ int main(int argc, char ** argv)
 			case 'i':
 				test_func = run_measure_insertion;
 				test = INSERTION;
-				break;
-			case 'f':
-				test_func = run_measure_fps;
-				test = FPS;
 				break;
 			case '?':
 				fprintf(stderr, "unknown option '-%c'\n", optopt);
@@ -159,11 +150,6 @@ int main(int argc, char ** argv)
 				fatal("insertion test requires one argument: emitter count");
 			EMITTER_COUNT = atoll(argv[optind]);
 			break;
-		case FPS:
-			if(optind != argc-2)
-				fatal("FPS test requires one argument: increment period and emitter count");
-			INCREASE = atoll(argv[optind]);
-            EMITTER_COUNT = atoll(argv[optind+1]);
 	}
 
 	test_func();
