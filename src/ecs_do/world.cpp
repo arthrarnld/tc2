@@ -38,3 +38,12 @@ void world::update(double dt)
 	update_reproduction(this, dt);
 	update_movement(this, dt);
 }
+
+void world::print()
+{
+	pos.print();
+	hea.print();
+	rep.print();
+	spe.print();
+	mov.print();
+}

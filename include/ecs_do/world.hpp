@@ -22,6 +22,8 @@ struct world
 	species			spe;
 	movement		mov;
 
+	void print();
+
 private:
 	std::list<uint64_t> m_freelist;
 	uint64_t m_next_index;

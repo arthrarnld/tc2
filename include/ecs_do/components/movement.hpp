@@ -25,6 +25,7 @@ struct movement
 	inline size_t create(uint64_t e, float s) {
 		size_t i = create(e);
 		speed[i] = s;
+		target[i] = nil;
 
 		#ifdef DO_PARTITION_ARRAYS
 			i = move(i, 0, MEMBER_SWAP_FUNC, partitions);
@@ -93,12 +94,13 @@ struct movement
 
 	inline void print()
 	{
-		#ifdef DO_PARTITION_ARRAYS
-			fprintf(stderr, "movement: { 0 | %zu | %zu | %zu }\n", partitions[0], partitions[1], size());
-		#else
-			fprintf(stderr, "movement: { 0 | %zu }\n", size());
-		#endif
-
+		fprintf(stderr, "movement: { ");
+		for(size_t i = 0; i < len; ++i) {
+			fprintf(stderr, "%llu: %llu", owner[i], target[i]);
+			if(i < len-1)
+				fprintf(stderr, ", ");
+		}
+		fprintf(stderr, " }\n");
 	}
 
 	uint64_t * target;

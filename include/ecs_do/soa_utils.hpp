@@ -165,7 +165,7 @@ namespace soa
 				// b -> a
 				memcpy(aaddr, baddr, e.size);
 				// bucket -> b
-				memcpy(&baddr, bucket, e.size);
+				memcpy(baddr, bucket, e.size);
 			}
 		}
 

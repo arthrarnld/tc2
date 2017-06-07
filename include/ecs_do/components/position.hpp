@@ -23,7 +23,13 @@ struct position
 
 	inline void print()
 	{
-		fprintf(stderr, "position: { 0 | %zu }\n", size());
+		fprintf(stderr, "position: { ");
+		for(size_t i = 0; i < len; ++i) {
+			fprintf(stderr, "%llu: (%.2f,%.2f)", owner[i], pos[i].x, pos[i].y);
+			if(i < len-1)
+				fprintf(stderr, ", ");
+		}
+		fprintf(stderr, " }\n");
 	}
 
 

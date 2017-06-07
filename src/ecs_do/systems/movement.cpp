@@ -142,6 +142,7 @@ bool update_movement(world * w, double dt)
 				size_t hidx = h.lookup(self);
 
 				if(r.desire[ridx] > 50.0f && r.desire[ridx] > h.hunger[hidx]) {
+					debug("%llu must mate", self);
 					my_target = find_closest_of(w, self, my_pos, my_species);
 					if(my_target != nil) {
 						m.seek_mate(i);
@@ -149,6 +150,7 @@ bool update_movement(world * w, double dt)
 					}
 				}
 				if(my_target == nil && h.hunger[hidx] > 50.0f) {
+					debug("%llu must eat", self);
 					my_target = find_closest_of(w, self, my_pos, h.prey[h.lookup(self)]);
 					if(my_target != nil) {
 						m.seek_food(i);

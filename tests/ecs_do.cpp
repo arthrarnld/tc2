@@ -155,6 +155,8 @@ void run_measure_time(size_t entities, size_t increment, size_t passes, size_t i
 
 int main(int argc, char ** argv)
 {
+	if(argc != 2)
+		return -1;
 	world w;
 
 	{

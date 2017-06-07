@@ -72,11 +72,13 @@ struct health
 
 	inline void print()
 	{
-		#ifdef DO_PARTITION_ARRAYS
-			fprintf(stderr, "health: { 0 | %zu | %zu }\n", partitions[0], size());
-		#else
-			fprintf(stderr, "health: { 0 | %zu }\n", size());
-		#endif
+		fprintf(stderr, "health: { ");
+		for(size_t i = 0; i < len; ++i) {
+			fprintf(stderr, "%llu: %.2f", owner[i], hunger[i]);
+			if(i < len-1)
+				fprintf(stderr, ", ");
+		}
+		fprintf(stderr, " }\n");
 	}
 
 
