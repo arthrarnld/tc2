@@ -6,7 +6,6 @@
 #include "components/species.hpp"
 
 static const float inf = std::numeric_limits<float>::infinity();
-static const float radius = 1.0f;
 
 inline float sqdist(const glm::vec2 & u, const glm::vec2 & v)
 {
@@ -56,20 +55,23 @@ bool update_movement(world * w, double dt)
 			int my_species = s.id[s.lookup(self)];
 			uint64_t & my_target = m.target[i];
 
-			if(r.desire[r.lookup(self)] > 50) {
+			size_t ridx = r.lookup(self);
+			size_t hidx = h.lookup(self);
+
+			if(r.desire[ridx] > 50.0f && r.desire[ridx] > h.hunger[hidx]) {
 				my_target = find_closest_of(w, self, my_pos, my_species);
 				if(my_target != nil) {
-					debug("%llu seeking to mate with %llu [%d]", self, my_target, my_species);
+					debug("%llu seeking to mate with %llu", self, my_target);
 					// Since seek_mate() may modify the arrays,
 					// we need to update i accordingly.
 					i = m.seek_mate(i);
 					continue;
 				}
 			}
-			if(h.hunger[h.lookup(self)] > 50) {
+			if(h.hunger[hidx] > 50.0f) {
 				my_target = find_closest_of(w, self, my_pos, h.prey[h.lookup(self)]);
 				if(my_target != nil) {
-					debug("%llu [%d] seeking to eat %llu [%d]", self, my_species, my_target, h.prey[h.lookup(self)]);
+					debug("%llu seeking to eat %llu", self, my_target);
 					// Same here
 					i = m.seek_food(i);
 					continue;
@@ -86,10 +88,13 @@ bool update_movement(world * w, double dt)
 			uint64_t & my_target = m.target[i];
 
 			glm::vec2 & tgt_pos = p.pos[p.lookup(my_target)];
-			if(sqdist(tgt_pos, my_pos) < radius)
+			if(tgt_pos != my_pos)
 			{
-				my_pos += glm::normalize(tgt_pos - my_pos) * m.speed[i] * (float)dt;
-				if(sqdist(tgt_pos, my_pos) < radius) {
+				my_pos = glm::length(tgt_pos - my_pos) <= m.speed[i]*(float)dt
+					? tgt_pos
+					: my_pos + glm::normalize(tgt_pos - my_pos) * m.speed[i] * (float)dt;
+				if(tgt_pos == my_pos)
+				{
 					debug("%llu starting to eat %llu", self, my_target);
 					i = h.start_eating(h.lookup(self));
 					continue;
@@ -106,12 +111,15 @@ bool update_movement(world * w, double dt)
 			uint64_t & my_target = m.target[i];
 
 			glm::vec2 & tgt_pos = p.pos[p.lookup(my_target)];
-			if(sqdist(tgt_pos, my_pos) < radius)
+			if(tgt_pos != my_pos)
 			{
-				my_pos += glm::normalize(tgt_pos - my_pos) * m.speed[i] * (float)dt;
-				if(sqdist(tgt_pos, my_pos) < radius) {
+				my_pos = glm::length(tgt_pos - my_pos) <= m.speed[i]*(float)dt
+					? tgt_pos
+					: my_pos + glm::normalize(tgt_pos - my_pos) * m.speed[i] * (float)dt;
+				if(tgt_pos == my_pos)
+				{
 					debug("%llu starting to mate with %llu", self, my_target);
-					i = r.start_mating(h.lookup(self));
+					i = r.start_mating(r.lookup(self));
 					continue;
 				}
 			}
@@ -130,18 +138,21 @@ bool update_movement(world * w, double dt)
 
 			if(my_state == movement::IDLE)
 			{
-				if(r.desire[r.lookup(self)] > 50) {
+				size_t ridx = r.lookup(self);
+				size_t hidx = h.lookup(self);
+
+				if(r.desire[ridx] > 50.0f && r.desire[ridx] > h.hunger[hidx]) {
 					my_target = find_closest_of(w, self, my_pos, my_species);
 					if(my_target != nil) {
-						my_state = movement::SEEK_MATE;
+						m.seek_mate(i);
 						debug("%llu seeking to mate with %llu [%d]", self, my_target, my_species);
 					}
 				}
-				if(my_target == nil && h.hunger[h.lookup(self)] > 50) {
+				if(my_target == nil && h.hunger[hidx] > 50.0f) {
 					my_target = find_closest_of(w, self, my_pos, h.prey[h.lookup(self)]);
 					if(my_target != nil) {
-						my_state = movement::SEEK_FOOD;
-						debug("%llu [%d] seeking to eat %llu [%d]", self, my_species, my_target, h.prey[h.lookup(self)]);
+						m.seek_food(i);
+						debug("%llu seeking to eat %llu", self, my_target);
 					}
 				}
 				if(my_target == nil)
@@ -149,10 +160,12 @@ bool update_movement(world * w, double dt)
 			}
 
 			glm::vec2 & tgt_pos = p.pos[p.lookup(my_target)];
-			if(sqdist(tgt_pos, my_pos) >= radius)
+			if(tgt_pos != my_pos)
 			{
-				my_pos += glm::normalize(tgt_pos - my_pos) * m.speed[i] * (float)dt;
-				if(sqdist(tgt_pos, my_pos) < radius)
+				my_pos = glm::length(tgt_pos - my_pos) <= m.speed[i]*(float)dt
+					? tgt_pos
+					: my_pos + glm::normalize(tgt_pos - my_pos) * m.speed[i] * (float)dt;
+				if(tgt_pos == my_pos)
 				{
 					if(my_state == movement::SEEK_MATE) {
 						r.start_mating(r.lookup(self));

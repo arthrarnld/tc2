@@ -19,8 +19,8 @@ struct world
 	position		pos;
 	health			hea;
 	reproduction	rep;
-	movement		mov;
 	species			spe;
+	movement		mov;
 
 private:
 	std::list<uint64_t> m_freelist;

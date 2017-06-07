@@ -53,6 +53,7 @@ struct movement
 
 	inline size_t stop_seeking_food(size_t i)
 	{
+		target[i] = nil;
 		#ifdef DO_PARTITION_ARRAYS
 			move(i, 0, MEMBER_SWAP_FUNC, partitions);
 			// print_partitioned(owner, size(), partitions);
@@ -79,6 +80,7 @@ struct movement
 
 	inline size_t stop_seeking_mate(size_t i)
 	{
+		target[i] = nil;
 		#ifdef DO_PARTITION_ARRAYS
 			move(i, 0, MEMBER_SWAP_FUNC, partitions);
 			// print_partitioned(owner, size(), partitions);

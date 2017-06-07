@@ -32,7 +32,7 @@ struct health
 
 	inline size_t create(uint64_t e, float apt, int pr) {
 		size_t idx = create(e);
-		hunger[idx] = 100;
+		hunger[idx] = random() % 100;
 		appetite[idx] = apt;
 		prey[idx] = pr;
 

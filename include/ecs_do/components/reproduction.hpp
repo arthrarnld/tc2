@@ -25,7 +25,7 @@ struct reproduction
 
 	inline size_t create(uint64_t e, float lib) {
 		size_t idx = create(e);
-		desire[idx] = 0;
+		desire[idx] = random() % 40;
 		libido[idx] = lib;
 
 		#ifdef DO_PARTITION_ARRAYS

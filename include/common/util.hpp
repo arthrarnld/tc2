@@ -55,4 +55,14 @@ inline float norm_rand()
     return (float)random() / RAND_MAX;
 }
 
+inline double drand(double start = 0.0, double end = 1.0)
+{
+	return start + (end-start)*(double)random()/(double)RAND_MAX;
+}
+
+inline double irand(int start = 0, int end = 100)
+{
+	return start + (random() % (end-start+1));
+}
+
 #endif // UTIL_HPP

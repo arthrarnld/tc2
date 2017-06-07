@@ -11,6 +11,7 @@
 #define C_CYAN(X)    "\x1b[36;1m" X "\x1b[0m"
 #define C_MAGENTA(X) "\x1b[35;1m" X "\x1b[0m"
 
+size_t log_iteration = 0;
 
 void log(const char * fmt, ...)
 {
@@ -30,7 +31,7 @@ void debug(const char * fmt, ...)
 	va_list args;
 	va_start(args, fmt);
 
-	fprintf(stderr, C_BLUE("DEBUG "));
+	fprintf(stderr, C_BLUE("DEBUG ") "%-5zu ", log_iteration);
 	vfprintf(stderr, fmt, args);
 	fprintf(stderr, "\n");
 
