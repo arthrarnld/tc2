@@ -11,37 +11,35 @@ bool update_health(world * w, double dt)
 	#ifdef DO_PARTITION_ARRAYS
 		// Idle
 		for(size_t i = 0; i < h.partitions[0]; ++i)
-		{
 			h.hunger[i] += h.appetite[i] * dt;
-		}
 		// Eating
 		for(size_t i = h.partitions[0]; i < h.size(); ++i)
 		{
-			--h.hunger[i];
+			h.hunger[i] -= 10.0f;
 			if(h.hunger[i] <= 0) // done eating
 			{
 				h.hunger[i] = 0;
-				h.stop_eating(i);
+				i = h.stop_eating(i);
 				m.stop_seeking_food(m.lookup(h.owner[i]));
-				debug("%llu satisfied", h.owner[i]);
+				debug("%llu done eating", h.owner[i]);
 			}
+			else ++i;
 		}
 	#else
 		for(size_t i = 0; i < h.size(); ++i)
 		{
 			if(h.state[i] == health::EATING)
 			{
-				--h.hunger[i];
+				h.hunger[i] -= 10.0f;
 				if(h.hunger[i] <= 0)
 				{
 					h.hunger[i] = 0;
 					h.stop_eating(i);
 					m.stop_seeking_food(m.lookup(h.owner[i]));
-					debug("%llu satisfied", h.owner[i]);
+					debug("%llu done eating", h.owner[i]);
 				}
 			}
-			else
-				h.hunger[i] += h.appetite[i] * dt;
+			else h.hunger[i] += h.appetite[i] * dt;
 		}
 	#endif
 

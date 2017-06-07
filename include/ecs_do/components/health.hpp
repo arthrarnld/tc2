@@ -32,7 +32,7 @@ struct health
 
 	inline size_t create(uint64_t e, float apt, int pr) {
 		size_t idx = create(e);
-		hunger[idx] = 100;
+		hunger[idx] = random() % 100;
 		appetite[idx] = apt;
 		prey[idx] = pr;
 
@@ -72,11 +72,13 @@ struct health
 
 	inline void print()
 	{
-		#ifdef DO_PARTITION_ARRAYS
-			fprintf(stderr, "health: { 0 | %zu | %zu }\n", partitions[0], size());
-		#else
-			fprintf(stderr, "health: { 0 | %zu }\n", size());
-		#endif
+		fprintf(stderr, "health: { ");
+		for(size_t i = 0; i < len; ++i) {
+			fprintf(stderr, "%llu: %.2f", owner[i], hunger[i]);
+			if(i < len-1)
+				fprintf(stderr, ", ");
+		}
+		fprintf(stderr, " }\n");
 	}
 
 

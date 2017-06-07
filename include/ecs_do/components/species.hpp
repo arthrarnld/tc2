@@ -19,7 +19,13 @@ struct species
 
 	inline void print()
 	{
-		fprintf(stderr, "species: { 0 | %zu }\n", size());
+		fprintf(stderr, "species: { ");
+		for(size_t i = 0; i < len; ++i) {
+			fprintf(stderr, "%llu: %d", owner[i], id[i]);
+			if(i < len-1)
+				fprintf(stderr, ", ");
+		}
+		fprintf(stderr, " }\n");
 	}
 
 	int * id;

@@ -10,7 +10,7 @@ public:
 
 	reproduction_component(uint64_t owner, float libido)
 		: base_component(owner)
-		, desire(0)
+		, desire(random() % 40)
 		, libido(libido)
 		, state(IDLE)
 	{

@@ -13,7 +13,7 @@ public:
 
 	health_component(uint64_t owner, float appetite, int prey)
 		: base_component(owner)
-		, hunger(100)
+		, hunger(random() % 100)
 		, appetite(appetite)
 		, prey(prey)
 	{

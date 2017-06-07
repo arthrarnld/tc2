@@ -47,6 +47,8 @@ public:
 	bool has_component()
 	{
 		assert_derived(T, base_component, "type must be a subclass of base_component");
+		if(id_gen::get<T>() >= m_components.size())
+			return false;
 		return m_components[id_gen::get<T>()] != nullptr;
 	}
 

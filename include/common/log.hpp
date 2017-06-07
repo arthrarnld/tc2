@@ -1,6 +1,10 @@
 #ifndef LOG_HPP
 #define LOG_HPP
 
+#include <cstddef>
+
+extern size_t log_iteration;
+
 void log(const char * fmt, ...);
 
 #ifdef DEBUG
