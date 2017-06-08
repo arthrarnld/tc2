@@ -21,7 +21,7 @@ struct world
 	health			hea;
 	species			spe;
 
-	void print();
+	// void print();
 
 private:
 	std::list<uint64_t> m_freelist;

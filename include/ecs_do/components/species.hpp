@@ -6,8 +6,9 @@
 struct species
 {
 	species(size_t c = 8)
-		: helper(this, c, &id)
-	{  }
+	{
+		helper.init(this, c, &id);
+	}
 
 	SOA_COMPONENT_BASE(species)
 
@@ -17,16 +18,13 @@ struct species
 		return idx;
 	}
 
-	inline void print()
-	{
-		fprintf(stderr, "species: { ");
-		for(size_t i = 0; i < len; ++i) {
-			fprintf(stderr, "%llu: %d", owner[i], id[i]);
-			if(i < len-1)
-				fprintf(stderr, ", ");
-		}
-		fprintf(stderr, " }\n");
-	}
+	// inline void print()
+	// {
+	// 	fprintf(stderr, "\e[1mspecies\e[0m:");
+	// 	for(size_t i = 0; i < len; ++i)
+	// 		fprintf(stderr, " %zu[%llu %d]", i, owner[i], id[i]);
+	// 	fprintf(stderr, "\n");
+	// }
 
 	int * id;
 };

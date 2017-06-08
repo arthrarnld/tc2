@@ -10,8 +10,9 @@
 struct position
 {
 	position(size_t c = 8)
-		: helper(this, c, &pos)
-	{  }
+	{
+		helper.init(this, c, &pos);
+	}
 
 	SOA_COMPONENT_BASE(position)
 
@@ -21,16 +22,13 @@ struct position
 		return i;
 	}
 
-	inline void print()
-	{
-		fprintf(stderr, "position: { ");
-		for(size_t i = 0; i < len; ++i) {
-			fprintf(stderr, "%llu: (%.2f,%.2f)", owner[i], pos[i].x, pos[i].y);
-			if(i < len-1)
-				fprintf(stderr, ", ");
-		}
-		fprintf(stderr, " }\n");
-	}
+	// inline void print()
+	// {
+	// 	fprintf(stderr, "\e[1mposition\e[0m:");
+	// 	for(size_t i = 0; i < len; ++i)
+	// 		fprintf(stderr, " %zu[%llu (%.2f %.2f)]", i, owner[i], pos[i].x, pos[i].y);
+	// 	fprintf(stderr, "\n");
+	// }
 
 
 	glm::vec2 * pos;

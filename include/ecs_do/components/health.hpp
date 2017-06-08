@@ -11,7 +11,8 @@
 struct health
 {
 	health(size_t cap = 8)
-		: helper(
+	{
+		helper.init(
 			this,
 			cap,
 			&hunger,
@@ -20,8 +21,8 @@ struct health
 			#ifndef DO_PARTITION_ARRAYS
 				, &state
 			#endif
-		)
-	{  }
+		);
+	}
 
 	#ifdef DO_PARTITION_ARRAYS
 		SOA_PARTITIONED_COMPONENT_BASE(health)
@@ -49,11 +50,11 @@ struct health
 		#ifdef DO_PARTITION_ARRAYS
 			if(move(i, 1, MEMBER_SWAP_FUNC, partitions) != i)
 				return i;
-			return i + 1;
 		#else
 			state[i] = EATING;
-			return i + 1;
 		#endif
+
+		return i + 1;
 	}
 
 	inline size_t stop_eating(size_t i)
@@ -61,7 +62,6 @@ struct health
 		#ifdef DO_PARTITION_ARRAYS
 			if(move(i, 0, MEMBER_SWAP_FUNC, partitions) != i)
 				return i;
-				return i + 1;
 		#else
 			state[i] = IDLE;
 		#endif
@@ -69,16 +69,17 @@ struct health
 		return i + 1;
 	}
 
-	inline void print()
-	{
-		fprintf(stderr, "health: { ");
-		for(size_t i = 0; i < len; ++i) {
-			fprintf(stderr, "%llu: %.2f", owner[i], hunger[i]);
-			if(i < len-1)
-				fprintf(stderr, ", ");
-		}
-		fprintf(stderr, " }\n");
-	}
+
+	// inline void print()
+	// {
+	// 	fprintf(stderr, "\e[1mhealth\e[0m\n\tidle:");
+	// 	for(size_t i = 0; i < partitions[0]; ++i)
+	// 		fprintf(stderr, " %zu[%llu %.2f]", i, owner[i], hunger[i]);
+	// 	fprintf(stderr, "\n\teating:");
+	// 	for(size_t i = partitions[0]; i < len; ++i)
+	// 		fprintf(stderr, " %zu[%llu %.2f]", i, owner[i], hunger[i]);
+	// 	fprintf(stderr, "\n");
+	// }
 
 
 	float * hunger;

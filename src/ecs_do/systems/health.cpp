@@ -19,9 +19,9 @@ bool update_health(world * w, double dt)
 			if(h.hunger[i] <= 0) // done eating
 			{
 				h.hunger[i] = 0;
-				i = h.stop_eating(i);
 				m.stop_seeking_food(m.lookup(h.owner[i]));
 				debug("%llu done eating", h.owner[i]);
+				i = h.stop_eating(i);
 			}
 			else ++i;
 		}

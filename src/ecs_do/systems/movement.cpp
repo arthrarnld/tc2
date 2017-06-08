@@ -89,11 +89,14 @@ bool update_movement(world * w, double dt)
 		}
 
 		// Seeking food
-		for(size_t i = m.partitions[0]; i < m.partitions[1]; )
+		for(size_t i = m.partitions[0]; i < m.partitions[1]; ++i)
 		{
 			uint64_t self = m.owner[i];
 			glm::vec2 & my_pos = p.pos[p.lookup(self)];
 			uint64_t & my_target = m.target[i];
+
+			A(my_target != nil);
+			A(p.lookup(my_target) != nil);
 
 			glm::vec2 & tgt_pos = p.pos[p.lookup(my_target)];
 			if(tgt_pos != my_pos)
@@ -104,11 +107,9 @@ bool update_movement(world * w, double dt)
 				if(tgt_pos == my_pos)
 				{
 					debug("%llu starting to eat %llu", self, my_target);
-					i = h.start_eating(h.lookup(self));
-					continue;
+					 h.start_eating(h.lookup(self));
 				}
 			}
-			++i;
 		}
 
 		// Seeking mate
@@ -127,7 +128,7 @@ bool update_movement(world * w, double dt)
 				if(tgt_pos == my_pos)
 				{
 					debug("%llu starting to mate with %llu", self, my_target);
-					i = r.start_mating(r.lookup(self));
+					r.start_mating(r.lookup(self));
 					continue;
 				}
 			}

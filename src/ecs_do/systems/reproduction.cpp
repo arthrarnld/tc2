@@ -20,9 +20,9 @@ bool update_reproduction(world * w, double dt)
 			if(r.desire[i] <= 0)
 			{
 				r.desire[i] = 0;
-				i = r.stop_mating(i);
 				m.stop_seeking_mate(m.lookup(r.owner[i]));
 				debug("%llu done mating", r.owner[i]);
+				i = r.stop_mating(i);
 			}
 			else ++i;
 		}

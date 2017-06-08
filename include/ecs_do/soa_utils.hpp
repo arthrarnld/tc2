@@ -5,10 +5,10 @@
 #include <cstdint>
 #include <cstdio>
 #include <cstring>
-#include <cassert>
 #include <vector>
 
 #include "common/constants.hpp"
+#include "common/util.hpp"
 #include "entity.hpp"
 
 template<size_t N>
@@ -54,13 +54,12 @@ namespace soa
 	{
 	public:
 		template<typename ... Ts>
-		helper(T * o, size_t cap, Ts ** ... arrays)
-			: arrays(sizeof...(Ts))
+		void init(T * o, size_t cap, Ts ** ... arrays)
 		{
 			obj = o;
 			o->len = 0;
 			o->cap = cap;
-			arrays_to_entries<0,sizeof...(Ts)>{}.go(*this, arrays...);
+			arrays_to_entries(*this, arrays...);
 
 			obj->owner = new uint64_t[cap];
 
@@ -75,6 +74,8 @@ namespace soa
 				*e.addr = new char[e.size*obj->cap];
 		}
 
+
+		helper() = default;
 		helper(const helper &) = delete;
 		helper & operator=(const helper &) = delete;
 
@@ -141,12 +142,16 @@ namespace soa
 
 		void swap(size_t a, size_t b)
 		{
-			size_t A = index(obj->owner[a]);
-			assert(A < obj->owned_cap && A != nil);
-			obj->owned[A] = b;
-			size_t B = index(obj->owner[b]);
-			assert(B < obj->owned_cap && B != nil);
-			obj->owned[B] = a;
+			if(a == b)
+				return;
+
+			size_t a_owner_idx = index(obj->owner[a]);
+			A(a_owner_idx < obj->owned_cap && a_owner_idx != nil);
+			obj->owned[a_owner_idx] = b;
+
+			size_t b_owner_idx = index(obj->owner[b]);
+			A(b_owner_idx < obj->owned_cap && b_owner_idx != nil);
+			obj->owned[b_owner_idx] = a;
 			// std::swap(obj->owned[A], obj->owned[B]);
 
 			// std::swap(obj->owner[a], obj->owner[b]);
@@ -168,11 +173,18 @@ namespace soa
 			}
 		}
 
+		size_t get_entry_size(int i) {
+			return arrays[i].size;
+		}
+
 	private:
 		struct entry
 		{
 			size_t size;
 			char ** addr;
+
+			entry() : size(0), addr(nullptr) {}
+			entry(size_t s, char ** a) : size(s), addr(a) {}
 		};
 
 		void grow()
@@ -213,28 +225,20 @@ namespace soa
 			obj->owned_cap = newcap;
 		}
 
-		template<size_t I, size_t S>
-		struct arrays_to_entries
+		template<typename H, typename ... Ts>
+		void arrays_to_entries(helper & h, H ** head, Ts ** ... tail)
 		{
-			template<typename H, typename ... Ts>
-			void go(helper & h, H ** head, Ts ** ... tail)
-			{
-				h.arrays[I] = entry{sizeof(H), (char**)head};
-				*head = nullptr;
-				arrays_to_entries<I+1, S-1>{}.go(h, tail...);
-			}
-		};
+			h.arrays.emplace_back(sizeof(H), (char**)head);
+			*head = nullptr;
+			arrays_to_entries(h, tail...);
+		}
 
-		template<size_t I>
-		struct arrays_to_entries<I,1>
+		template<typename H>
+		void arrays_to_entries(helper & h, H ** head)
 		{
-			template<typename H>
-			void go(helper & h, H ** head)
-			{
-				h.arrays[I] = entry{sizeof(H), (char**)head};
-				*head = nullptr;
-			}
-		};
+			h.arrays.emplace_back(sizeof(H), (char**)head);
+			*head = nullptr;
+		}
 
 		T * obj;
 		std::vector<entry> arrays;

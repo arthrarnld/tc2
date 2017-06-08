@@ -8,15 +8,18 @@
 struct movement
 {
 	movement(size_t c = 8)
-		: helper(this, c,
+	{
+		helper.init(
+			this,
+			c,
 			&target,
 			&speed,
 			&direction
 			#ifndef DO_PARTITION_ARRAYS
 				, &state
 			#endif
-		)
-	{  }
+		);
+	}
 
 	#ifdef DO_PARTITION_ARRAYS
 		SOA_PARTITIONED_COMPONENT_BASE(movement)
@@ -44,6 +47,7 @@ struct movement
 
 	inline size_t seek_food(size_t i)
 	{
+		A(i < len);
 		#ifdef DO_PARTITION_ARRAYS
 			bool moved = move(i, 1, MEMBER_SWAP_FUNC, partitions) != i;
 			// print_partitioned(owner, size(), partitions);
@@ -58,6 +62,7 @@ struct movement
 
 	inline size_t stop_seeking_food(size_t i)
 	{
+		A(i < len);
 		target[i] = nil;
 		#ifdef DO_PARTITION_ARRAYS
 			move(i, 0, MEMBER_SWAP_FUNC, partitions);
@@ -71,6 +76,7 @@ struct movement
 
 	inline size_t seek_mate(size_t i)
 	{
+		A(i < len);
 		#ifdef DO_PARTITION_ARRAYS
 			bool moved = move(i, 2, MEMBER_SWAP_FUNC, partitions) != i;
 			// print_partitioned(owner, size(), partitions);
@@ -85,6 +91,7 @@ struct movement
 
 	inline size_t stop_seeking_mate(size_t i)
 	{
+		A(i < len);
 		target[i] = nil;
 		#ifdef DO_PARTITION_ARRAYS
 			move(i, 0, MEMBER_SWAP_FUNC, partitions);
@@ -96,16 +103,19 @@ struct movement
 		return i + 1;
 	}
 
-	inline void print()
-	{
-		fprintf(stderr, "movement: { ");
-		for(size_t i = 0; i < len; ++i) {
-			fprintf(stderr, "%llu: %llu", owner[i], target[i]);
-			if(i < len-1)
-				fprintf(stderr, ", ");
-		}
-		fprintf(stderr, " }\n");
-	}
+	// inline void print()
+	// {
+	// 	fprintf(stderr, "\e[1mmovement\e[0m\n\tidle:");
+	// 	for(size_t i = 0; i < partitions[0]; ++i)
+	// 		fprintf(stderr, " %zu[%llu %llu (%.2f %.2f)]", i, owner[i], target[i], direction[i].x, direction[i].y);
+	// 	fprintf(stderr, "\n\tseeking food:");
+	// 	for(size_t i = partitions[0]; i < partitions[1]; ++i)
+	// 		fprintf(stderr, " %zu[%llu %llu (%.2f %.2f)]", i, owner[i], target[i], direction[i].x, direction[i].y);
+	// 	fprintf(stderr, "\n\tseeking mate:");
+	// 	for(size_t i = partitions[1]; i < len; ++i)
+	// 		fprintf(stderr, " %zu[%llu %llu (%.2f %.2f)]", i, owner[i], target[i], direction[i].x, direction[i].y);
+	// 	fprintf(stderr, "\n");
+	// }
 
 	uint64_t * target;
 	float * speed;

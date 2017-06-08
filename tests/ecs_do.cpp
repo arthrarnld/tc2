@@ -56,50 +56,23 @@ void run_measure_time(size_t entities, size_t increment, size_t passes, size_t i
 
 	while(!runs.empty())
 	{
+		// fprintf(stderr, "\e[1;32m-----\e[0;30;42m PASS %zu \e[1;32;49m-----\e[0m\n", passes_completed);
 		int idx = random() % runs.size();
 		run & this_run = runs[idx];
 
 		world w;
 		populate(w, this_run.entities);
-		assert(w.count() == this_run.entities);
+		A(w.count() == this_run.entities);
 
 		fprintf(stderr, "\r%6.2f%%", 100.0f*(float)passes_completed/(float)total_passes);
 
 		for(size_t i = 0; i < iterations; ++i)
 		{
+			// fprintf(stderr, "\n\e[1;34mIteration %zu\e[0m\n", i);
+			// w.print();
 			tp = now();
 			w.update(1);
 			this_run.accum_time += elapsed(tp, now());
-
-			for(size_t i = 0; i < w.mov.len; ++i)
-				assert(w.mov.owned[index(w.mov.owner[i])] == i);
-			for(size_t i = 0; i < w.mov.owned_cap; ++i)
-				if(w.mov.owned[i] != nil)
-					assert(index(w.mov.owner[w.mov.owned[i]]) == i);
-
-			for(size_t i = 0; i < w.spe.len; ++i)
-				assert(w.spe.owned[index(w.spe.owner[i])] == i);
-			for(size_t i = 0; i < w.spe.owned_cap; ++i)
-				if(w.spe.owned[i] != nil)
-					assert(index(w.spe.owner[w.spe.owned[i]]) == i);
-
-			for(size_t i = 0; i < w.hea.len; ++i)
-				assert(w.hea.owned[index(w.hea.owner[i])] == i);
-			for(size_t i = 0; i < w.hea.owned_cap; ++i)
-				if(w.hea.owned[i] != nil)
-					assert(index(w.hea.owner[w.hea.owned[i]]) == i);
-
-			for(size_t i = 0; i < w.rep.len; ++i)
-				assert(w.rep.owned[index(w.rep.owner[i])] == i);
-			for(size_t i = 0; i < w.rep.owned_cap; ++i)
-				if(w.rep.owned[i] != nil)
-					assert(index(w.rep.owner[w.rep.owned[i]]) == i);
-
-			for(size_t i = 0; i < w.pos.len; ++i)
-				assert(w.pos.owned[index(w.pos.owner[i])] == i);
-			for(size_t i = 0; i < w.pos.owned_cap; ++i)
-				if(w.pos.owned[i] != nil)
-					assert(index(w.pos.owner[w.pos.owned[i]]) == i);
 		}
 
 		if(--this_run.remaining_passes == 0) {
@@ -183,6 +156,20 @@ void run_measure_time(size_t entities, size_t increment, size_t passes, size_t i
 // 			printf("%zu\n", count-1);
 // 			return;
 // 		}
+// 	}
+// }
+
+// void test_debug(size_t iterations)
+// {
+// 	world w;
+//
+// 	{
+// 		uint64_t e = w.create();
+// 		w.spe.create(e, 0);
+// 		w.pos.create(e, -10, 0);
+// 		w.hea.create(e, 1, 1);
+// 		w.rep.create(e, );
+// 		w.mov.create(e, );
 // 	}
 // }
 
