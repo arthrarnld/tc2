@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "common/constants.hpp"
+#include "common/util.hpp"
 #include "entity.hpp"
 
 template<size_t N>
@@ -17,30 +18,18 @@ void reset_partitions(size_t (&partitions)[N])
 		partitions[i] = 0;
 }
 
-#ifdef DO_PARTITION_ARRAYS
-	#define RESET_PARTITIONS reset_partitions(partitions)
-#else
-	#define RESET_PARTITIONS ((void)0)
-#endif
 
 #define SOA_COMPONENT_COMMON(D)									\
 	private:													\
 		friend class soa::helper<D>;							\
-		size_t len, cap;										\
 		soa::helper<D> helper;									\
-		uint64_t owned_cap;										\
-		size_t * owned;											\
 	public:														\
+		uint64_t owned_cap;										\
+		size_t len, cap;										\
+		size_t * owned;											\
 		uint64_t * owner;										\
 		inline size_t create(uint64_t e)						\
 			{ return helper.create(e); }						\
-		inline void destroy(size_t index, size_t rid = nil)		\
-			{ return helper.destroy(index, rid); }				\
-		inline void kill(uint64_t e, size_t rid = nil) {		\
-			size_t idx = lookup(e);								\
-			if(idx != nil)										\
-				helper.destroy(idx, rid);						\
-		}														\
 		inline size_t size()									\
 			{ return len; }										\
 		inline size_t lookup(uint64_t e)						\
@@ -50,18 +39,12 @@ void reset_partitions(size_t (&partitions)[N])
 
 #define SOA_COMPONENT_BASE(D)									\
 	SOA_COMPONENT_COMMON(D)										\
-	inline void clear() {										\
-		std::fill(owned, owned+owned_cap, nil);					\
-		len = 0;												\
-	}
+	inline void reset_partitions() { }
 
 #define SOA_PARTITIONED_COMPONENT_BASE(D)						\
 	SOA_COMPONENT_COMMON(D)										\
-	inline void clear() {										\
-		std::fill(owned, owned+owned_cap, nil);					\
-		len = 0;												\
-		RESET_PARTITIONS;										\
-	}
+	inline void reset_partitions()								\
+		{ ::reset_partitions(partitions); }
 
 
 namespace soa
@@ -71,13 +54,12 @@ namespace soa
 	{
 	public:
 		template<typename ... Ts>
-		helper(T * o, size_t cap, Ts ** ... arrays)
-			: arrays(sizeof...(Ts))
+		void init(T * o, size_t cap, Ts ** ... arrays)
 		{
 			obj = o;
 			o->len = 0;
 			o->cap = cap;
-			arrays_to_entries<0,sizeof...(Ts)>{}.go(*this, arrays...);
+			arrays_to_entries(*this, arrays...);
 
 			obj->owner = new uint64_t[cap];
 
@@ -85,9 +67,17 @@ namespace soa
 			std::fill(obj->owned, obj->owned+cap, nil);
 			obj->owned_cap = cap;
 
+			obj->reset_partitions();
+
+
 			for(entry & e : this->arrays)
 				*e.addr = new char[e.size*obj->cap];
 		}
+
+
+		helper() = default;
+		helper(const helper &) = delete;
+		helper & operator=(const helper &) = delete;
 
 		~helper()
 		{
@@ -115,32 +105,32 @@ namespace soa
 			return i;
 		}
 
-		void destroy(size_t idx, size_t replacement_idx)
-		{
-			uint64_t eidx = index(obj->owner[idx]);
-			if(idx == obj->len-1) // last element
-			{
-				--obj->len;
-				obj->owned[eidx] = nil;
-
-				return;
-			}
-
-			uint64_t last_owner = obj->owner[obj->len-1];
-
-			obj->owned[index(last_owner)] = idx;
-
-			obj->owner[idx] = last_owner;
-			size_t ridx = replacement_idx == nil ? obj->len-1 : replacement_idx;
-			for(entry & e : arrays)
-			{
-				char * start = *e.addr + (ridx * e.size);
-				char * end = start + e.size;
-				char * dst = *e.addr + (idx * e.size);
-				std::copy(start, end, dst);
-			}
-			--obj->len;
-		}
+		// void destroy(size_t idx, size_t replacement_idx)
+		// {
+		// 	uint64_t eidx = index(obj->owner[idx]);
+		// 	if(idx == obj->len-1) // last element
+		// 	{
+		// 		--obj->len;
+		// 		obj->owned[eidx] = nil;
+		//
+		// 		return;
+		// 	}
+		//
+		// 	uint64_t last_owner = obj->owner[obj->len-1];
+		//
+		// 	obj->owned[index(last_owner)] = idx;
+		//
+		// 	obj->owner[idx] = last_owner;
+		// 	size_t ridx = replacement_idx == nil ? obj->len-1 : replacement_idx;
+		// 	for(entry & e : arrays)
+		// 	{
+		// 		char * start = *e.addr + (ridx * e.size);
+		// 		char * end = start + e.size;
+		// 		char * dst = *e.addr + (idx * e.size);
+		// 		std::copy(start, end, dst);
+		// 	}
+		// 	--obj->len;
+		// }
 
 		size_t lookup(uint64_t e)
 		{
@@ -152,8 +142,22 @@ namespace soa
 
 		void swap(size_t a, size_t b)
 		{
-			std::swap(obj->owned[a], obj->owned[b]);
-			std::swap(obj->owner[a], obj->owner[b]);
+			if(a == b)
+				return;
+
+			size_t a_owner_idx = index(obj->owner[a]);
+			A(a_owner_idx < obj->owned_cap && a_owner_idx != nil);
+			obj->owned[a_owner_idx] = b;
+
+			size_t b_owner_idx = index(obj->owner[b]);
+			A(b_owner_idx < obj->owned_cap && b_owner_idx != nil);
+			obj->owned[b_owner_idx] = a;
+			// std::swap(obj->owned[A], obj->owned[B]);
+
+			// std::swap(obj->owner[a], obj->owner[b]);
+			uint64_t ow_a = obj->owner[a];
+			obj->owner[a] = obj->owner[b];
+			obj->owner[b] = ow_a;
 
 			for(entry & e : arrays)
 			{
@@ -169,11 +173,18 @@ namespace soa
 			}
 		}
 
+		size_t get_entry_size(int i) {
+			return arrays[i].size;
+		}
+
 	private:
 		struct entry
 		{
 			size_t size;
 			char ** addr;
+
+			entry() : size(0), addr(nullptr) {}
+			entry(size_t s, char ** a) : size(s), addr(a) {}
 		};
 
 		void grow()
@@ -181,14 +192,16 @@ namespace soa
 			size_t newcap = obj->cap*2;
 
 			uint64_t * newowner = new uint64_t[newcap];
-			std::copy(obj->owner, obj->owner+obj->len, newowner);
+			memcpy(newowner, obj->owner, obj->len*sizeof(uint64_t));
+			// std::copy(obj->owner, obj->owner+obj->len, newowner);
 			delete [] obj->owner;
 			obj->owner = newowner;
 
 			for(entry & e : arrays)
 			{
 				char * newarr = new char[e.size*newcap];
-				std::copy(*e.addr, *e.addr+(e.size*obj->cap), newarr);
+				// std::copy(*e.addr, *e.addr+(e.size*obj->cap), newarr);
+				memcpy(newarr, *e.addr, e.size*obj->cap);
 				delete [] *e.addr;
 				*e.addr = newarr;
 			}
@@ -201,7 +214,8 @@ namespace soa
 			size_t newcap = idx < 2*obj->owned_cap ? 2*obj->owned_cap : idx+1;
 
 			size_t * newowned = new size_t[newcap];
-			std::copy(obj->owned, obj->owned+obj->owned_cap, newowned);
+			memcpy(newowned, obj->owned, obj->owned_cap*sizeof(size_t));
+			// std::copy(obj->owned, obj->owned+obj->owned_cap, newowned);
 			delete [] obj->owned;
 
 			for(int i = obj->owned_cap; i < newcap; ++i)
@@ -211,28 +225,20 @@ namespace soa
 			obj->owned_cap = newcap;
 		}
 
-		template<size_t I, size_t S>
-		struct arrays_to_entries
+		template<typename H, typename ... Ts>
+		void arrays_to_entries(helper & h, H ** head, Ts ** ... tail)
 		{
-			template<typename H, typename ... Ts>
-			void go(helper & h, H ** head, Ts ** ... tail)
-			{
-				h.arrays[I] = entry{sizeof(H), (char**)head};
-				*head = nullptr;
-				arrays_to_entries<I+1, S-1>{}.go(h, tail...);
-			}
-		};
+			h.arrays.emplace_back(sizeof(H), (char**)head);
+			*head = nullptr;
+			arrays_to_entries(h, tail...);
+		}
 
-		template<size_t I>
-		struct arrays_to_entries<I,1>
+		template<typename H>
+		void arrays_to_entries(helper & h, H ** head)
 		{
-			template<typename H>
-			void go(helper & h, H ** head)
-			{
-				h.arrays[I] = entry{sizeof(H), (char**)head};
-				*head = nullptr;
-			}
-		};
+			h.arrays.emplace_back(sizeof(H), (char**)head);
+			*head = nullptr;
+		}
 
 		T * obj;
 		std::vector<entry> arrays;

@@ -19,19 +19,6 @@ uint64_t world::create()
 	return id;
 }
 
-void world::clear()
-{
-	m_freelist.clear();
-	m_next_index = 0;
-	m_count = 0;
-
-	pos.clear();
-	hea.clear();
-	rep.clear();
-	mov.clear();
-	spe.clear();
-}
-
 void world::update(double dt)
 {
 	update_health(this, dt);
@@ -39,11 +26,11 @@ void world::update(double dt)
 	update_movement(this, dt);
 }
 
-void world::print()
-{
-	pos.print();
-	hea.print();
-	rep.print();
-	spe.print();
-	mov.print();
-}
+// void world::print()
+// {
+// 	pos.print();
+// 	hea.print();
+// 	rep.print();
+// 	spe.print();
+// 	mov.print();
+// }

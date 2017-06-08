@@ -47,6 +47,9 @@ void populate(world & w, size_t count)
 
 void run_measure_time(size_t entities, size_t increment, size_t passes, size_t iterations)
 {
+	fprintf(stderr, "# Time test\n# Entities: %zu\n# Increment: %zu\n# Passes: %zu\n# Iterations: %zu\n",
+		entities, increment, passes, iterations);
+		
 	size_t run_count = entities/increment;
 	size_t total_passes = run_count * passes;
 	size_t passes_completed = 0;

@@ -11,7 +11,7 @@ ECS_DO_SRC = $(shell find src/ecs_do/ -name '*.cpp')
 ECS_DO_BIN = libecs_do
 
 COMMSRC = $(shell find src/common/ -name '*.cpp')
-CFLAGS = -g -std=c++11 -DDEBUG #-Wfatal-errors
+CFLAGS = -std=c++11 -O2
 
 # Data-oriented ECS implementation stages
 S0 =
@@ -27,14 +27,16 @@ ecs_oo: common
 	c++ -L./bin -lcommon -shared -o bin/$(ECS_OO_BIN) *.o
 	@rm *.o
 
-ecs_do: common
+ecs_do: ecs_do0 ecs_do1
+
+ecs_do0: common
 	@tools/genheaders.sh
-	@# Stage 0
 	@echo -e "\033[1mBuilding Stage 0\033[0m"
 	c++ $(CFLAGS) $(S0) -fPIC -I./include -I./include/ecs_do -c $(ECS_DO_SRC)
 	c++ -L./bin -lcommon -shared -o bin/$(ECS_DO_BIN)0.so *.o
 	@rm *.o
-	@# Stage 1
+
+ecs_do1: common
 	@echo -e "\033[1mBuilding Stage 1\033[0m"
 	c++ $(CFLAGS) $(S1) -fPIC -I./include -I./include/ecs_do -c $(ECS_DO_SRC)
 	c++ -L./bin -lcommon -shared -o bin/$(ECS_DO_BIN)1.so *.o
@@ -68,10 +70,12 @@ ecs: test_ecs_oo test_ecs_do
 test_ecs_oo: ecs_oo
 	c++ $(CFLAGS) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lecs_oo tests/ecs_oo.cpp -o bin/oo
 
-test_ecs_do: ecs_do
-	@# Stage 0 -----------------------------------------------------------------
+test_ecs_do: test_ecs_do0 test_ecs_do1
+
+test_ecs_do0: ecs_do0
 	c++ $(CFLAGS) $(S0) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lecs_do0 tests/ecs_do.cpp -o bin/do0
-	@# Stage 1 -----------------------------------------------------------------
+
+test_ecs_do1: ecs_do1
 	c++ $(CFLAGS) $(S1) -Wl,-rpath '-Wl,$$ORIGIN' -I./include -L./bin -lcommon -lecs_do1 tests/ecs_do.cpp -o bin/do1
 
 part: test_part_oo test_part_do

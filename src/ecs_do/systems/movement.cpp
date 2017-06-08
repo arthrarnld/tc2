@@ -4,6 +4,7 @@
 #include "world.hpp"
 
 #include "components/species.hpp"
+#include "glm/gtx/rotate_vector.hpp"
 
 static const float inf = std::numeric_limits<float>::infinity();
 
@@ -77,15 +78,25 @@ bool update_movement(world * w, double dt)
 					continue;
 				}
 			}
+			// No target was found. Wander about randomly.
+			glm::vec2 delta = m.direction[i];
+			float angle = drand(to_rad(-30), to_rad(30));
+			delta = glm::rotate(delta, angle);
+			m.direction[i] = glm::normalize(m.direction[i] + delta);
+			my_pos += m.direction[i] * m.speed[i] * (float)dt;
+			debug("%llu at (%.2f, %.2f)", self, my_pos.x, my_pos.y);
 			++i;
 		}
 
 		// Seeking food
-		for(size_t i = m.partitions[0]; i < m.partitions[1]; )
+		for(size_t i = m.partitions[0]; i < m.partitions[1]; ++i)
 		{
 			uint64_t self = m.owner[i];
 			glm::vec2 & my_pos = p.pos[p.lookup(self)];
 			uint64_t & my_target = m.target[i];
+
+			A(my_target != nil);
+			A(p.lookup(my_target) != nil);
 
 			glm::vec2 & tgt_pos = p.pos[p.lookup(my_target)];
 			if(tgt_pos != my_pos)
@@ -96,11 +107,9 @@ bool update_movement(world * w, double dt)
 				if(tgt_pos == my_pos)
 				{
 					debug("%llu starting to eat %llu", self, my_target);
-					i = h.start_eating(h.lookup(self));
-					continue;
+					 h.start_eating(h.lookup(self));
 				}
 			}
-			++i;
 		}
 
 		// Seeking mate
@@ -119,7 +128,7 @@ bool update_movement(world * w, double dt)
 				if(tgt_pos == my_pos)
 				{
 					debug("%llu starting to mate with %llu", self, my_target);
-					i = r.start_mating(r.lookup(self));
+					r.start_mating(r.lookup(self));
 					continue;
 				}
 			}
@@ -157,8 +166,16 @@ bool update_movement(world * w, double dt)
 						debug("%llu seeking to eat %llu", self, my_target);
 					}
 				}
-				if(my_target == nil)
+				if(my_target == nil) {
+					// No target was found. Wander about randomly.
+					glm::vec2 delta = m.direction[i];
+					float angle = drand(to_rad(-30), to_rad(30));
+					delta = glm::rotate(delta, angle);
+					m.direction[i] = glm::normalize(m.direction[i] + delta);
+					my_pos += m.direction[i] * m.speed[i] * (float)dt;
+					debug("%llu at (%.2f, %.2f)", self, my_pos.x, my_pos.y);
 					continue;
+				}
 			}
 
 			glm::vec2 & tgt_pos = p.pos[p.lookup(my_target)];

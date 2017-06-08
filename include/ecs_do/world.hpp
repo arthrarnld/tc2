@@ -10,19 +10,18 @@ struct world
 {
 	world();
 	uint64_t create();
-	void clear();
 	void update(double dt);
 
 	inline size_t count() const
 		{ return m_count; }
 
-	position		pos;
-	health			hea;
-	reproduction	rep;
-	species			spe;
 	movement		mov;
+	position		pos;
+	reproduction	rep;
+	health			hea;
+	species			spe;
 
-	void print();
+	// void print();
 
 private:
 	std::list<uint64_t> m_freelist;

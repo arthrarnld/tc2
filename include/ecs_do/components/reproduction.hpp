@@ -7,15 +7,17 @@
 struct reproduction
 {
 	reproduction(size_t c = 8)
-		: helper(this,
+	{
+		helper.init(
+			this,
 			c,
 			&desire,
 			&libido
 			#ifndef DO_PARTITION_ARRAYS
 				, &state
 			#endif
-		)
-	{  }
+		);
+	}
 
 	#ifdef DO_PARTITION_ARRAYS
 		SOA_PARTITIONED_COMPONENT_BASE(reproduction)
@@ -62,23 +64,23 @@ struct reproduction
 		return i + 1;
 	}
 
-	inline void print()
-	{
-		fprintf(stderr, "reproduction: { ");
-		for(size_t i = 0; i < len; ++i) {
-			fprintf(stderr, "%llu: %.2f", owner[i], desire[i]);
-			if(i < len-1)
-				fprintf(stderr, ", ");
-		}
-		fprintf(stderr, " }\n");
-	}
+	// inline void print()
+	// {
+	// 	fprintf(stderr, "\e[1mreproduction\e[0m\n\tidle:");
+	// 	for(size_t i = 0; i < partitions[0]; ++i)
+	// 		fprintf(stderr, " %zu[%llu %.2f]", i, owner[i], desire[i]);
+	// 	fprintf(stderr, "\n\tmating:");
+	// 	for(size_t i = partitions[0]; i < len; ++i)
+	// 		fprintf(stderr, " %zu[%llu %.2f]", i, owner[i], desire[i]);
+	// 	fprintf(stderr, "\n");
+	// }
 
 	// Properties:
 	float * desire;
 	float * libido;
 
 	#ifdef DO_PARTITION_ARRAYS
-		size_t partitions[1] = { 0 };
+		size_t partitions[1];
 	#else
 		enum state_type { IDLE, MATING };
 		state_type * state;

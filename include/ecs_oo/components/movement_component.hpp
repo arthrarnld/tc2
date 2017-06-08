@@ -3,6 +3,7 @@
 
 #include "base_component.hpp"
 #include "common/constants.hpp"
+#include "glm/glm.hpp"
 
 class movement_component : public base_component
 {
@@ -20,6 +21,7 @@ public:
 
 	uint64_t target;
 	float speed;
+	glm::vec2 direction;
 	state_type state;
 };
 
