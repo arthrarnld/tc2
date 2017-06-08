@@ -16,6 +16,7 @@ public:
 		, hunger(random() % 100)
 		, appetite(appetite)
 		, prey(prey)
+		, state(IDLE)
 	{
 
 	}
