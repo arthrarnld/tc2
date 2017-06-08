@@ -78,7 +78,7 @@ struct reproduction
 	float * libido;
 
 	#ifdef DO_PARTITION_ARRAYS
-		size_t partitions[1] = { 0 };
+		size_t partitions[1];
 	#else
 		enum state_type { IDLE, MATING };
 		state_type * state;

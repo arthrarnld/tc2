@@ -38,6 +38,9 @@ void populate(world & w, size_t count)
 
 void run_measure_time(size_t entities, size_t increment, size_t passes, size_t iterations)
 {
+	fprintf(stderr, "# Time test\n# Entities: %zu\n# Increment: %zu\n# Passes: %zu\n# Iterations: %zu\n",
+		entities, increment, passes, iterations);
+
 	size_t run_count = entities/increment;
 	size_t total_passes = run_count * passes;
 	size_t passes_completed = 0;
@@ -53,8 +56,8 @@ void run_measure_time(size_t entities, size_t increment, size_t passes, size_t i
 
 	while(!runs.empty())
 	{
-		int index = random() % runs.size();
-		run & this_run = runs[index];
+		int idx = random() % runs.size();
+		run & this_run = runs[idx];
 
 		world w;
 		populate(w, this_run.entities);
@@ -67,16 +70,46 @@ void run_measure_time(size_t entities, size_t increment, size_t passes, size_t i
 			tp = now();
 			w.update(1);
 			this_run.accum_time += elapsed(tp, now());
+
+			for(size_t i = 0; i < w.mov.len; ++i)
+				assert(w.mov.owned[index(w.mov.owner[i])] == i);
+			for(size_t i = 0; i < w.mov.owned_cap; ++i)
+				if(w.mov.owned[i] != nil)
+					assert(index(w.mov.owner[w.mov.owned[i]]) == i);
+
+			for(size_t i = 0; i < w.spe.len; ++i)
+				assert(w.spe.owned[index(w.spe.owner[i])] == i);
+			for(size_t i = 0; i < w.spe.owned_cap; ++i)
+				if(w.spe.owned[i] != nil)
+					assert(index(w.spe.owner[w.spe.owned[i]]) == i);
+
+			for(size_t i = 0; i < w.hea.len; ++i)
+				assert(w.hea.owned[index(w.hea.owner[i])] == i);
+			for(size_t i = 0; i < w.hea.owned_cap; ++i)
+				if(w.hea.owned[i] != nil)
+					assert(index(w.hea.owner[w.hea.owned[i]]) == i);
+
+			for(size_t i = 0; i < w.rep.len; ++i)
+				assert(w.rep.owned[index(w.rep.owner[i])] == i);
+			for(size_t i = 0; i < w.rep.owned_cap; ++i)
+				if(w.rep.owned[i] != nil)
+					assert(index(w.rep.owner[w.rep.owned[i]]) == i);
+
+			for(size_t i = 0; i < w.pos.len; ++i)
+				assert(w.pos.owned[index(w.pos.owner[i])] == i);
+			for(size_t i = 0; i < w.pos.owned_cap; ++i)
+				if(w.pos.owned[i] != nil)
+					assert(index(w.pos.owner[w.pos.owned[i]]) == i);
 		}
 
 		if(--this_run.remaining_passes == 0) {
 			times[this_run.index] = this_run.accum_time / (double)(iterations*passes);
-			runs.erase(runs.begin()+index);
+			runs.erase(runs.begin()+idx);
 		}
 
 		++passes_completed;
 	}
-	fprintf(stderr, "   100%%\n");
+	fprintf(stderr, "\r   100%%\n");
 
 	for(size_t i = 0; i < run_count; ++i)
 		printf("%llu\t%f\n", (i+1)*increment, times[i]);
@@ -155,45 +188,12 @@ void run_measure_time(size_t entities, size_t increment, size_t passes, size_t i
 
 int main(int argc, char ** argv)
 {
-	if(argc != 2)
-		return -1;
-	world w;
+	size_t seed;
+	FILE * fp = fopen("/dev/urandom", "rb");
+	fread(&seed, sizeof(seed), 1, fp);
+	srandom(seed);
+	fclose(fp);
 
-	{
-		uint64_t e = w.create();
-		w.spe.create(e, 0);
-		w.pos.create(e, -10, 0);
-		w.hea.create(e, 2, 1);
-		w.mov.create(e, 1);
-		w.rep.create(e, 1);
-	}
-
-	{
-		uint64_t e = w.create();
-		w.spe.create(e, 0);
-		w.pos.create(e, 10, 0);
-		w.hea.create(e, 2, 2);
-		w.mov.create(e, 1);
-		w.rep.create(e, 1);
-	}
-
-	{
-		uint64_t e = w.create();
-		w.spe.create(e, 1);
-		w.pos.create(e, -20, 0);
-	}
-
-	{
-		uint64_t e = w.create();
-		w.spe.create(e, 2);
-		w.pos.create(e, 20, 0);
-	}
-
-	for(size_t i = 0; i < atoll(argv[1]); ++i) {
-		log_iteration = i;
-		w.update(1);
-	}
-/*
 	enum { TICK, INSERTION, FPS } test = TICK;
 
 	int c;
@@ -229,7 +229,7 @@ int main(int argc, char ** argv)
 			increment = atoll(argv[optind++]);
 			passes = atoll(argv[optind++]);
 			iterations = atoll(argv[optind++]);
-			run_measure_time(entities, increment, iterations, passes);
+			run_measure_time(entities, increment, passes, iterations);
 			break;
 		case INSERTION:
 			// if(optind != argc-1)
@@ -242,6 +242,6 @@ int main(int argc, char ** argv)
 			// 	fatal("FPS test requires one argument: increment period");
 			// increment_period = atoll(argv[optind]);
 	}
-*/
+
 	return 0;
 }

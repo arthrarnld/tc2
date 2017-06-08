@@ -4,6 +4,7 @@
 #include "world.hpp"
 
 #include "components/species.hpp"
+#include "glm/gtx/rotate_vector.hpp"
 
 static const float inf = std::numeric_limits<float>::infinity();
 
@@ -77,6 +78,13 @@ bool update_movement(world * w, double dt)
 					continue;
 				}
 			}
+			// No target was found. Wander about randomly.
+			glm::vec2 delta = m.direction[i];
+			float angle = drand(to_rad(-30), to_rad(30));
+			delta = glm::rotate(delta, angle);
+			m.direction[i] = glm::normalize(m.direction[i] + delta);
+			my_pos += m.direction[i] * m.speed[i] * (float)dt;
+			debug("%llu at (%.2f, %.2f)", self, my_pos.x, my_pos.y);
 			++i;
 		}
 
@@ -157,8 +165,16 @@ bool update_movement(world * w, double dt)
 						debug("%llu seeking to eat %llu", self, my_target);
 					}
 				}
-				if(my_target == nil)
+				if(my_target == nil) {
+					// No target was found. Wander about randomly.
+					glm::vec2 delta = m.direction[i];
+					float angle = drand(to_rad(-30), to_rad(30));
+					delta = glm::rotate(delta, angle);
+					m.direction[i] = glm::normalize(m.direction[i] + delta);
+					my_pos += m.direction[i] * m.speed[i] * (float)dt;
+					debug("%llu at (%.2f, %.2f)", self, my_pos.x, my_pos.y);
 					continue;
+				}
 			}
 
 			glm::vec2 & tgt_pos = p.pos[p.lookup(my_target)];

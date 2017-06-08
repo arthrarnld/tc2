@@ -1,0 +1,1893 @@
+desc: (none)
+cmd: bin/do1 1000 100 1 100
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=2499570
+mem_heap_B=72704
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=3096941
+mem_heap_B=81712
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=3488562
+mem_heap_B=99888
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=detailed
+n17: 99888 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x52DEA2E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:123)
+  n1: 72704 0x400F348: call_init.part.0 (in /usr/lib/ld-2.25.so)
+   n1: 72704 0x400F459: _dl_init (in /usr/lib/ld-2.25.so)
+    n1: 72704 0x4000DB8: ??? (in /usr/lib/ld-2.25.so)
+     n1: 72704 0x3: ???
+      n1: 72704 0xFFF00040D: ???
+       n1: 72704 0xFFF000415: ???
+        n1: 72704 0xFFF00041A: ???
+         n1: 72704 0xFFF00041E: ???
+          n0: 72704 0xFFF000420: ???
+ n1: 3072 0x40935F: soa::helper<reproduction>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 3072 0x407906: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 3072 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 3072 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 3072 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 3072 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 3072 0x405F07: main (ecs_do.cpp:202)
+ n1: 2560 0x408934: soa::helper<movement>::grow() (soa_utils.hpp:195)
+  n1: 2560 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2560 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 2560 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 2560 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 2560 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2560 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4098A1: soa::helper<species>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x407DB0: soa::helper<species>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 2048 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 2048 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408F6D: soa::helper<position>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x40773E: soa::helper<position>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 2048 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 2048 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408A2B: soa::helper<movement>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x40717E: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 2048 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 2048 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4083C5: soa::helper<health>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x406B96: soa::helper<health>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 2048 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 2048 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4096CB: soa::helper<species>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 2048 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 2048 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408D97: soa::helper<position>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 2048 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 2048 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408E76: soa::helper<position>::grow() (soa_utils.hpp:195)
+  n1: 2048 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 2048 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 2048 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 1536 0x4082CE: soa::helper<health>::grow() (soa_utils.hpp:195)
+  n1: 1536 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1536 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 1536 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 1536 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 1536 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1536 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x408855: soa::helper<movement>::grow() (soa_utils.hpp:188)
+  n1: 1024 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 1024 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 1024 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x4081EF: soa::helper<health>::grow() (soa_utils.hpp:188)
+  n1: 1024 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 1024 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 1024 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x409189: soa::helper<reproduction>::grow() (soa_utils.hpp:188)
+  n1: 1024 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 1024 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 1024 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x409268: soa::helper<reproduction>::grow() (soa_utils.hpp:195)
+  n1: 1024 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 1024 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 1024 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x4097AA: soa::helper<species>::grow() (soa_utils.hpp:195)
+  n1: 1024 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 1024 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 1024 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n0: 560 in 24 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=4
+#-----------
+time=3711111
+mem_heap_B=107568
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=detailed
+n16: 107568 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x52DEA2E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:123)
+  n1: 72704 0x400F348: call_init.part.0 (in /usr/lib/ld-2.25.so)
+   n1: 72704 0x400F459: _dl_init (in /usr/lib/ld-2.25.so)
+    n1: 72704 0x4000DB8: ??? (in /usr/lib/ld-2.25.so)
+     n1: 72704 0x3: ???
+      n1: 72704 0xFFF00040D: ???
+       n1: 72704 0xFFF000415: ???
+        n1: 72704 0xFFF00041A: ???
+         n1: 72704 0xFFF00041E: ???
+          n0: 72704 0xFFF000420: ???
+ n1: 5120 0x408934: soa::helper<movement>::grow() (soa_utils.hpp:195)
+  n1: 5120 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 5120 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 5120 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 5120 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 5120 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 5120 0x405F07: main (ecs_do.cpp:202)
+ n1: 3072 0x4082CE: soa::helper<health>::grow() (soa_utils.hpp:195)
+  n1: 3072 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 3072 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 3072 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 3072 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 3072 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 3072 0x405F07: main (ecs_do.cpp:202)
+ n1: 2560 0x409268: soa::helper<reproduction>::grow() (soa_utils.hpp:195)
+  n1: 2560 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2560 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 2560 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 2560 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 2560 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2560 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408F6D: soa::helper<position>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x40773E: soa::helper<position>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 2048 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 2048 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4081EF: soa::helper<health>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 2048 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 2048 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4083C5: soa::helper<health>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x406B96: soa::helper<health>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 2048 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 2048 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408855: soa::helper<movement>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 2048 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 2048 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408A2B: soa::helper<movement>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x40717E: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 2048 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 2048 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x409189: soa::helper<reproduction>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 2048 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 2048 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x40935F: soa::helper<reproduction>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x407906: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 2048 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 2048 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4096CB: soa::helper<species>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 2048 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 2048 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408D97: soa::helper<position>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 2048 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 2048 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408E76: soa::helper<position>::grow() (soa_utils.hpp:195)
+  n1: 2048 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 2048 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 2048 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4098A1: soa::helper<species>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x407DB0: soa::helper<species>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 2048 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 2048 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n0: 1584 in 25 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=5
+#-----------
+time=4107399
+mem_heap_B=111152
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=4520720
+mem_heap_B=140848
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=5303918
+mem_heap_B=149040
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=5345243
+mem_heap_B=179760
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=detailed
+n17: 179760 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x52DEA2E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:123)
+  n1: 72704 0x400F348: call_init.part.0 (in /usr/lib/ld-2.25.so)
+   n1: 72704 0x400F459: _dl_init (in /usr/lib/ld-2.25.so)
+    n1: 72704 0x4000DB8: ??? (in /usr/lib/ld-2.25.so)
+     n1: 72704 0x3: ???
+      n1: 72704 0xFFF00040D: ???
+       n1: 72704 0xFFF000415: ???
+        n1: 72704 0xFFF00041A: ???
+         n1: 72704 0xFFF00041E: ???
+          n0: 72704 0xFFF000420: ???
+ n1: 12288 0x40935F: soa::helper<reproduction>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 12288 0x407906: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 12288 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 12288 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 12288 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 12288 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 12288 0x405F07: main (ecs_do.cpp:202)
+ n1: 10240 0x408934: soa::helper<movement>::grow() (soa_utils.hpp:195)
+  n1: 10240 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 10240 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 10240 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 10240 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 10240 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 10240 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x4098A1: soa::helper<species>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x407DB0: soa::helper<species>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 8192 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 8192 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408F6D: soa::helper<position>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x40773E: soa::helper<position>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 8192 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 8192 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408A2B: soa::helper<movement>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x40717E: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 8192 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 8192 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x4083C5: soa::helper<health>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x406B96: soa::helper<health>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 8192 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 8192 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x4096CB: soa::helper<species>::grow() (soa_utils.hpp:188)
+  n1: 8192 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 8192 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 8192 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 8192 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408D97: soa::helper<position>::grow() (soa_utils.hpp:188)
+  n1: 8192 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 8192 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 8192 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 8192 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408E76: soa::helper<position>::grow() (soa_utils.hpp:195)
+  n1: 8192 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 8192 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 8192 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 8192 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 6144 0x4082CE: soa::helper<health>::grow() (soa_utils.hpp:195)
+  n1: 6144 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 6144 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 6144 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 6144 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 6144 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 6144 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x408855: soa::helper<movement>::grow() (soa_utils.hpp:188)
+  n1: 4096 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 4096 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 4096 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x4081EF: soa::helper<health>::grow() (soa_utils.hpp:188)
+  n1: 4096 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 4096 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 4096 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x409189: soa::helper<reproduction>::grow() (soa_utils.hpp:188)
+  n1: 4096 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 4096 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 4096 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x409268: soa::helper<reproduction>::grow() (soa_utils.hpp:195)
+  n1: 4096 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 4096 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 4096 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x4097AA: soa::helper<species>::grow() (soa_utils.hpp:195)
+  n1: 4096 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 4096 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 4096 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n0: 560 in 24 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=9
+#-----------
+time=6110695
+mem_heap_B=183856
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=6120421
+mem_heap_B=208432
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=peak
+n17: 208432 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x52DEA2E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:123)
+  n1: 72704 0x400F348: call_init.part.0 (in /usr/lib/ld-2.25.so)
+   n1: 72704 0x400F459: _dl_init (in /usr/lib/ld-2.25.so)
+    n1: 72704 0x4000DB8: ??? (in /usr/lib/ld-2.25.so)
+     n1: 72704 0x3: ???
+      n1: 72704 0xFFF00040D: ???
+       n1: 72704 0xFFF000415: ???
+        n1: 72704 0xFFF00041A: ???
+         n1: 72704 0xFFF00041E: ???
+          n0: 72704 0xFFF000420: ???
+ n1: 20480 0x408934: soa::helper<movement>::grow() (soa_utils.hpp:195)
+  n1: 20480 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 20480 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 20480 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 20480 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 20480 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 20480 0x405F07: main (ecs_do.cpp:202)
+ n1: 12288 0x4082CE: soa::helper<health>::grow() (soa_utils.hpp:195)
+  n1: 12288 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 12288 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 12288 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 12288 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 12288 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 12288 0x405F07: main (ecs_do.cpp:202)
+ n1: 12288 0x409189: soa::helper<reproduction>::grow() (soa_utils.hpp:188)
+  n1: 12288 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 12288 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 12288 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 12288 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 12288 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 12288 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408E76: soa::helper<position>::grow() (soa_utils.hpp:195)
+  n1: 8192 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 8192 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 8192 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 8192 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x4098A1: soa::helper<species>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x407DB0: soa::helper<species>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 8192 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 8192 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408F6D: soa::helper<position>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x40773E: soa::helper<position>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 8192 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 8192 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x4081EF: soa::helper<health>::grow() (soa_utils.hpp:188)
+  n1: 8192 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 8192 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 8192 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 8192 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x40935F: soa::helper<reproduction>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x407906: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 8192 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 8192 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x4083C5: soa::helper<health>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x406B96: soa::helper<health>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 8192 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 8192 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408855: soa::helper<movement>::grow() (soa_utils.hpp:188)
+  n1: 8192 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 8192 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 8192 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 8192 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x4096CB: soa::helper<species>::grow() (soa_utils.hpp:188)
+  n1: 8192 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 8192 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 8192 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 8192 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408A2B: soa::helper<movement>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x40717E: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 8192 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 8192 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408D97: soa::helper<position>::grow() (soa_utils.hpp:188)
+  n1: 8192 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 8192 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 8192 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 8192 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x409268: soa::helper<reproduction>::grow() (soa_utils.hpp:195)
+  n1: 4096 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 4096 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 4096 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x4097AA: soa::helper<species>::grow() (soa_utils.hpp:195)
+  n1: 4096 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 4096 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 4096 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n0: 560 in 24 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=11
+#-----------
+time=83265644
+mem_heap_B=200240
+mem_heap_extra_B=216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=83493156
+mem_heap_B=81712
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=84106667
+mem_heap_B=107056
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=84513060
+mem_heap_B=126512
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=105117906
+mem_heap_B=122416
+mem_heap_extra_B=216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=105551050
+mem_heap_B=90160
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=105953977
+mem_heap_B=107056
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=106358323
+mem_heap_B=126512
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=106762406
+mem_heap_B=140848
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=155867233
+mem_heap_B=136752
+mem_heap_extra_B=216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=156295008
+mem_heap_B=90160
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=156703288
+mem_heap_B=107056
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=157124398
+mem_heap_B=111152
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=157508320
+mem_heap_B=140848
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=196457831
+mem_heap_B=136752
+mem_heap_extra_B=216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=196884608
+mem_heap_B=87088
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=197293642
+mem_heap_B=106544
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=211419624
+mem_heap_B=105008
+mem_heap_extra_B=216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=211842501
+mem_heap_B=87088
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=212256893
+mem_heap_B=106544
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=detailed
+n16: 106544 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x52DEA2E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:123)
+  n1: 72704 0x400F348: call_init.part.0 (in /usr/lib/ld-2.25.so)
+   n1: 72704 0x400F459: _dl_init (in /usr/lib/ld-2.25.so)
+    n1: 72704 0x4000DB8: ??? (in /usr/lib/ld-2.25.so)
+     n1: 72704 0x3: ???
+      n1: 72704 0xFFF00040D: ???
+       n1: 72704 0xFFF000415: ???
+        n1: 72704 0xFFF00041A: ???
+         n1: 72704 0xFFF00041E: ???
+          n0: 72704 0xFFF000420: ???
+ n1: 5120 0x408934: soa::helper<movement>::grow() (soa_utils.hpp:195)
+  n1: 5120 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 5120 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 5120 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 5120 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 5120 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 5120 0x405F07: main (ecs_do.cpp:202)
+ n1: 3072 0x4082CE: soa::helper<health>::grow() (soa_utils.hpp:195)
+  n1: 3072 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 3072 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 3072 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 3072 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 3072 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 3072 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4098A1: soa::helper<species>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x407DB0: soa::helper<species>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 2048 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 2048 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408F6D: soa::helper<position>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x40773E: soa::helper<position>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 2048 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 2048 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4081EF: soa::helper<health>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 2048 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 2048 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4083C5: soa::helper<health>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x406B96: soa::helper<health>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 2048 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 2048 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408855: soa::helper<movement>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 2048 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 2048 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408A2B: soa::helper<movement>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x40717E: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 2048 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 2048 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x409189: soa::helper<reproduction>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 2048 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 2048 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4096CB: soa::helper<species>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 2048 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 2048 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408D97: soa::helper<position>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 2048 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 2048 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408E76: soa::helper<position>::grow() (soa_utils.hpp:195)
+  n1: 2048 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 2048 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 2048 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x40935F: soa::helper<reproduction>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x407906: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 2048 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 2048 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n0: 1584 in 25 places, all below massif's threshold (1.00%)
+ n1: 1536 0x409268: soa::helper<reproduction>::grow() (soa_utils.hpp:195)
+  n1: 1536 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1536 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 1536 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 1536 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 1536 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1536 0x405F07: main (ecs_do.cpp:202)
+#-----------
+snapshot=31
+#-----------
+time=212649537
+mem_heap_B=111152
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=213063053
+mem_heap_B=138800
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=213856956
+mem_heap_B=149040
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=213897659
+mem_heap_B=179760
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=214655837
+mem_heap_B=183856
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=214664941
+mem_heap_B=208432
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=350279177
+mem_heap_B=200240
+mem_heap_extra_B=216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=350702060
+mem_heap_B=87088
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=356848401
+mem_heap_B=89136
+mem_heap_extra_B=216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=357268359
+mem_heap_B=87088
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=detailed
+n12: 87088 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x52DEA2E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:123)
+  n1: 72704 0x400F348: call_init.part.0 (in /usr/lib/ld-2.25.so)
+   n1: 72704 0x400F459: _dl_init (in /usr/lib/ld-2.25.so)
+    n1: 72704 0x4000DB8: ??? (in /usr/lib/ld-2.25.so)
+     n1: 72704 0x3: ???
+      n1: 72704 0xFFF00040D: ???
+       n1: 72704 0xFFF000415: ???
+        n1: 72704 0xFFF00041A: ???
+         n1: 72704 0xFFF00041E: ???
+          n0: 72704 0xFFF000420: ???
+ n0: 3376 in 29 places, all below massif's threshold (1.00%)
+ n1: 1536 0x4081EF: soa::helper<health>::grow() (soa_utils.hpp:188)
+  n1: 1536 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1536 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 1536 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 1536 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 1536 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1536 0x405F07: main (ecs_do.cpp:202)
+ n1: 1280 0x408934: soa::helper<movement>::grow() (soa_utils.hpp:195)
+  n1: 1280 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1280 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 1280 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 1280 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 1280 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1280 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x4098A1: soa::helper<species>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 1024 0x407DB0: soa::helper<species>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 1024 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 1024 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 1024 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x408F6D: soa::helper<position>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 1024 0x40773E: soa::helper<position>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 1024 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 1024 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 1024 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x4083C5: soa::helper<health>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 1024 0x406B96: soa::helper<health>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 1024 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 1024 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 1024 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x408A2B: soa::helper<movement>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 1024 0x40717E: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 1024 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 1024 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 1024 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x40935F: soa::helper<reproduction>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 1024 0x407906: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 1024 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 1024 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 1024 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x4096CB: soa::helper<species>::grow() (soa_utils.hpp:188)
+  n1: 1024 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 1024 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 1024 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x408D97: soa::helper<position>::grow() (soa_utils.hpp:188)
+  n1: 1024 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 1024 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 1024 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x408E76: soa::helper<position>::grow() (soa_utils.hpp:195)
+  n1: 1024 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 1024 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 1024 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+#-----------
+snapshot=41
+#-----------
+time=357671385
+mem_heap_B=100912
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=358176444
+mem_heap_B=111152
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=358479070
+mem_heap_B=140848
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=359416576
+mem_heap_B=149040
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=detailed
+n17: 149040 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x52DEA2E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:123)
+  n1: 72704 0x400F348: call_init.part.0 (in /usr/lib/ld-2.25.so)
+   n1: 72704 0x400F459: _dl_init (in /usr/lib/ld-2.25.so)
+    n1: 72704 0x4000DB8: ??? (in /usr/lib/ld-2.25.so)
+     n1: 72704 0x3: ???
+      n1: 72704 0xFFF00040D: ???
+       n1: 72704 0xFFF000415: ???
+        n1: 72704 0xFFF00041A: ???
+         n1: 72704 0xFFF00041E: ???
+          n0: 72704 0xFFF000420: ???
+ n1: 12288 0x4096CB: soa::helper<species>::grow() (soa_utils.hpp:188)
+  n1: 12288 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 12288 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 12288 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 12288 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 12288 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 12288 0x405F07: main (ecs_do.cpp:202)
+ n1: 10240 0x408934: soa::helper<movement>::grow() (soa_utils.hpp:195)
+  n1: 10240 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 10240 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 10240 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 10240 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 10240 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 10240 0x405F07: main (ecs_do.cpp:202)
+ n1: 6144 0x4082CE: soa::helper<health>::grow() (soa_utils.hpp:195)
+  n1: 6144 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 6144 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 6144 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 6144 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 6144 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 6144 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x408E76: soa::helper<position>::grow() (soa_utils.hpp:195)
+  n1: 4096 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 4096 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 4096 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x4098A1: soa::helper<species>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 4096 0x407DB0: soa::helper<species>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 4096 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 4096 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 4096 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x408F6D: soa::helper<position>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 4096 0x40773E: soa::helper<position>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 4096 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 4096 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 4096 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x4081EF: soa::helper<health>::grow() (soa_utils.hpp:188)
+  n1: 4096 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 4096 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 4096 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x40935F: soa::helper<reproduction>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 4096 0x407906: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 4096 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 4096 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 4096 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x408D97: soa::helper<position>::grow() (soa_utils.hpp:188)
+  n1: 4096 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 4096 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 4096 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x4083C5: soa::helper<health>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 4096 0x406B96: soa::helper<health>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 4096 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 4096 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 4096 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x408855: soa::helper<movement>::grow() (soa_utils.hpp:188)
+  n1: 4096 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 4096 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 4096 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x408A2B: soa::helper<movement>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 4096 0x40717E: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 4096 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 4096 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 4096 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x409189: soa::helper<reproduction>::grow() (soa_utils.hpp:188)
+  n1: 4096 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 4096 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 4096 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x409268: soa::helper<reproduction>::grow() (soa_utils.hpp:195)
+  n1: 4096 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 4096 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 4096 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4097AA: soa::helper<species>::grow() (soa_utils.hpp:195)
+  n1: 2048 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 2048 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 2048 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n0: 560 in 24 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=45
+#-----------
+time=359451827
+mem_heap_B=179760
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=360071470
+mem_heap_B=183856
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=360080576
+mem_heap_B=208432
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=485657356
+mem_heap_B=200240
+mem_heap_extra_B=216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=486231350
+mem_heap_B=92208
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=486241829
+mem_heap_B=98864
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=detailed
+n17: 98864 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x52DEA2E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:123)
+  n1: 72704 0x400F348: call_init.part.0 (in /usr/lib/ld-2.25.so)
+   n1: 72704 0x400F459: _dl_init (in /usr/lib/ld-2.25.so)
+    n1: 72704 0x4000DB8: ??? (in /usr/lib/ld-2.25.so)
+     n1: 72704 0x3: ???
+      n1: 72704 0xFFF00040D: ???
+       n1: 72704 0xFFF000415: ???
+        n1: 72704 0xFFF00041A: ???
+         n1: 72704 0xFFF00041E: ???
+          n0: 72704 0xFFF000420: ???
+ n1: 3072 0x408A2B: soa::helper<movement>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 3072 0x40717E: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 3072 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 3072 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 3072 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 3072 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 3072 0x405F07: main (ecs_do.cpp:202)
+ n1: 2560 0x408934: soa::helper<movement>::grow() (soa_utils.hpp:195)
+  n1: 2560 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2560 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 2560 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 2560 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 2560 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2560 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408E76: soa::helper<position>::grow() (soa_utils.hpp:195)
+  n1: 2048 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 2048 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 2048 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4098A1: soa::helper<species>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x407DB0: soa::helper<species>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 2048 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 2048 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408F6D: soa::helper<position>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x40773E: soa::helper<position>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 2048 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 2048 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4083C5: soa::helper<health>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x406B96: soa::helper<health>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 2048 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 2048 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4096CB: soa::helper<species>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 2048 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 2048 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408D97: soa::helper<position>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 2048 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 2048 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 1536 0x4082CE: soa::helper<health>::grow() (soa_utils.hpp:195)
+  n1: 1536 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1536 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 1536 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 1536 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 1536 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1536 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x408855: soa::helper<movement>::grow() (soa_utils.hpp:188)
+  n1: 1024 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 1024 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 1024 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x4081EF: soa::helper<health>::grow() (soa_utils.hpp:188)
+  n1: 1024 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 1024 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 1024 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x4097AA: soa::helper<species>::grow() (soa_utils.hpp:195)
+  n1: 1024 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 1024 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 1024 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x409189: soa::helper<reproduction>::grow() (soa_utils.hpp:188)
+  n1: 1024 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 1024 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 1024 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x409268: soa::helper<reproduction>::grow() (soa_utils.hpp:195)
+  n1: 1024 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 1024 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 1024 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 1024 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n1: 1024 0x40935F: soa::helper<reproduction>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 1024 0x407906: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 1024 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 1024 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 1024 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 1024 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 1024 0x405F07: main (ecs_do.cpp:202)
+ n0: 560 in 24 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=51
+#-----------
+time=486493489
+mem_heap_B=100912
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=486827282
+mem_heap_B=111152
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=53
+#-----------
+time=486839114
+mem_heap_B=120368
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=54
+#-----------
+time=486848425
+mem_heap_B=122416
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=55
+#-----------
+time=487301775
+mem_heap_B=128560
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=487310906
+mem_heap_B=140848
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=57
+#-----------
+time=488018351
+mem_heap_B=149040
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=58
+#-----------
+time=488028741
+mem_heap_B=167472
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=59
+#-----------
+time=488044200
+mem_heap_B=175664
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=488053605
+mem_heap_B=179760
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=detailed
+n17: 179760 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x52DEA2E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:123)
+  n1: 72704 0x400F348: call_init.part.0 (in /usr/lib/ld-2.25.so)
+   n1: 72704 0x400F459: _dl_init (in /usr/lib/ld-2.25.so)
+    n1: 72704 0x4000DB8: ??? (in /usr/lib/ld-2.25.so)
+     n1: 72704 0x3: ???
+      n1: 72704 0xFFF00040D: ???
+       n1: 72704 0xFFF000415: ???
+        n1: 72704 0xFFF00041A: ???
+         n1: 72704 0xFFF00041E: ???
+          n0: 72704 0xFFF000420: ???
+ n1: 12288 0x40935F: soa::helper<reproduction>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 12288 0x407906: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 12288 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 12288 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 12288 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 12288 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 12288 0x405F07: main (ecs_do.cpp:202)
+ n1: 10240 0x408934: soa::helper<movement>::grow() (soa_utils.hpp:195)
+  n1: 10240 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 10240 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 10240 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 10240 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 10240 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 10240 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x4098A1: soa::helper<species>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x407DB0: soa::helper<species>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 8192 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 8192 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408F6D: soa::helper<position>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x40773E: soa::helper<position>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 8192 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 8192 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408A2B: soa::helper<movement>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x40717E: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 8192 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 8192 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x4083C5: soa::helper<health>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 8192 0x406B96: soa::helper<health>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 8192 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 8192 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 8192 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x4096CB: soa::helper<species>::grow() (soa_utils.hpp:188)
+  n1: 8192 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 8192 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 8192 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 8192 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408D97: soa::helper<position>::grow() (soa_utils.hpp:188)
+  n1: 8192 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 8192 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 8192 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 8192 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 8192 0x408E76: soa::helper<position>::grow() (soa_utils.hpp:195)
+  n1: 8192 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 8192 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 8192 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 8192 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 8192 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 8192 0x405F07: main (ecs_do.cpp:202)
+ n1: 6144 0x4082CE: soa::helper<health>::grow() (soa_utils.hpp:195)
+  n1: 6144 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 6144 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 6144 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 6144 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 6144 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 6144 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x408855: soa::helper<movement>::grow() (soa_utils.hpp:188)
+  n1: 4096 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 4096 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 4096 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x4081EF: soa::helper<health>::grow() (soa_utils.hpp:188)
+  n1: 4096 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 4096 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 4096 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x409189: soa::helper<reproduction>::grow() (soa_utils.hpp:188)
+  n1: 4096 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 4096 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 4096 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x409268: soa::helper<reproduction>::grow() (soa_utils.hpp:195)
+  n1: 4096 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 4096 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 4096 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x4097AA: soa::helper<species>::grow() (soa_utils.hpp:195)
+  n1: 4096 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 4096 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 4096 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n0: 560 in 24 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=61
+#-----------
+time=548749060
+mem_heap_B=171568
+mem_heap_extra_B=216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=548758382
+mem_heap_B=74224
+mem_heap_extra_B=208
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=63
+#-----------
+time=548800878
+mem_heap_B=74448
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=64
+#-----------
+time=548810061
+mem_heap_B=75056
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=65
+#-----------
+time=548844040
+mem_heap_B=75632
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=66
+#-----------
+time=548854822
+mem_heap_B=76464
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=67
+#-----------
+time=548864130
+mem_heap_B=77232
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=68
+#-----------
+time=548929978
+mem_heap_B=78000
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=69
+#-----------
+time=548939672
+mem_heap_B=79408
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=70
+#-----------
+time=548965905
+mem_heap_B=80176
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=detailed
+n2: 80176 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x52DEA2E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:123)
+  n1: 72704 0x400F348: call_init.part.0 (in /usr/lib/ld-2.25.so)
+   n1: 72704 0x400F459: _dl_init (in /usr/lib/ld-2.25.so)
+    n1: 72704 0x4000DB8: ??? (in /usr/lib/ld-2.25.so)
+     n1: 72704 0x3: ???
+      n1: 72704 0xFFF00040D: ???
+       n1: 72704 0xFFF000415: ???
+        n1: 72704 0xFFF00041A: ???
+         n1: 72704 0xFFF00041E: ???
+          n0: 72704 0xFFF000420: ???
+ n0: 7472 in 39 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=71
+#-----------
+time=549095674
+mem_heap_B=82736
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=72
+#-----------
+time=549106674
+mem_heap_B=86576
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=73
+#-----------
+time=549171450
+mem_heap_B=87088
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=74
+#-----------
+time=549388476
+mem_heap_B=92208
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=75
+#-----------
+time=549398305
+mem_heap_B=96816
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=76
+#-----------
+time=549408892
+mem_heap_B=99888
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=77
+#-----------
+time=549577406
+mem_heap_B=100912
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=78
+#-----------
+time=549951702
+mem_heap_B=111152
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=79
+#-----------
+time=549963534
+mem_heap_B=120368
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=80
+#-----------
+time=549972846
+mem_heap_B=122416
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=detailed
+n17: 122416 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x52DEA2E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:123)
+  n1: 72704 0x400F348: call_init.part.0 (in /usr/lib/ld-2.25.so)
+   n1: 72704 0x400F459: _dl_init (in /usr/lib/ld-2.25.so)
+    n1: 72704 0x4000DB8: ??? (in /usr/lib/ld-2.25.so)
+     n1: 72704 0x3: ???
+      n1: 72704 0xFFF00040D: ???
+       n1: 72704 0xFFF000415: ???
+        n1: 72704 0xFFF00041A: ???
+         n1: 72704 0xFFF00041E: ???
+          n0: 72704 0xFFF000420: ???
+ n1: 5120 0x408934: soa::helper<movement>::grow() (soa_utils.hpp:195)
+  n1: 5120 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 5120 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 5120 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 5120 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 5120 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 5120 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x408A2B: soa::helper<movement>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 4096 0x40717E: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 4096 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 4096 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 4096 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x408D97: soa::helper<position>::grow() (soa_utils.hpp:188)
+  n1: 4096 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 4096 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 4096 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x408E76: soa::helper<position>::grow() (soa_utils.hpp:195)
+  n1: 4096 0x4076ED: soa::helper<position>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 4096 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 4096 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x4098A1: soa::helper<species>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 4096 0x407DB0: soa::helper<species>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 4096 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 4096 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 4096 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x408F6D: soa::helper<position>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 4096 0x40773E: soa::helper<position>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 4096 0x406553: position::create(unsigned long) (position.hpp:16)
+    n1: 4096 0x406584: position::create(unsigned long, float, float) (position.hpp:19)
+     n1: 4096 0x4056B2: populate(world&, unsigned long) (ecs_do.cpp:28)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x4083C5: soa::helper<health>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 4096 0x406B96: soa::helper<health>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 4096 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 4096 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 4096 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 4096 0x4096CB: soa::helper<species>::grow() (soa_utils.hpp:188)
+  n1: 4096 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 4096 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 4096 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 4096 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 4096 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 4096 0x405F07: main (ecs_do.cpp:202)
+ n1: 3072 0x4082CE: soa::helper<health>::grow() (soa_utils.hpp:195)
+  n1: 3072 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 3072 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 3072 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 3072 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 3072 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 3072 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x408855: soa::helper<movement>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x40712D: soa::helper<movement>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406317: movement::create(unsigned long) (movement.hpp:29)
+    n1: 2048 0x4063D7: movement::create(unsigned long, float) (movement.hpp:35)
+     n1: 2048 0x405772: populate(world&, unsigned long) (ecs_do.cpp:33)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4081EF: soa::helper<health>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x406B45: soa::helper<health>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x4060C3: health::create(unsigned long) (health.hpp:27)
+    n1: 2048 0x406172: health::create(unsigned long, float, int) (health.hpp:33)
+     n1: 2048 0x405733: populate(world&, unsigned long) (ecs_do.cpp:32)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x4097AA: soa::helper<species>::grow() (soa_utils.hpp:195)
+  n1: 2048 0x407D5F: soa::helper<species>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x406791: species::create(unsigned long) (species.hpp:12)
+    n1: 2048 0x4067BA: species::create(unsigned long, int) (species.hpp:15)
+     n1: 2048 0x405663: populate(world&, unsigned long) (ecs_do.cpp:27)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x409189: soa::helper<reproduction>::grow() (soa_utils.hpp:188)
+  n1: 2048 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 2048 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 2048 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x409268: soa::helper<reproduction>::grow() (soa_utils.hpp:195)
+  n1: 2048 0x4078B5: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:111)
+   n1: 2048 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 2048 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 2048 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n1: 2048 0x40935F: soa::helper<reproduction>::grow_owned(unsigned long) (soa_utils.hpp:208)
+  n1: 2048 0x407906: soa::helper<reproduction>::create(unsigned long) (soa_utils.hpp:117)
+   n1: 2048 0x4065F5: reproduction::create(unsigned long) (reproduction.hpp:21)
+    n1: 2048 0x406685: reproduction::create(unsigned long, float) (reproduction.hpp:27)
+     n1: 2048 0x4057A9: populate(world&, unsigned long) (ecs_do.cpp:34)
+      n1: 2048 0x4059DC: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:63)
+       n0: 2048 0x405F07: main (ecs_do.cpp:202)
+ n0: 560 in 24 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=81
+#-----------
+time=550395923
+mem_heap_B=128560
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=82
+#-----------
+time=550405055
+mem_heap_B=140848
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=83
+#-----------
+time=551099160
+mem_heap_B=149040
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=84
+#-----------
+time=551108540
+mem_heap_B=159280
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=85
+#-----------
+time=551122124
+mem_heap_B=171568
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=86
+#-----------
+time=551139865
+mem_heap_B=179760
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=87
+#-----------
+time=551993583
+mem_heap_B=183856
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=88
+#-----------
+time=552002688
+mem_heap_B=208432
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=89
+#-----------
+time=648981004
+mem_heap_B=200240
+mem_heap_extra_B=216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=90
+#-----------
+time=649015015
+mem_heap_B=74048
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=detailed
+n3: 74048 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 72704 0x52DEA2E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:123)
+  n1: 72704 0x400F348: call_init.part.0 (in /usr/lib/ld-2.25.so)
+   n1: 72704 0x400F459: _dl_init (in /usr/lib/ld-2.25.so)
+    n1: 72704 0x4000DB8: ??? (in /usr/lib/ld-2.25.so)
+     n1: 72704 0x3: ???
+      n1: 72704 0xFFF00040D: ???
+       n1: 72704 0xFFF000415: ???
+        n1: 72704 0xFFF00041A: ???
+         n1: 72704 0xFFF00041E: ???
+          n0: 72704 0xFFF000420: ???
+ n1: 1024 0x5B6CB6A: _IO_file_doallocate (in /usr/lib/libc-2.25.so)
+  n2: 1024 0x5B7B284: _IO_doallocbuf (in /usr/lib/libc-2.25.so)
+   n1: 1024 0x5B7A576: _IO_file_overflow@@GLIBC_2.2.5 (in /usr/lib/libc-2.25.so)
+    n1: 1024 0x5B79634: _IO_file_xsputn@@GLIBC_2.2.5 (in /usr/lib/libc-2.25.so)
+     n1: 1024 0x5B4E274: vfprintf (in /usr/lib/libc-2.25.so)
+      n1: 1024 0x5B55EA4: printf (in /usr/lib/libc-2.25.so)
+       n1: 1024 0x405C8C: run_measure_time(unsigned long, unsigned long, unsigned long, unsigned long) (ecs_do.cpp:85)
+        n0: 1024 0x405F07: main (ecs_do.cpp:202)
+   n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 320 in 38 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=91
+#-----------
+time=649028940
+mem_heap_B=1024
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty

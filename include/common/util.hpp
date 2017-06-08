@@ -4,6 +4,7 @@
 #include <functional>
 #include <iostream>
 #include <cstdlib>
+#include <cmath>
 
 using swap_func = std::function<void(size_t,size_t)>;
 #define MEMBER_SWAP_FUNC [this](size_t a, size_t b){this->swap(a,b);}
@@ -63,6 +64,11 @@ inline double drand(double start = 0.0, double end = 1.0)
 inline double irand(int start = 0, int end = 100)
 {
 	return start + (random() % (end-start+1));
+}
+
+inline double to_rad(double deg)
+{
+	return M_PI * deg / 180.0;
 }
 
 #endif // UTIL_HPP

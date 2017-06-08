@@ -21,7 +21,6 @@ struct health
 				, &state
 			#endif
 		)
-
 	{  }
 
 	#ifdef DO_PARTITION_ARRAYS
@@ -87,7 +86,7 @@ struct health
 	int   * prey;
 
 	#ifdef DO_PARTITION_ARRAYS
-		size_t partitions[1] = { 0 };
+		size_t partitions[1];
 	#else
 		enum state_type { IDLE, EATING };
 		state_type * state;

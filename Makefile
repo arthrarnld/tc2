@@ -11,7 +11,7 @@ ECS_DO_SRC = $(shell find src/ecs_do/ -name '*.cpp')
 ECS_DO_BIN = libecs_do
 
 COMMSRC = $(shell find src/common/ -name '*.cpp')
-CFLAGS = -g -std=c++11 -DDEBUG #-Wfatal-errors
+CFLAGS = -g -std=c++11
 
 # Data-oriented ECS implementation stages
 S0 =
