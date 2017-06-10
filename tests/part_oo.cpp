@@ -8,9 +8,6 @@
 #include <cmath>
 #include <unistd.h>
 
-using test_func_type = void(*)();
-test_func_type test_func;
-
 int iterations;
 int period;
 size_t emitter_count;
