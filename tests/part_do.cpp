@@ -133,7 +133,7 @@ int main(int argc, char ** argv)
             run_measure_tick(iterations, period, emitter_count, passes);
 			break;
 		case INSERTION:
-			if(optind != argc-1)
+			if(optind != argc-2)
 				fatal("insertion test requires two arguments: <emitter count> <passes>");
 			emitter_count = atoll(argv[optind++]);
             passes = atoll(argv[optind++]);
