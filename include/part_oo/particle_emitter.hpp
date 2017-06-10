@@ -27,7 +27,6 @@ public:
     int get_particle_count();
 
     void tick(double dt);
-
 };
 
 #endif // PARTICLE_EMITTER_HPP

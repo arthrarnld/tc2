@@ -11,20 +11,20 @@
 using test_func_type = void(*)();
 test_func_type test_func;
 
-int ITERATIONS;
-int INCREASE;
-size_t EMITTER_COUNT;
+int iterations;
+int period;
+size_t emitter_count;
 
-void run_measure_tick()
+void run_measure_tick(size_t iterations, size_t period, size_t emitter_count, size_t passes)
 {
-    std::vector<particle_emitter *> emitters{EMITTER_COUNT};
+    std::vector<particle_emitter *> emitters{emitter_count};
 
     std::map<int, double> times;
     std::map<int, int> occurrences;
     time_point start;
     double taken;
 
-    for(int i = 0; i < EMITTER_COUNT; ++i)
+    for(int i = 0; i < emitter_count; ++i)
     {
         switch(i % 3)
         {
@@ -41,12 +41,12 @@ void run_measure_tick()
     }
 
     int particle_count;
-    for(int i = 0; i < ITERATIONS; ++i)
+    for(int i = 0; i < iterations; ++i)
     {
         particle_count = 0;
 
         start = now();
-        for(size_t j = 0; j < EMITTER_COUNT; ++j)
+        for(size_t j = 0; j < emitter_count; ++j)
         {
             particle_emitter * e = emitters[j];
             e->tick(1);
@@ -58,15 +58,15 @@ void run_measure_tick()
         times[particle_count] += taken;
         ++occurrences[particle_count];
 
-        fprintf(stderr, "\ri: %d\tdt: %-20f", i, taken);
+        debug("\ri: %d\tdt: %-20f", i, taken);
 
         // log("particle count: %d\t time taken: %f", e.get_particle_count(), taken);
-        if(i % INCREASE == 0)
-            for(size_t j = 0; j < EMITTER_COUNT; ++j)
+        if(i % period == 0)
+            for(size_t j = 0; j < emitter_count; ++j)
                 emitters[j]->set_emission_rate(emitters[j]->get_emission_rate() + 1);
     }
 
-    fprintf(stderr, "\n");
+    debug("\n");
 
     for(auto & p : times)
     {
@@ -74,60 +74,56 @@ void run_measure_tick()
     }
 }
 
-void run_measure_insertion()
+void run_measure_insertion(size_t emitter_count, size_t passes)
 {
-    std::vector<particle_emitter *> emitters{EMITTER_COUNT};
+    std::vector<particle_emitter *> emitters{emitter_count};
 
-    std::map<int, double> times;
     time_point start;
     double taken;
 
-    for(int i = 0; i < EMITTER_COUNT; ++i)
+    for(size_t p = 0; p < passes; ++p)
     {
-        switch(i % 3)
+        start = now();
+        for(size_t i = 0; i < emitter_count; ++i)
         {
-            case 0:
-                start = now();
-                emitters[i] = new particle_emitter(glm::vec2(100.0f * i, 100.0f * i), 1);
-                taken = elapsed(start, now());
-                break;
-            case 1:
-                start = now();
-                emitters[i] = new cone_emitter(glm::vec2(100.0f * i, 100.0f * i), 1, M_PI/6.0f);
-                taken = elapsed(start, now());
-                break;
-            case 2:
-                start = now();
-                emitters[i] = new area_emitter(glm::vec2(100.0f * i, 100.0f * i), 1, 5);
-                taken = elapsed(start, now());
-                break;
+            switch(i % 3)
+            {
+                case 0:
+                    emitters[i] = new particle_emitter(glm::vec2(100.0f * i, 100.0f * i), 1);
+                    break;
+                case 1:
+                    emitters[i] = new cone_emitter(glm::vec2(100.0f * i, 100.0f * i), 1, M_PI/6.0f);
+                    break;
+                case 2:
+                    emitters[i] = new area_emitter(glm::vec2(100.0f * i, 100.0f * i), 1, 5);
+                    break;
+            }
+
+            taken += elapsed(start, now());
+            debug("\ri: %d\tdt: %-20f", i, taken);
         }
-
-        times[i] = taken;
-        fprintf(stderr, "\ri: %d\tdt: %-20f", i, taken);
     }
 
-    for(auto & p : times)
-    {
-        std::cout << p.first << '\t' << p.second << '\n';
-    }
+    std::cout << emitter_count << '\t' << (taken / passes) << '\n';
 }
 
 int main(int argc, char ** argv)
 {
-    enum { TICK, INSERTION, FPS } test;
-	test_func = run_measure_tick;
-	test = TICK;
+    enum { TICK, INSERTION } test = TICK;
+
+    size_t iterations;
+    size_t period;
+    size_t emitter_count;
+    size_t passes;
+
 	int c;
 	while((c = getopt(argc, argv, "ti")) != -1)
 		switch(c)
 		{
 			case 't':
-				test_func = run_measure_tick;
 				test = TICK;
 				break;
 			case 'i':
-				test_func = run_measure_insertion;
 				test = INSERTION;
 				break;
 			case '?':
@@ -139,20 +135,22 @@ int main(int argc, char ** argv)
 	switch(test)
 	{
 		case TICK:
-			if(optind != argc-3)
-				fatal("tick test requires three arguments: iteration count, increment period and emitter count");
-            ITERATIONS = atoll(argv[optind]);
-            INCREASE = atoll(argv[optind+1]);
-			EMITTER_COUNT = atoll(argv[optind+2]);
+			if(optind != argc-4)
+				fatal("tick test requires three arguments: <iterations> <increment period> <emitter count> <passes>");
+            iterations = atoll(argv[optind++]);
+            period = atoll(argv[optind++]);
+			emitter_count = atoll(argv[optind++]);
+            passes = atoll(argv[optind++]);
+            run_measure_tick(iterations, period, emitter_count, passes);
 			break;
 		case INSERTION:
 			if(optind != argc-1)
-				fatal("insertion test requires one argument: emitter count");
-			EMITTER_COUNT = atoll(argv[optind]);
+				fatal("insertion test requires two arguments: <emitter count> <passes>");
+			emitter_count = atoll(argv[optind++]);
+            passes = atoll(argv[optind++]);
+            run_measure_insertion(emitter_count, passes);
 			break;
 	}
-
-	test_func();
 
 	return 0;
 }
