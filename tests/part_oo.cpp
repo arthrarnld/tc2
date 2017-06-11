@@ -39,7 +39,7 @@ void run_measure_tick(size_t iterations, size_t period, size_t emitter_count, si
         times[particle_count] += taken;
         ++occurrences[particle_count];
 
-        debug(stderr, "\ri: %d\tdt: %-20f", i, taken);
+        fprintf(stderr, "\ri: %d\tdt: %-20f", i, taken);
 
         // log("particle count: %d\t time taken: %f", e.get_particle_count(), taken);
         if(i % period == 0)
@@ -47,7 +47,7 @@ void run_measure_tick(size_t iterations, size_t period, size_t emitter_count, si
                 emitters[j].set_emission_rate(emitters[j].get_emission_rate() + 1);
     }
 
-    debug(stderr, "\n");
+    fprintf(stderr, "\n");
 
     for(auto & p : times)
     {

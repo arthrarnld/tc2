@@ -8,7 +8,6 @@ private:
     glm::vec2 m_position;
     glm::vec2 m_velocity;
     float m_lifetime;
-    bool m_alive;
 
 public:
     particle(const glm::vec2 & position);

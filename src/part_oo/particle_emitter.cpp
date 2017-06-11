@@ -22,13 +22,6 @@ void particle_emitter::set_emission_rate(float rate)
     m_emission_rate = rate;
 }
 
-const particle * particle_emitter::get_particle_at(int pos)
-{
-    if(pos > 0 && pos < m_particles.size())
-        return &m_particles[pos];
-    return NULL;
-}
-
 int particle_emitter::get_particle_count()
 {
     return m_particles.size();
@@ -44,12 +37,9 @@ void particle_emitter::tick(double dt)
     for(int i = 0; i < m_emission_rate*dt; ++i)
         emit(particle(m_position));
 
-    for (auto & particle : m_particles)
-        particle.tick(dt);
-
-    auto it = m_particles.begin();
-    while(it != m_particles.end())
+    for(auto it = m_particles.begin(); it != m_particles.end(); )
     {
+        it->tick(dt);
         if(!it->is_alive())
             it = m_particles.erase(it);
         else
