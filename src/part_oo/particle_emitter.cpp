@@ -50,7 +50,7 @@ void particle_emitter::tick(double dt)
 
     for(auto it = m_particles.begin(); it != m_particles.end(); )
     {
-        particle.tick(dt);
+        it->tick(dt);
         if(!it->is_alive())
             it = m_particles.erase(it);
         else
