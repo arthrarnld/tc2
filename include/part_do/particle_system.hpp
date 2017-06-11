@@ -26,9 +26,8 @@ struct particle_system
 
     //// SYSTEM ////////////////////////////////////////////////////////////////
     size_t partitions[2] = { 0, 0 };
-    int particle_count;
 
-    static const glm::vec2 UP; 
+    static const glm::vec2 UP;
 
     particle_system();
 
@@ -36,7 +35,9 @@ struct particle_system
     void new_cone_emitter(const glm::vec2 & position, float emission_rate, float angle_rad);
     void new_area_emitter(const glm::vec2 & position, float emission_rate, float max_distance);
 
-    int tick(double dt);
+    int count();
+
+    void tick(double dt);
     void emit(int from, const glm::vec2 & p, const glm::vec2 & v, double l, double dt);
 
 };

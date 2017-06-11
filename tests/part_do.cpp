@@ -12,12 +12,12 @@ std::map<int, int> occurrences;
 
 void run_measure_tick(size_t iterations, size_t period, size_t emitter_count, size_t passes)
 {
-    particle_system ps;
     time_point start;
     double taken;
 
     for(size_t p = 0; p < passes; ++p)
     {
+        particle_system ps;
         for(size_t i = 0; i < emitter_count; ++i)
         {
             switch(i % 3)
@@ -34,17 +34,17 @@ void run_measure_tick(size_t iterations, size_t period, size_t emitter_count, si
             }
         }
 
-        int particle_count;
+        int pcount;
         for(size_t i = 0; i < iterations; ++i)
         {
-            particle_count = 0;
-
             start = now();
-            particle_count = ps.tick(1);
+            ps.tick(1);
             taken = elapsed(start, now());
 
-            times[particle_count] += taken;
-            ++occurrences[particle_count];
+            pcount = ps.count();
+
+            times[pcount] += taken;
+            ++occurrences[pcount];
 
             debug("\ri: %d\tdt: %-20f", i, taken);
 
@@ -59,20 +59,19 @@ void run_measure_tick(size_t iterations, size_t period, size_t emitter_count, si
 
     for(auto & p : times)
     {
-        assert(occurrences[p.first] == passes);
         std::cout << p.first << '\t' << p.second / occurrences[p.first] << '\n';
     }
 }
 
 void run_measure_insertion(size_t emitter_count, size_t passes)
 {
-    particle_system ps;
-
     time_point start;
     double taken;
 
     for(size_t p = 0; p < passes; ++p)
     {
+        particle_system ps;
+
         start = now();
         for(size_t i = 0; i < emitter_count; ++i)
         {

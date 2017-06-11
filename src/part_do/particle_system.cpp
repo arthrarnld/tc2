@@ -34,7 +34,12 @@ void particle_system::new_area_emitter(const glm::vec2 & position, float emissio
     area_max_distances.push_back(max_distance);
 }
 
-int particle_system::tick(double dt)
+int particle_system::count()
+{
+    return p_from.size();
+}
+
+void particle_system::tick(double dt)
 {
     // tick emitters
     for(size_t i = 0; i < partitions[0]; ++i)
@@ -73,9 +78,6 @@ int particle_system::tick(double dt)
             p_lifetimes.remove(i);
         }
     }
-
-    particle_count = p_from.size();
-    return particle_count;
 }
 
 void particle_system::emit(int from, const glm::vec2 & p, const glm::vec2 & v, double l, double dt)

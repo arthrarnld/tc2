@@ -48,12 +48,9 @@ void particle_emitter::tick(double dt)
     for(int i = 0; i < m_emission_rate*dt; ++i)
         emit();
 
-    for (auto & particle : m_particles)
-        particle.tick(dt);
-
-    auto it = m_particles.begin();
-    while(it != m_particles.end())
+    for(auto it = m_particles.begin(); it != m_particles.end(); )
     {
+        particle.tick(dt);
         if(!it->is_alive())
             it = m_particles.erase(it);
         else
