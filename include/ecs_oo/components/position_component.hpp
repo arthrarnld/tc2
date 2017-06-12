@@ -11,10 +11,9 @@
 class position_component : public base_component
 {
 public:
-	position_component(uint64_t owner) : base_component(owner) { }
-	position_component(uint64_t owner, float x, float y)
-		: base_component(owner)
-		, position(x,y)
+	position_component() = default;
+	position_component(float x, float y)
+		: position(x,y)
 	{
 
 	}

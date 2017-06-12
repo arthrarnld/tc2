@@ -8,9 +8,7 @@ class world;
 class base_component
 {
 public:
-	base_component(uint64_t owner) : owner(owner) {  }
-
-	uint64_t owner;
+	base_component() {  }
 };
 
 #endif // BASE_COMPONENT_HPP

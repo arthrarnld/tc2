@@ -95,8 +95,12 @@ bool update_movement(world * w, double dt)
 			glm::vec2 & my_pos = p.pos[p.lookup(self)];
 			uint64_t & my_target = m.target[i];
 
-			A(my_target != nil);
-			A(p.lookup(my_target) != nil);
+			if(p.lookup(my_target) == nil) // target no longer exists
+			{
+				my_target = nil;
+				i = m.stop_seeking_food(self);
+				continue;
+			}
 
 			glm::vec2 & tgt_pos = p.pos[p.lookup(my_target)];
 			if(tgt_pos != my_pos)

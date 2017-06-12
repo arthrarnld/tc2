@@ -95,10 +95,9 @@ void run_measure_insertion(size_t emitter_count, size_t passes)
                     emitters[i] = new area_emitter(glm::vec2(100.0f * i, 100.0f * i), 1, 5);
                     break;
             }
-
-            taken += elapsed(start, now());
-            debug("\ri: %d\tdt: %-20f", i, taken);
         }
+		taken += elapsed(start, now());
+		debug("\ri: %d\tdt: %-20f", p, taken);
     }
 
     std::cout << emitter_count << '\t' << (taken / passes) << '\n';

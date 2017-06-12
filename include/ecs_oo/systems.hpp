@@ -4,7 +4,6 @@
 #ifndef SYSTEMS_HPP
 #define SYSTEMS_HPP
 
-#include "systems/base_system.hpp"
 #include "systems/health_system.hpp"
 #include "systems/movement_system.hpp"
 #include "systems/reproduction_system.hpp"

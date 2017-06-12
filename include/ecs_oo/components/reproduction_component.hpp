@@ -3,14 +3,15 @@
 
 #include "base_component.hpp"
 
+#include <cstdlib>
+
 class reproduction_component : public base_component
 {
 public:
 	enum state_type { IDLE, MATING };
 
-	reproduction_component(uint64_t owner, float libido)
-		: base_component(owner)
-		, desire(random() % 40)
+	reproduction_component(float libido)
+		: desire(random() % 40)
 		, libido(libido)
 		, state(IDLE)
 	{

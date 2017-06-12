@@ -2,14 +2,14 @@
 
 #include "common/log.hpp"
 
+#include "world.hpp"
 #include "components/reproduction_component.hpp"
 #include "components/movement_component.hpp"
 
 bool reproduction_system::update(world & w, double dt)
 {
-	for(auto & pair : w)
+	for(auto & e : w)
 	{
-		auto e = pair.second;
 		if(!e->has_component<reproduction_component>())
 			continue;
 
@@ -21,7 +21,7 @@ bool reproduction_system::update(world & w, double dt)
 				rc.state = reproduction_component::IDLE;
 				auto & mc = *(e->get_component<movement_component>());
 				mc.state = movement_component::IDLE;
-				mc.target = nil;
+				mc.target.reset();
 				debug("%llu done mating", e->get_id());
 			}
 		} else {
