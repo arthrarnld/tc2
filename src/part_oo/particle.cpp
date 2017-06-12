@@ -5,7 +5,6 @@ particle::particle(const glm::vec2 & p, const glm::vec2 & v, float l)
     m_position = p;
     m_velocity = v;
     m_lifetime = l;
-    m_alive = true;
 }
 
 const glm::vec2 & particle::get_velocity()
@@ -24,7 +23,7 @@ float particle::get_lifetime()
 }
 
 bool particle::is_alive() {
-    return m_alive;
+    return m_lifetime > 0;
 }
 
 void particle::set_velocity(const glm::vec2 & v)
@@ -47,6 +46,4 @@ void particle::tick(double dt)
     m_lifetime -= dt;
     if(m_lifetime > 0)
         m_position += m_velocity;
-    else
-        m_alive = false;
 }
