@@ -11,7 +11,7 @@ public:
 	using iterator = value_type*;
 	using const_iterator = const value_type*;
 
-	array(size_t cap = 10)
+	array(size_t cap = 1)
 		: m_data(new value_type[cap])
 		, m_cap(cap)
 		, m_len(0)
