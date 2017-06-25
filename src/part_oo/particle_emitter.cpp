@@ -26,13 +26,6 @@ void particle_emitter::set_emission_rate(float rate)
     m_emission_rate = rate;
 }
 
-const particle * particle_emitter::get_particle_at(int pos)
-{
-    if(pos > 0 && pos < m_particles.size())
-        return &m_particles[pos];
-    return NULL;
-}
-
 int particle_emitter::get_particle_count()
 {
     return m_particles.size();

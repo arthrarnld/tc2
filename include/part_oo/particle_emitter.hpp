@@ -23,7 +23,6 @@ public:
     void set_emission_rate(float rate);
     float get_emission_rate();
 
-    const particle * get_particle_at(int pos);
     int get_particle_count();
 
     void tick(double dt);
