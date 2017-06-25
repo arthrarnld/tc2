@@ -59,26 +59,25 @@ void run_measure_tick(size_t iterations, size_t period, size_t emitter_count, si
     }
 }
 
-void run_measure_insertion(size_t emitter_count, size_t passes)
-{
-    time_point start;
-    double taken;
-
+void run_measure_insertion(size_t emitter_count, size_t increment)
+{   
     std::vector<particle_emitter> emitters;
 
-    for(size_t p = 0; p < passes; ++p)
-    {
-        start = now();
-        for(size_t i = 0; i < emitter_count; ++i)
-        {
+    time_point tp;
+    size_t measures = emitter_count/increment;
+	double * times = new double[measures];
+     
+    tp = now();
+    for(size_t m = 0; m < measures; ++m)
+	{
+		for(size_t i = 0; i < increment; ++i)
             emitters.emplace_back(glm::vec2(100.0 * i, 100.0 * i), 1);
-        }
-        taken += elapsed(start, now());
 
-        debug("\ri: %d\tdt: %-20f", p, taken);
-    }
+		times[m] = elapsed(tp, now());
+	}
 
-    std::cout << emitter_count << '\t' << (taken / passes) << '\n';
+	for(size_t m = 0; m < measures; ++m)
+		printf("%zu\t%f\n", (m+1)*increment, times[m]);
 }
 
 int main(int argc, char ** argv)
@@ -89,6 +88,7 @@ int main(int argc, char ** argv)
     size_t period;
     size_t emitter_count;
     size_t passes;
+    size_t increment;
 
 	int c;
 	while((c = getopt(argc, argv, "ti")) != -1)
@@ -121,8 +121,8 @@ int main(int argc, char ** argv)
 			if(optind != argc-2)
 				fatal("insertion test requires one argument: <emitter count> <passes>");
 			emitter_count = atoll(argv[optind++]);
-            passes = atoll(argv[optind++]);
-            run_measure_insertion(emitter_count, passes);
+            increment = atoll(argv[optind++]);
+            run_measure_insertion(emitter_count, increment);
 			break;
 	}
 
