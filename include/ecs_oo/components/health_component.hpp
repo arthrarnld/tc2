@@ -11,9 +11,8 @@ class health_component : public base_component
 public:
 	enum state_type { IDLE, EATING };
 
-	health_component(uint64_t owner, float appetite, int prey)
-		: base_component(owner)
-		, hunger(random() % 100)
+	health_component(float appetite, int prey)
+		: hunger(random() % 100)
 		, appetite(appetite)
 		, prey(prey)
 		, state(IDLE)

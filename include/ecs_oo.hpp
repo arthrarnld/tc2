@@ -7,7 +7,6 @@
 #include "ecs_oo/components.hpp"
 #include "ecs_oo/entity.hpp"
 #include "ecs_oo/id_generator.hpp"
-#include "ecs_oo/messages.hpp"
 #include "ecs_oo/systems.hpp"
 #include "ecs_oo/world.hpp"
 

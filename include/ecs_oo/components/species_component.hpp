@@ -6,12 +6,9 @@
 class species_component : public base_component
 {
 public:
-	species_component(uint64_t owner, int id)
-		: base_component(owner)
-		, id(id)
-	{
-
-	}
+	species_component(int id)
+		: id(id)
+	{  }
 
 	int id;
 };

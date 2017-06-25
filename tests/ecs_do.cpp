@@ -8,9 +8,6 @@
 #include <stdio.h>
 #include <unistd.h>
 
-// Variables for measuring time
-time_point tp;
-
 struct run {
 	int index;
 	size_t entities;
@@ -45,6 +42,8 @@ void run_measure_time(size_t entities, size_t increment, size_t passes, size_t i
 	size_t total_passes = run_count * passes;
 	size_t passes_completed = 0;
 
+
+	time_point tp;
 	double * times = new double[run_count];
 
 	std::vector<run> runs { run_count, { 0, 0, 0.0, passes } };
@@ -90,88 +89,77 @@ void run_measure_time(size_t entities, size_t increment, size_t passes, size_t i
 	delete [] times;
 }
 
-// void run_measure_insertion()
-// {
-// 	fprintf(stderr, "# Insertion test\n# Entity count: %llu\n", entity_count);
-//
-// 	world w;
-//
-// 	double * times = new double[entity_count+1];
-// 	for(size_t i = 0; i < entity_count; ++i)
-// 	{
-// 		int s = i%6;
-// 		tp = now();
-//
-// 		uint64_t e = w.create();
-// 		w.spe.create(e, s);
-// 		w.hea.create(e, appetites[s], (s+1)%6);
-// 		w.mov.create(e, speeds[s]);
-// 		w.pos.create(e, sin(i)*10, cos(i)*10);
-// 		w.rep.create(e, libidos[s]);
-//
-// 		times[w.count()] = elapsed(tp, now());
-//
-// 		fprintf(stderr, "\r%3d%%", 100*(i+1)/entity_count);
-// 	}
-// 	fprintf(stderr, "\n");
-//
-// 	for(int i = 0; i <= entity_count; ++i)
-// 		std::cout << i << '\t' << times[i] << '\n';
-// 	delete [] times;
-// }
-//
-// void run_measure_fps()
-// {
-// 	fprintf(stderr, "# FPS test\n");
-//
-// 	world w;
-// 	double accum_time;
-// 	size_t count = 0;
-//
-// 	while(true)
-// 	{
-// 		// Create new entity
-// 		uint64_t e = w.create();
-// 		int s = count%6;
-// 		w.spe.create(e, s);
-// 		w.hea.create(e, appetites[s], (s+1)%6);
-// 		w.mov.create(e, speeds[s]);
-// 		w.pos.create(e, sin(count)*10, cos(count)*10);
-// 		w.rep.create(e, libidos[s]);
-// 		++count;
-// 		// Reset time count
-// 		accum_time = 0.0;
-//
-// 		for(size_t i = 0; i < 10; ++i)
-// 		{
-// 			tp = now();
-// 			w.update(1);
-// 			accum_time += elapsed(tp, now());
-// 		}
-// 		double avg_time = accum_time / 10.0;
-// 		fprintf(stderr, "\r%-6.2f%%", 6000.0f*avg_time);
-//
-// 		if(avg_time > 1.0/60.0) {
-// 			fprintf(stderr, "\r100%%   \n");
-// 			printf("%zu\n", count-1);
-// 			return;
-// 		}
-// 	}
-// }
+void run_measure_insertion(size_t entities, size_t increment)
+{
+	fprintf(stderr, "# Insertion test\n# Entities: %zu\n# Increments: %zu\n", entities, increment);
 
-// void test_debug(size_t iterations)
-// {
-// 	world w;
-//
-// 	{
-// 		uint64_t e = w.create();
-// 		w.spe.create(e, 0);
-// 		w.pos.create(e, -10, 0);
-// 		w.hea.create(e, 1, 1);
-// 		w.rep.create(e, );
-// 		w.mov.create(e, );
-// 	}
-// }
+	world w;
+
+	time_point tp;
+	size_t measures = entities/increment;
+	double * times = new double[measures];
+	// double t = 0.0;
+
+	tp = now();
+	for(size_t m = 0; m < measures; ++m)
+	{
+		for(size_t i = 0; i < increment; ++i)
+		{
+			uint64_t e = w.create();
+			w.spe.create(e, 0);
+			w.hea.create(e, 0, 0);
+			w.mov.create(e, 0);
+			w.pos.create(e, 0, 0);
+			w.rep.create(e, 0);
+		}
+		// t += elapsed(tp, now());
+		// times[m] = t;
+		times[m] = elapsed(tp, now());
+	}
+	for(size_t m = 0; m < measures; ++m)
+		printf("%zu\t%f\n", (m+1)*increment, times[m]);
+}
+
+void run_measure_fps(size_t iterations)
+{
+  fprintf(stderr, "# FPS test\n# Iterations: %zu\n", iterations);
+
+  size_t lo = 0;
+  size_t hi = 10000;
+  bool hi_found = false;
+
+  size_t cur;
+  double t;
+  time_point tp;
+  while(true)
+  {
+    cur = (hi + lo) / 2;
+    fprintf(stderr, "%zu ", cur);
+    world w;
+    populate(w, cur);
+    t = 0;
+    for(int i = 0; i < iterations; ++i)
+    {
+      tp = now();
+      w.update(1);
+      t += elapsed(tp, now());
+    }
+    t /= (double)iterations;
+    fprintf(stderr, "%f\n", t);
+    if(t > 1.0/60.0) {
+      hi = cur;
+      hi_found = true;
+    } else {
+      lo = cur;
+      if(!hi_found)
+        hi *= 2;
+    }
+    if(hi - lo <= 1) {
+      printf("%zu %f\n", hi < 1.0/60.0 ? hi : lo, t);
+      return;
+    }
+  }
+}
 
 int main(int argc, char ** argv)
 {
@@ -219,11 +207,17 @@ int main(int argc, char ** argv)
 			run_measure_time(entities, increment, passes, iterations);
 			break;
 		case INSERTION:
-			// if(optind != argc-1)
-			// 	fatal("insertion test requires one argument: entity count");
-			// entity_count = atoll(argv[optind]);
+			if(optind != argc-2)
+				fatal("insertion test requires two arguments: <entities> <increment>");
+			entities = atoll(argv[optind++]);
+			increment = atoll(argv[optind++]);
+			run_measure_insertion(entities, increment);
 			break;
 		case FPS:
+      if(optind != argc-1)
+        fatal("FPS test requires one argument: <iterations>");
+      iterations = atoll(argv[optind++]);
+      run_measure_fps(iterations);
 			break;
 			// if(optind != argc-1)
 			// 	fatal("FPS test requires one argument: increment period");

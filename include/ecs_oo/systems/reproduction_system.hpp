@@ -1,14 +1,12 @@
 #ifndef REPRODUCTION_SYSTEM_HPP
 #define REPRODUCTION_SYSTEM_HPP
 
-#include "base_system.hpp"
+class world;
 
-class reproduction_system : public base_system
+class reproduction_system
 {
 public:
-	reproduction_system() = default;
-
-	bool update(world & w, double dt) override;
+	bool update(world & w, double dt);
 };
 
 #endif // REPRODUCTION_SYSTEM_HPP

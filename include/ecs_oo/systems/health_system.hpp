@@ -1,15 +1,12 @@
 #ifndef HEALTH_SYSTEM_HPP
 #define HEALTH_SYSTEM_HPP
 
-#include "base_system.hpp"
-#include "../components/health_component.hpp"
+class world;
 
-class health_system : public base_system
+class health_system
 {
 public:
-	health_system() = default;
-
-	bool update(world & w, double dt) override;
+	bool update(world & w, double dt);
 };
 
 #endif // HEALTH_SYSTEM_HPP
