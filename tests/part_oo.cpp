@@ -12,39 +12,43 @@ void run_measure_tick(size_t iterations, size_t period, size_t emitter_count, si
     std::map<int, double> times;
     std::map<int, int> occurrences;
 
-    std::vector<particle_emitter> emitters;
-    emitters.reserve(emitter_count);
 
     time_point start;
     double taken;
 
-    for(size_t i = 0; i < emitter_count; ++i)
-        emitters.emplace_back(glm::vec2(100.0 * i, 100.0 * i), 1);
-
-    int particle_count;
-    for(size_t i = 0; i < iterations; ++i)
+    for(size_t p = 0; p < passes; ++p)
     {
-        particle_count = 0;
+        std::vector<particle_emitter> emitters;
+        emitters.reserve(emitter_count);
 
-        start = now();
-        for(size_t j = 0; j < emitter_count; ++j)
+        for(size_t i = 0; i < emitter_count; ++i)
+            emitters.emplace_back(glm::vec2(100.0 * i, 100.0 * i), 1);
+
+        int particle_count;
+        for(size_t i = 0; i < iterations; ++i)
         {
-            particle_emitter & e = emitters[j];
-            e.tick(1);
+            particle_count = 0;
 
-            particle_count += e.get_particle_count();
-        }
-        taken = elapsed(start, now());
-
-        times[particle_count] += taken;
-        ++occurrences[particle_count];
-
-        fprintf(stderr, "\ri: %d\tdt: %-20f", i, taken);
-
-        // log("particle count: %d\t time taken: %f", e.get_particle_count(), taken);
-        if(i % period == 0)
+            start = now();
             for(size_t j = 0; j < emitter_count; ++j)
-                emitters[j].set_emission_rate(emitters[j].get_emission_rate() + 1);
+            {
+                particle_emitter & e = emitters[j];
+                e.tick(1);
+
+                particle_count += e.get_particle_count();
+            }
+            taken = elapsed(start, now());
+
+            times[particle_count] += taken;
+            ++occurrences[particle_count];
+
+            // fprintf(stderr, "\ri: %d\tdt: %-20f", i, taken);
+
+            // log("particle count: %d\t time taken: %f", e.get_particle_count(), taken);
+            if(i % period == 0)
+                for(size_t j = 0; j < emitter_count; ++j)
+                    emitters[j].set_emission_rate(emitters[j].get_emission_rate() + 1);
+        }
     }
 
     fprintf(stderr, "\n");

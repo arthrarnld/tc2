@@ -1,4 +1,4 @@
-#import "particle_system.hpp"
+#include "particle_system.hpp"
 
 void particle_system::create_emitter(const glm::vec2 & position, float emission_rate)
 {
@@ -27,10 +27,11 @@ void particle_system::tick(double dt)
     // tick particles
     for(size_t i = 0; i < p_from.size(); )
     {
+        p_positions[i] += p_velocities[i];
+        p_lifetimes[i] -= dt;
+        
         if(p_lifetimes[i] > 0)
         {
-            p_positions[i] += p_velocities[i];
-            p_lifetimes[i] -= dt;
             ++i;
         }
         else
