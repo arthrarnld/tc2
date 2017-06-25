@@ -126,9 +126,45 @@ void run_measure_insertion(size_t entities, size_t increment)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void run_measure_fps()
+void run_measure_fps(size_t iterations)
 {
+  fprintf(stderr, "# FPS test\n# Iterations: %zu\n", iterations);
 
+  size_t lo = 0;
+  size_t hi = 10000;
+  bool hi_found = false;
+
+  size_t cur;
+  double t;
+  time_point tp;
+  while(true)
+  {
+    cur = (hi + lo) / 2;
+    fprintf(stderr, "%zu ", cur);
+    world w;
+    populate(w, cur);
+    t = 0;
+    for(int i = 0; i < iterations; ++i)
+    {
+      tp = now();
+      w.update(1);
+      t += elapsed(tp, now());
+    }
+    t /= (double)iterations;
+    fprintf(stderr, "%f\n", t);
+    if(t > 1.0/60.0) {
+      hi = cur;
+      hi_found = true;
+    } else {
+      lo = cur;
+      if(!hi_found)
+        hi *= 2;
+    }
+    if(hi - lo <= 1) {
+      printf("%zu %f\n", hi < 1.0/60.0 ? hi : lo, t);
+      return;
+    }
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -182,9 +218,10 @@ int main(int argc, char ** argv)
 			run_measure_insertion(entities, increment);
 			break;
 		case FPS:
-			// if(optind != argc-1)
-			// 	fatal("FPS test requires one argument: increment period");
-			// increment_period = atoll(argv[optind]);
+			if(optind != argc-1)
+				fatal("FPS test requires one argument: <iterations>");
+			iterations = atoll(argv[optind++]);
+      run_measure_fps(iterations);
 			break;
 	}
 

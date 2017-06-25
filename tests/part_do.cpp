@@ -46,7 +46,7 @@ void run_measure_tick(size_t iterations, size_t period, size_t emitter_count, si
             times[pcount] += taken;
             ++occurrences[pcount];
 
-            fprintf(stderr, "\ri: %d\tdt: %-20f", i, taken);
+            // fprintf(stderr, "\ri: %d\tdt: %-20f", i, taken);
 
             // log("particle count: %d\t time taken: %f", e.get_particle_count(), taken);
             if(i % period == 0)
@@ -66,7 +66,7 @@ void run_measure_tick(size_t iterations, size_t period, size_t emitter_count, si
 void run_measure_insertion(size_t emitter_count, size_t passes)
 {
     time_point start;
-    double taken;
+    double taken = 0.0;
 
     for(size_t p = 0; p < passes; ++p)
     {

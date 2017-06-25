@@ -14,53 +14,58 @@ size_t emitter_count;
 
 void run_measure_tick(size_t iterations, size_t period, size_t emitter_count, size_t passes)
 {
-    std::vector<particle_emitter *> emitters{emitter_count};
+    
 
     std::map<int, double> times;
     std::map<int, int> occurrences;
     time_point start;
     double taken;
 
-    for(int i = 0; i < emitter_count; ++i)
+    for(size_t p = 0; p < passes; ++p)
     {
-        switch(i % 3)
+        std::vector<particle_emitter *> emitters{emitter_count};
+
+        for(int i = 0; i < emitter_count; ++i)
         {
-            case 0:
-                emitters[i] = new particle_emitter(glm::vec2(100.0f * i, 100.0f * i), 1);
-                break;
-            case 1:
-                emitters[i] = new cone_emitter(glm::vec2(100.0f * i, 100.0f * i), 1, M_PI/6.0f);
-                break;
-            case 2:
-                emitters[i] = new area_emitter(glm::vec2(100.0f * i, 100.0f * i), 1, 5);
-                break;
+            switch(i % 3)
+            {
+                case 0:
+                    emitters[i] = new particle_emitter(glm::vec2(100.0f * i, 100.0f * i), 1);
+                    break;
+                case 1:
+                    emitters[i] = new cone_emitter(glm::vec2(100.0f * i, 100.0f * i), 1, M_PI/6.0f);
+                    break;
+                case 2:
+                    emitters[i] = new area_emitter(glm::vec2(100.0f * i, 100.0f * i), 1, 5);
+                    break;
+            }
         }
-    }
 
-    int particle_count;
-    for(int i = 0; i < iterations; ++i)
-    {
-        particle_count = 0;
-
-        start = now();
-        for(size_t j = 0; j < emitter_count; ++j)
+        int particle_count;
+        for(int i = 0; i < iterations; ++i)
         {
-            particle_emitter * e = emitters[j];
-            e->tick(1);
+            particle_count = 0;
 
-            particle_count += e->get_particle_count();
-        }
-        taken = elapsed(start, now());
-
-        times[particle_count] += taken;
-        ++occurrences[particle_count];
-
-        fprintf(stderr, "\ri: %d\tdt: %-20f", i, taken);
-
-        // log("particle count: %d\t time taken: %f", e.get_particle_count(), taken);
-        if(i % period == 0)
+            start = now();
             for(size_t j = 0; j < emitter_count; ++j)
-                emitters[j]->set_emission_rate(emitters[j]->get_emission_rate() + 1);
+            {
+                particle_emitter * e = emitters[j];
+                e->tick(1);
+
+                particle_count += e->get_particle_count();
+            }
+            taken = elapsed(start, now());
+
+            times[particle_count] += taken;
+            ++occurrences[particle_count];
+
+            // fprintf(stderr, "\ri: %d\tdt: %-20f", i, taken);
+
+            // log("particle count: %d\t time taken: %f", e.get_particle_count(), taken);
+            if(i % period == 0)
+                for(size_t j = 0; j < emitter_count; ++j)
+                    emitters[j]->set_emission_rate(emitters[j]->get_emission_rate() + 1);
+        }
     }
 
     fprintf(stderr, "\n");
@@ -73,13 +78,13 @@ void run_measure_tick(size_t iterations, size_t period, size_t emitter_count, si
 
 void run_measure_insertion(size_t emitter_count, size_t passes)
 {
-    std::vector<particle_emitter *> emitters{emitter_count};
-
     time_point start;
-    double taken;
+    double taken = 0.0;
 
     for(size_t p = 0; p < passes; ++p)
     {
+        std::vector<particle_emitter *> emitters{emitter_count};
+
         start = now();
         for(size_t i = 0; i < emitter_count; ++i)
         {
